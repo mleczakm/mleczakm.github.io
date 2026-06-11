@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mleczakm.github.io/sitemap.xml

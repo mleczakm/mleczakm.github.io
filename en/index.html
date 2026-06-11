@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="pl" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michał Mleczko | Senior Developer & Architect</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Michał Mleczko - Senior Developer & Architect. Specjalizuję się w automatyzacji CI/CD, Kubernetes, PHP i architekturze rozproszonej.">
+    <meta name="description" content="Michał Mleczko - Senior Developer & Architect. Specializing in CI/CD automation, Kubernetes, PHP, and distributed architecture.">
     <meta name="keywords" content="Senior Developer, Architect, PHP, Kubernetes, CI/CD, DevOps, Symfony, Docker">
     <meta name="author" content="Michał Mleczko">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://mleczakm.github.io/">
+    <link rel="canonical" href="https://mleczakm.github.io/en/">
     
     <!-- Hreflang for multilingual SEO -->
     <link rel="alternate" hreflang="pl" href="https://mleczakm.github.io/">
@@ -20,16 +20,16 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mleczakm.github.io/">
+    <meta property="og:url" content="https://mleczakm.github.io/en/">
     <meta property="og:title" content="Michał Mleczko | Senior Developer & Architect">
-    <meta property="og:description" content="Senior Developer & Architect specjalizujący się w automatyzacji CI/CD, Kubernetes i architekturze rozproszonej.">
+    <meta property="og:description" content="Senior Developer & Architect specializing in CI/CD automation, Kubernetes, and distributed architecture.">
     <meta property="og:image" content="https://mleczakm.github.io/og-image.png">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://mleczakm.github.io/">
+    <meta property="twitter:url" content="https://mleczakm.github.io/en/">
     <meta property="twitter:title" content="Michał Mleczko | Senior Developer & Architect">
-    <meta property="twitter:description" content="Senior Developer & Architect specjalizujący się w automatyzacji CI/CD, Kubernetes i architekturze rozproszonej.">
+    <meta property="twitter:description" content="Senior Developer & Architect specializing in CI/CD automation, Kubernetes, and distributed architecture.">
     <meta property="twitter:image" content="https://mleczakm.github.io/og-image.png">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -102,20 +102,20 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="#about" class="text-sm font-medium hover:text-brand-500 transition-colors">O mnie</a>
-                    <a href="#experience" class="text-sm font-medium hover:text-brand-500 transition-colors">Doświadczenie</a>
+                    <a href="#about" class="text-sm font-medium hover:text-brand-500 transition-colors">About</a>
+                    <a href="#experience" class="text-sm font-medium hover:text-brand-500 transition-colors">Experience</a>
                     <a href="#pipeline" class="text-sm font-medium hover:text-brand-500 transition-colors">CI/CD Simulator</a>
-                    <a href="#skills" class="text-sm font-medium hover:text-brand-500 transition-colors">Stack Technologiczny</a>
-                    <a href="#projects" class="text-sm font-medium hover:text-brand-500 transition-colors">Projekty</a>
-                    <a href="#contact" class="px-4 py-2 text-xs font-semibold tracking-wider text-white bg-brand-600 rounded-lg hover:bg-brand-500 transition-all shadow-md shadow-brand-900/20 uppercase">Kontakt</a>
+                    <a href="#skills" class="text-sm font-medium hover:text-brand-500 transition-colors">Tech Stack</a>
+                    <a href="#projects" class="text-sm font-medium hover:text-brand-500 transition-colors">Projects</a>
+                    <a href="#contact" class="px-4 py-2 text-xs font-semibold tracking-wider text-white bg-brand-600 rounded-lg hover:bg-brand-500 transition-all shadow-md shadow-brand-900/20 uppercase">Contact</a>
                     
                     <!-- Language Switcher -->
-                    <a href="/en/" class="text-sm font-medium hover:text-brand-500 transition-colors flex items-center gap-1">
-                        <i class="fa-solid fa-globe"></i> EN
+                    <a href="/" class="text-sm font-medium hover:text-brand-500 transition-colors flex items-center gap-1">
+                        <i class="fa-solid fa-globe"></i> PL
                     </a>
                     
                     <!-- Theme Toggle -->
-                    <button id="theme-toggle" class="p-2 text-slate-400 hover:text-brand-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Przełącz motyw">
+                    <button id="theme-toggle" class="p-2 text-slate-400 hover:text-brand-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Toggle theme">
                         <i id="theme-icon" class="fa-solid fa-sun text-lg"></i>
                     </button>
                 </div>
@@ -135,14 +135,14 @@
         <!-- Mobile Menu, show/hide based on menu state. -->
         <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 dark:bg-slate-950/95 border-b border-slate-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">O mnie</a>
-                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Doświadczenie</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">About</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Experience</a>
                 <a href="#pipeline" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">CI/CD Simulator</a>
-                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Stack Technologiczny</a>
-                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Projekty</a>
-                <a href="#contact" class="block text-center w-full px-3 py-2 mt-4 rounded-md text-base font-medium text-white bg-brand-600 hover:bg-brand-500">Kontakt</a>
-                <a href="/en/" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500 flex items-center gap-2">
-                    <i class="fa-solid fa-globe"></i> English
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Tech Stack</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Projects</a>
+                <a href="#contact" class="block text-center w-full px-3 py-2 mt-4 rounded-md text-base font-medium text-white bg-brand-600 hover:bg-brand-500">Contact</a>
+                <a href="/" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500 flex items-center gap-2">
+                    <i class="fa-solid fa-globe"></i> Polski
                 </a>
             </div>
         </div>
@@ -162,7 +162,7 @@
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
                 </span>
-                Szybkie, skalowalne systemy bez długu technicznego
+Fast, scalable systems without technical debt
             </div>
 
             <!-- Title -->
@@ -175,16 +175,16 @@
 
             <!-- Business Promise Paragraph -->
             <p class="max-w-3xl mx-auto text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed">
-                Łączę <span class="text-brand-500 font-semibold">myślenie biznesowe (business-first)</span> z bezkompromisową automatyzacją infrastruktury. Przeprowadzam projekty od surowego pomysłu i analizy, przez optymalizację architektury DDD/Hexagonal, po bezstresowe wdrożenia produkcyjne na klastrach Kubernetes.
+I combine <span class="text-brand-500 font-semibold">business-first thinking</span> with uncompromising infrastructure automation. I take projects from raw idea and analysis, through DDD/Hexagonal architecture optimization, to stress-free production deployments on Kubernetes clusters.
             </p>
 
             <!-- CTA Actions -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href="#pipeline" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-900/30 transition-all flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-play"></i> Przetestuj mój Pipeline
+                    <i class="fa-solid fa-play"></i> Test My Pipeline
                 </a>
                 <a href="#experience" class="w-full sm:w-auto px-8 py-4 bg-slate-800/80 hover:bg-slate-700 text-slate-200 hover:text-white font-semibold rounded-xl border border-slate-700 transition-all flex items-center justify-center gap-2">
-                    Doświadczenie zawodowe
+                    Professional Experience
                 </a>
             </div>
 
@@ -192,15 +192,15 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-20 pt-8 border-t border-slate-800/80">
                 <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
                     <div class="text-3xl font-extrabold text-white font-mono">12+</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Lat doświadczenia</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Years Experience</div>
                 </div>
                 <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
                     <div class="text-3xl font-extrabold text-white font-mono">100%</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Zautomatyzowane CI/CD</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Automated CI/CD</div>
                 </div>
                 <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
                     <div class="text-3xl font-extrabold text-white font-mono">3+</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Kontynenty wdrożeń</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Deployment Continents</div>
                 </div>
                 <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
                     <div class="text-3xl font-extrabold text-white font-mono">Friday</div>
@@ -219,36 +219,36 @@
                 <!-- Left Column: Biography -->
                 <div class="lg:col-span-7 space-y-6">
                     <div class="inline-flex items-center gap-2 text-brand-500 font-mono text-xs uppercase tracking-wider">
-                        <i class="fa-solid fa-user"></i> Kim jestem?
+                        <i class="fa-solid fa-user"></i> Who am I?
                     </div>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
-                        Architekt, który patrzy na kod przez pryzmat korzyści biznesowych.
+                        Architect who views code through the lens of business value.
                     </h2>
                     <p class="text-slate-300 leading-relaxed text-base">
-                        Jako osoba o profilu **DISC Dominującym (D)**, moją naturalną siłą napędową jest dążenie do usuwania przeszkód oraz automatyzowania wszystkiego, co powtarzalne: od sprawdzania jakości kodu (Rector, PHPStan), przez automatyczne testy, po dynamiczne środowiska testowe i wdrożenia.
+                        As a **DISC Dominant (D)** profile, my natural drive is to remove obstacles and automate everything repeatable: from code quality checks (Rector, PHPStan), through automated tests, to dynamic test environments and deployments.
                     </p>
                     <p class="text-slate-300 leading-relaxed text-base">
-                        Jednak prawdziwy sekret stabilnego biznesu tkwi w **atmosferze i spokoju ducha**. Głęboko wierzę, że pewny siebie i zgrany zespół deweloperski potrafi bezpiecznie wdrożyć kod na produkcję nawet w piątkowe popołudnie bez grama stresu. Gwarantują to twarde reguły jakości i dojrzałość techniczna.
+                        However, the true secret of stable business lies in **atmosphere and peace of mind**. I deeply believe that a confident and cohesive development team can safely deploy code to production even on Friday afternoons without stress. This is guaranteed by hard quality rules and technical maturity.
                     </p>
                     
                     <div class="p-4 bg-brand-950/25 border-l-4 border-brand-500 rounded-r-xl text-brand-300 text-sm italic font-mono">
-                        "Zgrany zespół, który czuje się bezpiecznie, nie waha się wdrażać poprawek w piątkowe popołudnie, bo ufa procedurom automatyzacji."
+                        "A cohesive team that feels safe doesn't hesitate to deploy fixes on Friday afternoons because they trust automation procedures."
                     </div>
                 </div>
 
                 <!-- Right Column: Interactive DISC Visualization -->
                 <div class="lg:col-span-5 bg-slate-800/40 p-6 rounded-2xl border border-slate-800/80">
                     <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-chart-pie text-brand-500"></i> Mój Profil DISC w działaniu
+                        <i class="fa-solid fa-chart-pie text-brand-500"></i> My DISC Profile in Action
                     </h3>
-                    <p class="text-xs text-slate-400 mb-6">Kliknij na poszczególne litery profilu, aby przeczytać jak dany aspekt wpływa na moją pracę.</p>
+                    <p class="text-xs text-slate-400 mb-6">Click on profile letters to read how each aspect affects my work.</p>
 
                     <!-- Bar Graph -->
                     <div class="space-y-4">
                         <!-- Dominance -->
                         <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('D')">
                             <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-brand-400">D — DOMINANCE (Dominujący)</span>
+                                <span class="font-bold text-brand-400">D — DOMINANCE (Dominant)</span>
                                 <span class="font-mono text-slate-300 font-bold">85%</span>
                             </div>
                             <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
@@ -259,7 +259,7 @@
                         <!-- Compliance -->
                         <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('C')">
                             <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-cyber-cyan">C — COMPLIANCE (Sumienny)</span>
+                                <span class="font-bold text-cyber-cyan">C — COMPLIANCE (Conscientious)</span>
                                 <span class="font-mono text-slate-300 font-bold">90%</span>
                             </div>
                             <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
@@ -270,7 +270,7 @@
                         <!-- Influence -->
                         <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('I')">
                             <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-cyber-purple">I — INFLUENCE (Wpływowy)</span>
+                                <span class="font-bold text-cyber-purple">I — INFLUENCE (Influential)</span>
                                 <span class="font-mono text-slate-300 font-bold">75%</span>
                             </div>
                             <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
@@ -281,7 +281,7 @@
                         <!-- Steadiness -->
                         <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('S')">
                             <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-amber-500">S — STEADINESS (Stały)</span>
+                                <span class="font-bold text-amber-500">S — STEADINESS (Steady)</span>
                                 <span class="font-mono text-slate-300 font-bold">70%</span>
                             </div>
                             <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
@@ -294,10 +294,10 @@
                     <div class="mt-6 p-4 bg-slate-900/80 rounded-xl border border-slate-800 text-sm">
                         <div id="disc-content-title" class="font-bold text-white mb-2 flex items-center gap-2">
                             <span class="inline-block w-2.5 h-2.5 bg-brand-500 rounded-full"></span>
-                            D - Dominacja (Rezultaty i Działanie)
+                            D - Dominance (Results and Action)
                         </div>
                         <p id="disc-content-text" class="text-slate-300 text-xs leading-relaxed">
-                            Pcha mnie w kierunku ciągłego usprawniania procesów deweloperskich. Nie godzę się na marnowanie czasu przez deweloperów na manualne powtarzanie operacji. Gdy pojawia się problem z wydajnością, szukam rozwiązania u źródła, projektując optymalne narzędzia.
+                            Drives me toward continuous process improvement. I don't accept developers wasting time on manual repetitive operations. When performance issues arise, I seek solutions at the source by designing optimal tools.
                         </p>
                     </div>
                 </div>
@@ -313,11 +313,11 @@
 
                 <div class="max-w-3xl mx-auto text-center mb-8">
                     <span class="px-3 py-1 rounded-full bg-brand-950 text-brand-400 text-xs font-mono font-bold uppercase tracking-wider">
-                        Symulator w czasie rzeczywistym
+                        Real-time Simulator
                     </span>
-                    <h2 class="text-3xl font-extrabold text-white mt-4">Wdrożenie Bez Stresu w Piątek o 16:00</h2>
+                    <h2 class="text-3xl font-extrabold text-white mt-4">Stress-Free Friday 4 PM Deployment</h2>
                     <p class="text-slate-400 text-sm mt-2">
-                        Przekonaj się, jak wdrożona przeze mnie automatyzacja pozwala spać spokojnie deweloperom i biznesowi. Kliknij przycisk, aby uruchomić pełen proces QA i CI/CD.
+                        See how the automation I've implemented allows developers and business to sleep peacefully. Click the button to run the full QA and CI/CD process.
                     </p>
                 </div>
 
@@ -325,25 +325,25 @@
                     <!-- Controls Column -->
                     <div class="lg:col-span-4 flex flex-col justify-center space-y-4">
                         <button id="run-pipeline-btn" onclick="startPipelineSimulation()" class="w-full py-4 px-6 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl shadow-lg shadow-brand-900/20 active:scale-95 transition-all flex items-center justify-center gap-3">
-                            <i class="fa-solid fa-play animate-pulse"></i> Uruchom Pipeline
+                            <i class="fa-solid fa-play animate-pulse"></i> Run Pipeline
                         </button>
                         <button id="reset-pipeline-btn" onclick="resetPipeline()" class="w-full py-2 px-6 bg-slate-800 hover:bg-slate-700 text-slate-400 font-semibold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-rotate-right"></i> Resetuj Symulator
+                            <i class="fa-solid fa-rotate-right"></i> Reset Simulator
                         </button>
                         
                         <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-800/80 space-y-2">
-                            <div class="text-xs font-bold uppercase text-slate-400 tracking-wider">Metryki SLA</div>
+                            <div class="text-xs font-bold uppercase text-slate-400 tracking-wider">SLA Metrics</div>
                             <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Coverage testów:</span>
+                                <span class="text-slate-400">Test Coverage:</span>
                                 <span class="font-mono text-brand-400 font-semibold">94.8%</span>
                             </div>
                             <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Analiza statyczna (PHPStan):</span>
+                                <span class="text-slate-400">Static Analysis (PHPStan):</span>
                                 <span class="font-mono text-brand-400 font-semibold">Max (Lvl 9)</span>
                             </div>
                             <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Średni czas deploymentu:</span>
-                                <span class="font-mono text-cyber-cyan font-semibold">3 min 45 sek</span>
+                                <span class="text-slate-400">Avg Deployment Time:</span>
+                                <span class="font-mono text-cyber-cyan font-semibold">3 min 45 sec</span>
                             </div>
                         </div>
                     </div>
@@ -363,8 +363,8 @@
 
                         <!-- Terminal Output Window -->
                         <div id="terminal-logs" class="p-4 font-mono text-xs text-slate-300 flex-1 space-y-2 overflow-y-auto max-h-[300px]">
-                            <div class="text-slate-500">&gt; Oczekiwanie na uruchomienie wdrożenia...</div>
-                            <div class="text-slate-500">&gt; Kliknij "Uruchom Pipeline", aby przetestować bezstresowe wdrożenie.</div>
+                            <div class="text-slate-500">&gt; Waiting for deployment to start...</div>
+                            <div class="text-slate-500">&gt; Click "Run Pipeline" to test stress-free deployment.</div>
                         </div>
 
                         <!-- Progress indicator footer -->
@@ -384,11 +384,11 @@
         <section id="experience" class="scroll-mt-20">
             <div class="max-w-3xl mx-auto text-center mb-16">
                 <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                    <i class="fa-solid fa-briefcase"></i> Ścieżka Kariery
+                    <i class="fa-solid fa-briefcase"></i> Career Path
                 </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Dostarczone Projekty & Role</h2>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Delivered Projects & Roles</h2>
                 <p class="text-slate-400 mt-2 text-sm">
-                    Od modernizacji potężnych monolitów, przez rozproszone architektury na wielu kontynentach, po pełną orkiestrację chmury.
+                    From modernizing massive monoliths, through distributed architectures across continents, to full cloud orchestration.
                 </p>
             </div>
 
@@ -414,9 +414,9 @@
                             </span>
                         </div>
                         <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">Refaktoryzacja monolitu PHP:</strong> Wdrożyłem PHPStan (level 9), RectorPHP oraz PHPUnit. Zero regresji przy zmianach.</li>
-                            <li><strong class="text-white">Kubernetes & CI/CD:</strong> Zoptymalizowałem potoki wdrożeń kontenerowych aplikacji.</li>
-                            <li><strong class="text-white">Mentoring:</strong> Wdrożyłem standardy logowania błędów i raportowania w zespołach PHP.</li>
+                            <li><strong class="text-white">PHP Monolith Refactoring:</strong> Implemented PHPStan (level 9), RectorPHP, and PHPUnit. Zero regressions on changes.</li>
+                            <li><strong class="text-white">Kubernetes & CI/CD:</strong> Optimized deployment pipelines for containerized applications.</li>
+                            <li><strong class="text-white">Mentoring:</strong> Implemented error logging and reporting standards in PHP teams.</li>
                         </ul>
                     </div>
                 </div>
@@ -437,9 +437,9 @@
                             </span>
                         </div>
                         <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">Backend e-commerce:</strong> Rozproszony na 3 kontynentach, Kubernetes, PHP 8, MySQL.</li>
-                            <li><strong class="text-white">Migracja MySQL:</strong> Bezpieczne przejście z v5 na v8 w produkcji.</li>
-                            <li>Wdrożyłem statyczną analizę kodu dla poprawy jakości.</li>
+                            <li><strong class="text-white">Backend e-commerce:</strong> Distributed across 3 continents, Kubernetes, PHP 8, MySQL.</li>
+                            <li><strong class="text-white">MySQL Migration:</strong> Safe transition from v5 to v8 in production.</li>
+                            <li>Implemented static code analysis for quality improvement.</li>
                         </ul>
                     </div>
                 </div>
@@ -460,7 +460,7 @@
                             </span>
                         </div>
                         <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">Microservices:</strong> Rozwój i utrzymanie rozproszonej architektury w chmurze.</li>
+                            <li><strong class="text-white">Microservices:</strong> Development and maintenance of distributed cloud architecture.</li>
                             <li><strong class="text-white">IaC & CI/CD:</strong> Terraform, Atlantis, CircleCI, GitHub Actions.</li>
                         </ul>
                     </div>
@@ -482,8 +482,8 @@
                             </span>
                         </div>
                         <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">Architektura:</strong> Wdrożyłem Hexagonal Architecture, CQRS, Event Sourcing.</li>
-                            <li><strong class="text-white">A/B Testing:</strong> Swoole, RoadRunner, Kafka - zero latency przy przekierowaniach.</li>
+                            <li><strong class="text-white">Architecture:</strong> Implemented Hexagonal Architecture, CQRS, Event Sourcing.</li>
+                            <li><strong class="text-white">A/B Testing:</strong> Swoole, RoadRunner, Kafka - zero latency on redirects.</li>
                             <li>Monitoring: Prometheus, Grafana, ELK stack.</li>
                         </ul>
                     </div>
@@ -505,8 +505,8 @@
                             </span>
                         </div>
                         <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">CRM rewrite:</strong> Symfony 2/3, 2700+ klientów biznesowych.</li>
-                            <li>Projektowanie i implementacja modułów wewnętrznych.</li>
+                            <li><strong class="text-white">CRM rewrite:</strong> Symfony 2/3, 2700+ business clients.</li>
+                            <li>Design and implementation of internal modules.</li>
                         </ul>
                     </div>
                 </div>
@@ -518,26 +518,26 @@
         <section id="skills" class="scroll-mt-20">
             <div class="max-w-3xl mx-auto text-center mb-12">
                 <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                    <i class="fa-solid fa-layer-group"></i> Narzędzia i Technologie
+                    <i class="fa-solid fa-layer-group"></i> Tools & Technologies
                 </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Mój Ekosystem Technologiczny</h2>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">My Tech Ecosystem</h2>
                 <p class="text-slate-400 mt-2 text-sm">
-                    Kompletna gama narzędzi pozwalających na szybkie projektowanie, testowanie i stabilne hostowanie systemów biznesowych.
+                    Complete range of tools enabling rapid design, testing, and stable hosting of business systems.
                 </p>
 
                 <!-- Filter Buttons -->
                 <div class="flex flex-wrap items-center justify-center gap-2 mt-8">
                     <button onclick="filterSkills('all')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-brand-600 text-white transition-all">
-                        Wszystko
+                        All
                     </button>
                     <button onclick="filterSkills('backend')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-400 hover:text-white transition-all">
                         PHP & Backend
                     </button>
                     <button onclick="filterSkills('devops')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-400 hover:text-white transition-all">
-                        DevOps, Chmura & CI/CD
+                        DevOps, Cloud & CI/CD
                     </button>
                     <button onclick="filterSkills('architecture')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-400 hover:text-white transition-all">
-                        Metodologia & Architektura
+                        Methodology & Architecture
                     </button>
                 </div>
             </div>
@@ -648,11 +648,11 @@
         <section id="projects" class="scroll-mt-20">
             <div class="max-w-3xl mx-auto text-center mb-16">
                 <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                    <i class="fa-solid fa-star"></i> Z czego jestem dumny
+                    <i class="fa-solid fa-star"></i> What I'm Proud Of
                 </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Przełomowe Osiągnięcia</h2>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Breakthrough Achievements</h2>
                 <p class="text-slate-400 mt-2 text-sm">
-                    Konkretne wdrożenia, które przyniosły wymierne oszczędności finansowe i uprościły procesy biznesowe.
+                    Specific deployments that brought measurable financial savings and simplified business processes.
                 </p>
             </div>
 
@@ -662,11 +662,11 @@
                 <div class="bg-slate-800/20 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all overflow-hidden flex flex-col">
                     <div class="p-6 flex-1">
                         <div class="flex items-center gap-3 text-brand-500 text-xs font-mono mb-3">
-                            <i class="fa-solid fa-split"></i> Wydajność & Architektura
+                            <i class="fa-solid fa-split"></i> Performance & Architecture
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">System Testów A/B Wysokiej Skali</h3>
+                        <h3 class="text-xl font-bold text-white mb-3">High-Scale A/B Testing System</h3>
                         <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            Jako Tech Lead pokierowałem zespołem, z którym stworzyłem nowoczesny system A/B testing dla platformy o wysokim ruchu. Szybkie przekierowania użytkowników, precyzyjne śledzenie ich aktywności oraz zaawansowane raportowanie zostały oparte na technologii <strong class="text-white">Kafka, RoadRunner, Swoole, React</strong> oraz kontenerach w klastrze Kubernetes.
+                            As Tech Lead, I led a team to create a modern A/B testing system for a high-traffic platform. Fast user redirects, precise activity tracking, and advanced reporting were built on <strong class="text-white">Kafka, RoadRunner, Swoole, React</strong> and containers in a Kubernetes cluster.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Swoole</span>
@@ -681,11 +681,11 @@
                 <div class="bg-slate-800/20 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all overflow-hidden flex flex-col">
                     <div class="p-6 flex-1">
                         <div class="flex items-center gap-3 text-cyber-cyan text-xs font-mono mb-3">
-                            <i class="fa-solid fa-cloud"></i> DevOps & Automatyzacja
+                            <i class="fa-solid fa-cloud"></i> DevOps & Automation
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Środowiska Testowe na Żądanie (On-Demand)</h3>
+                        <h3 class="text-xl font-bold text-white mb-3">On-Demand Test Environments</h3>
                         <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            Zaprojektowałem i wdrożyłem od zera kompletny, automatyczny pipeline CI/CD pozwalający na automatyczne podnoszenie tymczasowych, niezależnych środowisk deweloperskich dla każdego brancha deweloperskiego. Wykorzystałem do tego <strong class="text-white">Docker, Traefik, Rancher</strong> oraz dynamiczne runner-y. Skróciło to czas QA o ponad 40%.
+                            I designed and deployed from scratch a complete, automated CI/CD pipeline enabling automatic creation of temporary, independent development environments for each development branch. I used <strong class="text-white">Docker, Traefik, Rancher</strong> and dynamic runners. This reduced QA time by over 40%.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Rancher</span>
@@ -701,9 +701,9 @@
                         <div class="flex items-center gap-3 text-cyber-blue text-xs font-mono mb-3">
                             <i class="fa-solid fa-code"></i> Open Source
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Wsparcie dla Flow PHP (ETL)</h3>
+                        <h3 class="text-xl font-bold text-white mb-3">Flow PHP (ETL) Support</h3>
                         <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            Aktywnie wspieram i rozwijam ekosystem open-source, w tym popularny framework <strong class="text-white">Flow PHP</strong> — zorientowany na przetwarzanie ETL o dużej przepustowości w języku PHP. Dbając o doskonałe standardy jakości kodu, wdrażam narzędzia automatycznej analizy statycznej oraz testów QA dla mniejszych narzędzi towarzyszących.
+                            I actively support and develop the open-source ecosystem, including the popular <strong class="text-white">Flow PHP</strong> framework — focused on high-throughput ETL processing in PHP. Maintaining excellent code quality standards, I implement static analysis tools and QA tests for smaller companion tools.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Flow PHP</span>
@@ -717,11 +717,11 @@
                 <div class="bg-slate-800/20 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all overflow-hidden flex flex-col">
                     <div class="p-6 flex-1">
                         <div class="flex items-center gap-3 text-amber-500 text-xs font-mono mb-3">
-                            <i class="fa-solid fa-handshake-angle"></i> CSR & Zaangażowanie Społeczne
+                            <i class="fa-solid fa-handshake-angle"></i> CSR & Social Engagement
                         </div>
-                        <h3 class="text-xl font-bold text-white mb-3">3 Lata Wolontariatu w Domu Dziecka</h3>
+                        <h3 class="text-xl font-bold text-white mb-3">3 Years of Volunteering at Orphanage</h3>
                         <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            W trakcie trwania nauki w liceum co tydzień odwiedzałem zaprzyjaźniony dom dziecka, gdzie bezpłatnie opiekowałem się pracownią komputerową. Do moich obowiązków należał dobór oprogramowania, fizyczna naprawa sprzętu komputerowego, zabezpieczanie i czyszczenie systemów z infekcji wirusowych oraz podstawowe szkolenia dla personelu i podopiecznych.
+                            During high school, I weekly visited a local orphanage where I voluntarily managed the computer lab. My responsibilities included software selection, physical computer hardware repair, securing and cleaning systems from virus infections, and basic training for staff and residents.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-4">
                             <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Hardware</span>
@@ -741,11 +741,11 @@
                 <!-- Left: Contact info -->
                 <div class="lg:col-span-5 space-y-6">
                     <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                        <i class="fa-solid fa-paper-plane"></i> Kontakt
+                        <i class="fa-solid fa-paper-plane"></i> Contact
                     </span>
-                    <h2 class="text-3xl font-extrabold text-white">Zbudujmy coś wielkiego razem</h2>
+                    <h2 class="text-3xl font-extrabold text-white">Let's Build Something Great Together</h2>
                     <p class="text-slate-400 text-sm">
-                        Masz projekt do uratowania? Potrzebujesz uporządkować infrastrukturę, wdrożyć pewne testy statyczne, czy przeskalować aplikację chmurową? Porozmawiajmy o konkretnych potrzebach biznesowych.
+                        Have a project to rescue? Need to organize infrastructure, implement static tests, or scale a cloud application? Let's discuss specific business needs.
                     </p>
 
                     <div class="space-y-4 pt-4">
@@ -778,19 +778,19 @@
                 <div class="lg:col-span-7 bg-slate-950 p-6 sm:p-8 rounded-2xl border border-slate-800">
                     <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
                         <div>
-                            <label for="form-name" class="block text-xs font-bold uppercase text-slate-400 mb-1">Imię i Nazwisko / Firma</label>
-                            <input type="text" id="form-name" name="name" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="Jan Kowalski">
+                            <label for="form-name" class="block text-xs font-bold uppercase text-slate-400 mb-1">Name / Company</label>
+                            <input type="text" id="form-name" name="name" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="John Doe">
                         </div>
                         <div>
-                            <label for="form-email" class="block text-xs font-bold uppercase text-slate-400 mb-1">Adres Email</label>
-                            <input type="email" id="form-email" name="email" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="jan@company.com">
+                            <label for="form-email" class="block text-xs font-bold uppercase text-slate-400 mb-1">Email Address</label>
+                            <input type="email" id="form-email" name="email" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="john@company.com">
                         </div>
                         <div>
-                            <label for="form-message" class="block text-xs font-bold uppercase text-slate-400 mb-1">W czym mogę pomóc?</label>
-                            <textarea id="form-message" name="message" required rows="4" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="Opisz wyzwanie technologiczne lub biznesowe w Twojej firmie..."></textarea>
+                            <label for="form-message" class="block text-xs font-bold uppercase text-slate-400 mb-1">How can I help?</label>
+                            <textarea id="form-message" name="message" required rows="4" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="Describe the technological or business challenge in your company..."></textarea>
                         </div>
                         <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i> Wyślij Wiadomość
+                            <i class="fa-solid fa-paper-plane"></i> Send Message
                         </button>
                     </form>
 
@@ -807,13 +807,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-2">
                 <span class="text-brand-500 font-mono font-bold text-lg">&lt;mleczakm/&gt;</span>
-                <span>© 2026 Michał Mleczko. Wszystkie prawa zastrzeżone.</span>
+                <span>© 2026 Michał Mleczko. All rights reserved.</span>
             </div>
             <div class="flex items-center gap-6">
-                <a href="#about" class="hover:text-brand-500 transition-colors">O mnie</a>
-                <a href="#experience" class="hover:text-brand-500 transition-colors">Doświadczenie</a>
+                <a href="#about" class="hover:text-brand-500 transition-colors">About</a>
+                <a href="#experience" class="hover:text-brand-500 transition-colors">Experience</a>
                 <a href="#skills" class="hover:text-brand-500 transition-colors">Stack</a>
-                <a href="#contact" class="hover:text-brand-500 transition-colors">Kontakt</a>
+                <a href="#contact" class="hover:text-brand-500 transition-colors">Contact</a>
             </div>
         </div>
     </footer>
@@ -911,20 +911,20 @@
         // DISC PROFILE INTERACTIVE TEXT TOGGLE
         const discData = {
             'D': {
-                title: "D — DOMINANCE (Dominujący)",
-                text: "Pcha mnie w kierunku ciągłego usprawniania procesów deweloperskich. Nie znoszę powtarzania ręcznego tych samych operacji. Gdy pojawia się problem z wydajnością aplikacji lub obniżonym SLA, natychmiast diagnozuję przyczynę, podejmuję twarde decyzje architektoniczne i wdrażam zoptymalizowane mechanizmy rygorystycznej kontroli."
+                title: "D — DOMINANCE (Dominant)",
+                text: "Drives me toward continuous process improvement. I don't tolerate manual repetition of the same operations. When application performance issues or degraded SLA arise, I immediately diagnose the cause, make hard architectural decisions, and implement optimized rigorous control mechanisms."
             },
             'C': {
-                title: "C — COMPLIANCE (Sumienny)",
-                text: "To z kolei moje bezkompromisowe dążenie do doskonałości technicznej i rygorystycznego zachowania standardów. Wprowadzam do systemów najtrudniejszy poziom analizy statycznej PHPStan (Level 9), automatyczne reguły optymalizacyjne w RectorPHP oraz dbam o wysokie pokrycie testami PHPUnit. Kod musi być czysty, bezpieczny i czytelny."
+                title: "C — COMPLIANCE (Conscientious)",
+                text: "This is my uncompromising drive for technical excellence and rigorous standard adherence. I implement the most difficult level of static analysis PHPStan (Level 9), automatic optimization rules in RectorPHP, and ensure high test coverage with PHPUnit. Code must be clean, secure, and readable."
             },
             'I': {
-                title: "I — INFLUENCE (Wpływowy)",
-                text: "Objawia się w moim podejściu do komunikacji i pracy z ludźmi. Chętnie dzielę się wypracowaną wiedzą z zespołami na warsztatach (Knowledge Sharing). Buduję relacje oparte na zaufaniu i wzmacniam kompetencje rekrutacyjne i techniczne w organizacji, dbając o to, by deweloperzy czuli się pewnie i bezpiecznie."
+                title: "I — INFLUENCE (Influential)",
+                text: "Shows in my approach to communication and working with people. I eagerly share developed knowledge with teams in workshops (Knowledge Sharing). I build trust-based relationships and strengthen recruitment and technical competencies in the organization, ensuring developers feel confident and safe."
             },
             'S': {
-                title: "S — STEADINESS (Stały)",
-                text: "To gwarancja harmonii i dążenia do absolutnego spokoju ducha. Tworzę zautomatyzowane, stabilne infrastruktury Kubernetes i chmurowe w taki sposób, aby zespół wiedział, że platforma wytrzyma skoki obciążenia, a każdy deployment przebiegnie przewidywalnie i bez niespodzianek."
+                title: "S — STEADINESS (Steady)",
+                text: "Guarantees harmony and pursuit of absolute peace of mind. I create automated, stable Kubernetes and cloud infrastructures so the team knows the platform will withstand load spikes, and every deployment will run predictably without surprises."
             }
         };
 
@@ -958,16 +958,16 @@
             
             if (type === 'success') {
                 colorClass = 'text-brand-400 font-bold';
-                prefix = '[SUKCES]';
+                prefix = '[SUCCESS]';
             } else if (type === 'error') {
                 colorClass = 'text-red-400 font-bold';
-                prefix = '[BŁĄD]';
+                prefix = '[ERROR]';
             } else if (type === 'step') {
                 colorClass = 'text-cyber-cyan font-semibold';
-                prefix = '[KROK]';
+                prefix = '[STEP]';
             } else if (type === 'warning') {
                 colorClass = 'text-amber-400';
-                prefix = '[OSTRZEŻENIE]';
+                prefix = '[WARNING]';
             } else if (type === 'system') {
                 colorClass = 'text-slate-500';
                 prefix = '&gt;';
@@ -980,19 +980,19 @@
         }
 
         const pipelineSteps = [
-            { pct: 5, type: 'step', text: 'Inicjalizacja bezpiecznego potoku wdrożeniowego (v1.4.2)...' },
-            { pct: 10, type: 'info', text: 'Pobieranie najnowszych zależności środowiska...' },
-            { pct: 20, type: 'step', text: 'Uruchomienie statycznej analizy kodu (PHPStan, Level 9)...' },
-            { pct: 30, type: 'success', text: 'PHPStan: 0 błędów! Analiza statyczna zakończona sukcesem.' },
-            { pct: 40, type: 'step', text: 'RectorPHP: Walidacja reguł refaktoryzacyjnych i kompatybilności z PHP 8.x...' },
-            { pct: 48, type: 'success', text: 'Rector: Kod zoptymalizowany i zgodny z najnowszym standardem!' },
-            { pct: 55, type: 'step', text: 'PHPUnit: Uruchamianie 1,240 testów integracyjnych oraz jednostkowych...' },
-            { pct: 68, type: 'success', text: 'PHPUnit: Przetestowano 100% modułów krytycznych, pokrycie kodu: 94.8%.' },
-            { pct: 75, type: 'step', text: 'Budowanie zoptymalizowanego kontenera Docker (multi-stage build)...' },
-            { pct: 82, type: 'info', text: 'Generowanie konfiguracji dynamicznego routingu dla klastra...' },
-            { pct: 90, type: 'step', text: 'Orkiestracja Kubernetes: Wdrożenie nowej wersji za pomocą Helma na klaster produkcyjny...' },
-            { pct: 95, type: 'warning', text: 'Sprawdzanie stanu SLA aplikacji (Prometheus + Grafana)...' },
-            { pct: 100, type: 'success', text: 'Gotowe! Kod wdrożony bezpiecznie w piątek po południu. SLA stabilne (99.99%). Miłego weekendu! 🍻' }
+            { pct: 5, type: 'step', text: 'Initializing safe deployment pipeline (v1.4.2)...' },
+            { pct: 10, type: 'info', text: 'Fetching latest environment dependencies...' },
+            { pct: 20, type: 'step', text: 'Running static code analysis (PHPStan, Level 9)...' },
+            { pct: 30, type: 'success', text: 'PHPStan: 0 errors! Static analysis completed successfully.' },
+            { pct: 40, type: 'step', text: 'RectorPHP: Validating refactoring rules and PHP 8.x compatibility...' },
+            { pct: 48, type: 'success', text: 'Rector: Code optimized and compliant with latest standards!' },
+            { pct: 55, type: 'step', text: 'PHPUnit: Running 1,240 integration and unit tests...' },
+            { pct: 68, type: 'success', text: 'PHPUnit: 100% of critical modules tested, code coverage: 94.8%.' },
+            { pct: 75, type: 'step', text: 'Building optimized Docker container (multi-stage build)...' },
+            { pct: 82, type: 'info', text: 'Generating dynamic routing configuration for cluster...' },
+            { pct: 90, type: 'step', text: 'Kubernetes Orchestration: Deploying new version using Helm to production cluster...' },
+            { pct: 95, type: 'warning', text: 'Checking application SLA status (Prometheus + Grafana)...' },
+            { pct: 100, type: 'success', text: 'Done! Code deployed safely on Friday afternoon. SLA stable (99.99%). Have a great weekend! 🍻' }
         ];
 
         function startPipelineSimulation() {
@@ -1007,11 +1007,11 @@
             runBtn.className = "w-full py-4 px-6 bg-slate-800 text-slate-500 font-bold rounded-xl cursor-not-allowed flex items-center justify-center gap-3";
             
             statusBadge.className = "px-2 py-0.5 rounded-full bg-brand-950 text-brand-400 font-semibold text-[10px] animate-pulse";
-            statusBadge.innerText = "PRZETWARZANIE";
+            statusBadge.innerText = "PROCESSING";
 
             // Clear terminal first
             document.getElementById('terminal-logs').innerHTML = '';
-            appendTerminalLog('Uruchomienie procedury deploymentu...', 'system');
+            appendTerminalLog('Starting deployment procedure...', 'system');
 
             let stepIndex = 0;
             
@@ -1025,7 +1025,7 @@
                     clearInterval(simulationInterval);
                     isSimulating = false;
                     statusBadge.className = "px-2 py-0.5 rounded-full bg-brand-600 text-white font-semibold text-[10px]";
-                    statusBadge.innerText = "SUKCES";
+                    statusBadge.innerText = "SUCCESS";
                 }
             }, 1000);
         }
@@ -1049,8 +1049,8 @@
             pctLabel.innerText = "0%";
             
             document.getElementById('terminal-logs').innerHTML = `
-                <div class="text-slate-500">&gt; Oczekiwanie na uruchomienie wdrożenia...</div>
-                <div class="text-slate-500">&gt; Kliknij "Uruchom Pipeline", aby przetestować bezstresowe wdrożenie.</div>
+                <div class="text-slate-500">&gt; Waiting for deployment to start...</div>
+                <div class="text-slate-500">&gt; Click "Run Pipeline" to test stress-free deployment.</div>
             `;
         }
 
@@ -1066,11 +1066,11 @@
 
             // Show loading state
             feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-slate-800 text-slate-300";
-            feedback.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Wysyłanie wiadomości...`;
+            feedback.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Sending message...`;
             feedback.classList.remove('hidden');
             
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Wysyłanie...`;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Sending...`;
 
             try {
                 const response = await fetch('https://formspree.io/f/xdavweok', {
@@ -1085,25 +1085,25 @@
                     // Success
                     feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-brand-950/50 text-brand-400 border border-brand-800";
                     feedback.innerHTML = `
-                        <div class="font-bold mb-1"><i class="fa-solid fa-check-circle mr-2"></i>Dziękuję za kontakt!</div>
-                        Twoja wiadomość została wysłana pomyślnie. Odpiszę najszybciej jak to możliwe.
+                        <div class="font-bold mb-1"><i class="fa-solid fa-check-circle mr-2"></i>Thank you for contact!</div>
+                        Your message was sent successfully. I'll reply as soon as possible.
                     `;
                     form.reset();
                 } else {
                     // Error from Formspree
                     const data = await response.json();
-                    throw new Error(data.error || 'Wystąpił błąd podczas wysyłania wiadomości.');
+                    throw new Error(data.error || 'An error occurred while sending the message.');
                 }
             } catch (error) {
                 // Network error or Formspree error
                 feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-red-950/50 text-red-400 border border-red-800";
                 feedback.innerHTML = `
-                    <div class="font-bold mb-1"><i class="fa-solid fa-exclamation-circle mr-2"></i>Błąd</div>
-                    ${error.message || 'Nie udało się wysłać wiadomości. Spróbuj ponownie później.'}
+                    <div class="font-bold mb-1"><i class="fa-solid fa-exclamation-circle mr-2"></i>Error</div>
+                    ${error.message || 'Failed to send message. Please try again later.'}
                 `;
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Wyślij Wiadomość`;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Send Message`;
             }
         }
     </script>
