@@ -1,0 +1,88 @@
+# Project: Michał Mleczko - Personal Portfolio Website
+
+## Purpose
+This is a personal portfolio website for Michał Mleczko, a Senior Developer & Architect specializing in PHP, Kubernetes, CI/CD automation, and distributed architecture. The website showcases professional experience, technical skills, projects, and provides contact information.
+
+## Tech Stack
+- **Frontend**: HTML5, Tailwind CSS (CDN), Vanilla JavaScript
+- **Backend**: Formspree (form handling)
+- **Deployment**: GitHub Pages (static hosting)
+- **Icons**: FontAwesome 6.4.0
+- **Fonts**: Inter (sans-serif), JetBrains Mono (monospace)
+- **Features**: 
+  - Multilingual support (Polish/English)
+  - Dark/Light theme toggle
+  - CI/CD Pipeline Simulator (interactive demo)
+  - DISC Profile visualization
+  - Tech Stack filtering
+  - Contact form with AJAX submission
+
+## Project Structure
+```
+/
+├── index.html          # Polish version (default)
+├── en/
+│   └── index.html      # English version
+├── sitemap.xml        # SEO sitemap with hreflang
+├── robots.txt         # SEO robots configuration
+├── llms.txt          # This file - LLM documentation
+└── README.md         # Project documentation
+```
+
+## Key Files
+- `index.html` - Main Polish version with all sections (Hero, About, Experience, Skills, Projects, Contact)
+- `en/index.html` - English version with identical structure but translated content
+- Both HTML files contain embedded JavaScript for interactivity
+
+## Important Notes for LLM
+- The website is fully static (no server-side rendering)
+- All interactivity is handled via vanilla JavaScript
+- Contact form uses Formspree endpoint: `https://formspree.io/f/xdavweok`
+- The CI/CD Pipeline Simulator is a visual demo, not actual deployment
+- DISC Profile data is stored in JavaScript object `discData`
+- Tech Stack filtering is handled by `filterSkills()` function
+- Theme toggle uses localStorage to persist user preference
+- Language switching is done via separate HTML files (not JavaScript routing)
+
+## SEO Configuration
+- Canonical URLs configured for both language versions
+- Hreflang tags for multilingual SEO
+- Open Graph and Twitter meta tags
+- Sitemap.xml with proper hreflang annotations
+- Robots.txt allowing all crawlers
+
+## Color Scheme
+- Primary brand color: Green (#22c55e)
+- Secondary colors: Cyan (#06b6d4), Blue (#3b82f6), Purple (#8b5cf6)
+- Background: Slate (#0f172a, #020617)
+- Text: Slate (#e2e8f0, #f8fafc)
+
+## Sections Overview
+1. **Hero**: Professional introduction with key stats
+2. **About**: Biography with interactive DISC profile visualization
+3. **Pipeline Simulator**: Interactive CI/CD deployment demo
+4. **Experience**: Timeline of professional roles
+5. **Tech Stack**: Filterable grid of technologies
+6. **Projects**: Showcase of key achievements
+7. **Contact**: Form with AJAX submission via Formspree
+
+## Contact Information
+- Email: do@mleczki.pl
+- Phone: +48 732 575 375
+- Location: Radzymin (Warsaw), Poland
+- LinkedIn: https://linkedin.com/in/michal-mleczko/
+- GitHub: https://github.com/mleczakm
+
+## Development Notes
+- Uses Tailwind CSS CDN for styling
+- No build process required
+- Direct deployment to GitHub Pages
+- Responsive design (mobile-first)
+- Accessibility considerations (ARIA labels, semantic HTML)
+
+## Maintenance
+- Update experience section when changing roles
+- Update projects section with new achievements
+- Keep translations in sync between PL and EN versions
+- Update sitemap.xml lastmod date when content changes
+- Test Formspree integration periodically
