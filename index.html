@@ -86,6 +86,117 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #22c55e;
         }
+        
+        /* Custom Date/Time Picker Styles */
+        .scheduler {
+            width: 100%;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .scheduler-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 8px;
+        }
+
+        .scheduler-header h4 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .days-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .day-btn {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 8px 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .day-btn:hover {
+            border-color: #94a3b8;
+        }
+
+        .day-btn.active {
+            background-color: #22c55e;
+            border-color: #22c55e;
+            color: #ffffff;
+        }
+
+        .day-btn span {
+            display: block;
+        }
+
+        .day-name {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+
+        .day-btn.active .day-name {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .day-date {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .slots-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 8px;
+        }
+
+        .slot-btn {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 10px 6px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .slot-btn:hover {
+            border-color: #22c55e;
+            background-color: rgba(34, 197, 94, 0.1);
+        }
+
+        .slot-btn.active {
+            background-color: #22c55e;
+            border-color: #22c55e;
+            color: #000000;
+            font-weight: 600;
+        }
+
+        .selection-output {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: center;
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white dark:bg-slate-950 dark:text-slate-100 light:bg-slate-50 light:text-slate-900">
@@ -107,7 +218,7 @@
                     <a href="#pipeline" class="text-sm font-medium hover:text-brand-500 transition-colors">CI/CD Simulator</a>
                     <a href="#skills" class="text-sm font-medium hover:text-brand-500 transition-colors">Stack Technologiczny</a>
                     <a href="#projects" class="text-sm font-medium hover:text-brand-500 transition-colors">Projekty</a>
-                    <a href="#contact" class="px-4 py-2 text-xs font-semibold tracking-wider text-white bg-brand-600 rounded-lg hover:bg-brand-500 transition-all shadow-md shadow-brand-900/20 uppercase">Kontakt</a>
+                    <a href="#contact" class="px-4 py-2 text-xs font-semibold tracking-wider text-white bg-brand-600 rounded-lg hover:bg-brand-500 transition-all shadow-md shadow-brand-900/20 uppercase">Umów Konsultację</a>
                     
                     <!-- Language Switcher -->
                     <a href="/en/" class="text-sm font-medium hover:text-brand-500 transition-colors flex items-center gap-1">
@@ -140,7 +251,7 @@
                 <a href="#pipeline" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">CI/CD Simulator</a>
                 <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Stack Technologiczny</a>
                 <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Projekty</a>
-                <a href="#contact" class="block text-center w-full px-3 py-2 mt-4 rounded-md text-base font-medium text-white bg-brand-600 hover:bg-brand-500">Kontakt</a>
+                <a href="#contact" class="block text-center w-full px-3 py-2 mt-4 rounded-md text-base font-medium text-white bg-brand-600 hover:bg-brand-500">Umów Konsultację</a>
                 <a href="/en/" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500 flex items-center gap-2">
                     <i class="fa-solid fa-globe"></i> English
                 </a>
@@ -167,9 +278,9 @@
 
             <!-- Title -->
             <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6">
-                Michał Mleczko
+                Pomagam firmom zautomatyzować wdrożenia,
                 <span class="block text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-cyber-cyan to-cyber-blue mt-2">
-                    Senior Architect & Developer
+                    żeby zespół mógł spokojnie deployować w piątek, bez stresu o awarie produkcji.
                 </span>
             </h1>
 
@@ -776,7 +887,7 @@
 
                 <!-- Right: Simulated message form with state feedback -->
                 <div class="lg:col-span-7 bg-slate-950 p-6 sm:p-8 rounded-2xl border border-slate-800">
-                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4" novalidate>
                         <div>
                             <label for="form-name" class="block text-xs font-bold uppercase text-slate-400 mb-1">Imię i Nazwisko / Firma</label>
                             <input type="text" id="form-name" name="name" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="Jan Kowalski">
@@ -786,11 +897,34 @@
                             <input type="email" id="form-email" name="email" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="jan@company.com">
                         </div>
                         <div>
+                            <label for="form-phone" class="block text-xs font-bold uppercase text-slate-400 mb-1">Telefon kontaktowy</label>
+                            <input type="tel" id="form-phone" name="phone" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="+48 123 456 789">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Preferowana data i godzina</label>
+                            <div class="scheduler">
+                                <div class="scheduler-header">
+                                    <h4>Umów konsultację</h4>
+                                    <div id="month-label" style="font-size: 12px; color: #94a3b8;"></div>
+                                </div>
+                                <div class="days-container" id="daysRow"></div>
+                                <div class="slots-container" id="slotsGrid"></div>
+                                <div class="selection-output" id="selectionOutput">
+                                    Wybierz datę i godzinę
+                                </div>
+                                <input type="hidden" id="form-datetime" name="datetime" required>
+                            </div>
+                        </div>
+                        <div>
                             <label for="form-message" class="block text-xs font-bold uppercase text-slate-400 mb-1">W czym mogę pomóc?</label>
                             <textarea id="form-message" name="message" required rows="4" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="Opisz wyzwanie technologiczne lub biznesowe w Twojej firmie..."></textarea>
                         </div>
+                        <div class="text-xs text-slate-400">
+                            <i class="fa-solid fa-info-circle mr-1"></i>
+                            Wysłanie wiadomości jest zgodą na kontakt zwrotny w celu umówienia konsultacji.
+                        </div>
                         <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i> Wyślij Wiadomość
+                            <i class="fa-solid fa-paper-plane"></i> Umów 30-minutową konsultację
                         </button>
                     </form>
 
@@ -813,7 +947,7 @@
                 <a href="#about" class="hover:text-brand-500 transition-colors">O mnie</a>
                 <a href="#experience" class="hover:text-brand-500 transition-colors">Doświadczenie</a>
                 <a href="#skills" class="hover:text-brand-500 transition-colors">Stack</a>
-                <a href="#contact" class="hover:text-brand-500 transition-colors">Kontakt</a>
+                <a href="#contact" class="hover:text-brand-500 transition-colors">Umów Konsultację</a>
             </div>
         </div>
     </footer>
@@ -821,6 +955,138 @@
 
     <!-- INTERACTIVE JAVASCRIPT CONTROLLERS -->
     <script>
+        // CUSTOM DATE/TIME PICKER INITIALIZATION
+        function initCustomPicker() {
+            // CONFIGURATION
+            const WORK_START_HOUR = 7; // 7:00 AM
+            const WORK_END_HOUR = 20;  // 8:00 PM (20:00)
+            const DAYS_TO_CHECK = 7;   // Look forward 7 calendar days
+
+            // STATE
+            let selectedDateString = null;
+            let selectedTimeRange = null;
+
+            // DOM ELEMENTS
+            const daysRow = document.getElementById('daysRow');
+            const slotsGrid = document.getElementById('slotsGrid');
+            const monthLabel = document.getElementById('month-label');
+            const selectionOutput = document.getElementById('selectionOutput');
+            const datetimeInput = document.getElementById('form-datetime');
+
+            // HELPER: Generate working dates within the next 7 calendar days
+            function getWorkingDaysAhead() {
+                const workingDays = [];
+                const today = new Date();
+
+                for (let i = 0; i < DAYS_TO_CHECK; i++) {
+                    const checkDate = new Date();
+                    checkDate.setDate(today.getDate() + i);
+
+                    const dayOfWeek = checkDate.getDay();
+                    // 0 = Sunday, 6 = Saturday. Only push Monday-Friday (1-5)
+                    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+                        workingDays.push(checkDate);
+                    }
+                }
+                return workingDays;
+            }
+
+            // HELPER: Generate time ranges array (e.g. ["7-8", "8-9", ...])
+            function generateTimeRanges() {
+                const ranges = [];
+                for (let hour = WORK_START_HOUR; hour < WORK_END_HOUR; hour++) {
+                    ranges.push(`${hour}-${hour + 1}`);
+                }
+                return ranges;
+            }
+
+            // RENDER: Render the Day tabs
+            function renderDays() {
+                const availableDays = getWorkingDaysAhead();
+                daysRow.innerHTML = '';
+
+                // Update top right month tag dynamically based on first available date
+                if(availableDays.length > 0) {
+                    const options = { month: 'long', year: 'numeric' };
+                    monthLabel.innerText = availableDays[0].toLocaleDateString('pl-PL', options);
+                }
+
+                availableDays.forEach((date, index) => {
+                    const dateString = date.toISOString().split('T')[0];
+                    const dayName = date.toLocaleDateString('pl-PL', { weekday: 'short' });
+                    const dayNum = date.getDate();
+
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `day-btn ${index === 0 ? 'active' : ''}`;
+                    btn.dataset.date = dateString;
+                    btn.innerHTML = `
+                        <span class="day-name">${dayName}</span>
+                        <span class="day-date">${dayNum}</span>
+                    `;
+
+                    // Set initial active date string to today/first available day
+                    if (index === 0) selectedDateString = dateString;
+
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedDateString = dateString;
+                        selectedTimeRange = null; // Reset chosen time when changing day
+                        renderSlots();
+                        updateOutput();
+                    });
+
+                    daysRow.appendChild(btn);
+                });
+            }
+
+            // RENDER: Render the Slot blocks
+            function renderSlots() {
+                const ranges = generateTimeRanges();
+                slotsGrid.innerHTML = '';
+
+                ranges.forEach(range => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'slot-btn';
+                    // Formatting representation: "8-9" converted to text "08:00 - 09:00"
+                    const [start, end] = range.split('-');
+                    const formatTime = (h) => `${h.padStart(2, '0')}:00`;
+                    btn.innerText = `${formatTime(start)} - ${formatTime(end)}`;
+
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedTimeRange = range;
+                        updateOutput();
+                    });
+
+                    slotsGrid.appendChild(btn);
+                });
+            }
+
+            // UPDATE: Output element behavior
+            function updateOutput() {
+                if (selectedDateString && selectedTimeRange) {
+                    const [start, end] = selectedTimeRange.split('-');
+                    selectionOutput.innerHTML = `Wybrany termin: <strong>${selectedDateString}</strong> pomiędzy <strong>${start}:00</strong> a <strong>${end}:00</strong>`;
+                    // Update hidden input for form submission
+                    datetimeInput.value = `${selectedDateString} ${start}:00`;
+                } else {
+                    selectionOutput.innerText = 'Wybierz datę i godzinę';
+                    datetimeInput.value = '';
+                }
+            }
+
+            // INITIALIZATION
+            renderDays();
+            renderSlots();
+        }
+        
+        // Initialize custom picker on page load
+        document.addEventListener('DOMContentLoaded', initCustomPicker);
+
         // MOBILE MENU TOGGLE
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -1063,6 +1329,54 @@
             const formData = new FormData(form);
             const feedback = document.getElementById('form-feedback');
             const submitBtn = form.querySelector('button[type="submit"]');
+            
+            // Custom validation
+            let isValid = true;
+            const requiredFields = form.querySelectorAll('[required]');
+            
+            // Clear previous validation styles
+            requiredFields.forEach(field => {
+                field.classList.remove('border-red-500');
+                field.classList.add('border-slate-800');
+            });
+            
+            // Validate each required field
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.remove('border-slate-800');
+                    field.classList.add('border-red-500');
+                }
+            });
+
+            // Email validation
+            const emailField = form.querySelector('#form-email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailField.value.trim() && !emailRegex.test(emailField.value.trim())) {
+                isValid = false;
+                emailField.classList.remove('border-slate-800');
+                emailField.classList.add('border-red-500');
+            }
+
+            // Phone validation (accepts various formats: plain digits, with +, spaces, dashes, dots, parentheses)
+            const phoneField = form.querySelector('#form-phone');
+            const phoneRegex = /^[\+]?[0-9\s\-\.\(\)]{9,}$/;
+            if (phoneField.value.trim() && !phoneRegex.test(phoneField.value.trim())) {
+                isValid = false;
+                phoneField.classList.remove('border-slate-800');
+                phoneField.classList.add('border-red-500');
+            }
+
+            // If validation fails, show error and prevent submission
+            if (!isValid) {
+                feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-red-950/50 text-red-400 border border-red-800";
+                feedback.innerHTML = `
+                    <div class="font-bold mb-1"><i class="fa-solid fa-exclamation-circle mr-2"></i>Wypełnij wszystkie wymagane pola</div>
+                    Proszę uzupełnić wszystkie pola oznaczone jako wymagane w poprawnym formacie.
+                `;
+                feedback.classList.remove('hidden');
+                return;
+            }
 
             // Show loading state
             feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-slate-800 text-slate-300";
@@ -1089,6 +1403,15 @@
                         Twoja wiadomość została wysłana pomyślnie. Odpiszę najszybciej jak to możliwe.
                     `;
                     form.reset();
+                    // Reset validation styles
+                    requiredFields.forEach(field => {
+                        field.classList.remove('border-red-500');
+                        field.classList.add('border-slate-800');
+                    });
+                    // Reset custom picker
+                    if (typeof initCustomPicker === 'function') {
+                        initCustomPicker();
+                    }
                 } else {
                     // Error from Formspree
                     const data = await response.json();
@@ -1103,7 +1426,7 @@
                 `;
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Wyślij Wiadomość`;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Umów 30-minutową konsultację`;
             }
         }
     </script>
