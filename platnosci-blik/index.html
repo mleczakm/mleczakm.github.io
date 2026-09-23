@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sklep, rezerwacje i wypożyczalnia z płatnością BLIK — bez operatora płatności | Michał Mleczko</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Strony, które przyjmują szybkie płatności BLIK na telefon bez umowy z operatorem płatności: sklep z integracją z kurierami, system rezerwacji zajęć, wypożyczalnia. Bez abonamentu — tylko niska prowizja od sprzedaży.">
+    <meta name="keywords" content="płatności BLIK, przelew na telefon, sklep internetowy bez operatora płatności, system rezerwacji, wypożyczalnia online, działalność nierejestrowana, integracja z kurierem, Polkurier">
+    <meta name="author" content="Michał Mleczko">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mleczakm.github.io/platnosci-blik/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mleczakm.github.io/platnosci-blik/">
+    <meta property="og:title" content="Sklep i rezerwacje z płatnością BLIK — bez operatora płatności">
+    <meta property="og:description" content="Strony, które przyjmują szybkie płatności BLIK na telefon bez umowy z operatorem płatności: sklep z integracją z kurierami, system rezerwacji zajęć, wypożyczalnia. Bez abonamentu — tylko niska prowizja od sprzedaży.">
+    <meta property="og:image" content="https://mleczakm.github.io/og-image.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://mleczakm.github.io/platnosci-blik/">
+    <meta property="twitter:title" content="Sklep i rezerwacje z płatnością BLIK — bez operatora płatności">
+    <meta property="twitter:description" content="Strony, które przyjmują szybkie płatności BLIK na telefon bez umowy z operatorem płatności: sklep z integracją z kurierami, system rezerwacji zajęć, wypożyczalnia. Bez abonamentu — tylko niska prowizja od sprzedaży.">
+    <meta property="twitter:image" content="https://mleczakm.github.io/og-image.png">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        },
+                        cyber: {
+                            cyan: '#06b6d4',
+                            blue: '#3b82f6',
+                            purple: '#8b5cf6',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Smooth transitions for theme switching */
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, text-decoration-color 0.3s ease;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #22c55e;
+        }
+        
+        /* Custom Date/Time Picker Styles */
+        .scheduler {
+            width: 100%;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .scheduler-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 8px;
+        }
+
+        .scheduler-header h4 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .days-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .day-btn {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 8px 4px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .day-btn:hover {
+            border-color: #94a3b8;
+        }
+
+        .day-btn.active {
+            background-color: #22c55e;
+            border-color: #22c55e;
+            color: #ffffff;
+        }
+
+        .day-btn span {
+            display: block;
+        }
+
+        .day-name {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+
+        .day-btn.active .day-name {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .day-date {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .slots-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 8px;
+        }
+
+        .slot-btn {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 10px 6px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .slot-btn:hover {
+            border-color: #22c55e;
+            background-color: rgba(34, 197, 94, 0.1);
+        }
+
+        .slot-btn.active {
+            background-color: #22c55e;
+            border-color: #22c55e;
+            color: #000000;
+            font-weight: 600;
+        }
+
+        .selection-output {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #94a3b8;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white dark:bg-slate-950 dark:text-slate-100 light:bg-slate-50 light:text-slate-900">
+
+    <!-- TOP NAVIGATION BAR -->
+    <nav class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 dark:bg-slate-950/80 border-b border-slate-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="/" class="flex-shrink-0 flex items-center gap-2">
+                    <span class="text-brand-500 font-mono font-bold text-xl">&lt;mleczakm/&gt;</span>
+                    <span class="hidden md:block font-semibold text-sm tracking-wider uppercase text-slate-300">Michał Mleczko</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#jak-to-dziala" class="text-sm font-medium hover:text-brand-500 transition-colors">Jak to działa</a>
+                    <a href="#realizacje" class="text-sm font-medium hover:text-brand-500 transition-colors">Realizacje</a>
+                    <a href="#koszty" class="text-sm font-medium hover:text-brand-500 transition-colors">Koszty</a>
+                    <a href="#faq" class="text-sm font-medium hover:text-brand-500 transition-colors">FAQ</a>
+                    <a href="/" class="text-sm font-medium hover:text-brand-500 transition-colors">O mnie</a>
+                    <a href="#contact" class="px-4 py-2 text-xs font-semibold tracking-wider text-white bg-brand-600 rounded-lg hover:bg-brand-500 transition-all shadow-md shadow-brand-900/20 uppercase">Chcę taką stronę</a>
+                    <button id="theme-toggle" class="p-2 text-slate-400 hover:text-brand-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Przełącz motyw">
+                        <i id="theme-icon" class="fa-solid fa-sun text-lg"></i>
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="theme-toggle-mobile" class="p-2 text-slate-400 hover:text-brand-500 rounded-lg focus:outline-none" aria-label="Przełącz motyw">
+                        <i id="theme-icon-mobile" class="fa-solid fa-sun text-lg"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-brand-500 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500" aria-expanded="false" aria-label="Menu">
+                        <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 dark:bg-slate-950/95 border-b border-slate-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#jak-to-dziala" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Jak to działa</a>
+                <a href="#realizacje" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Realizacje</a>
+                <a href="#koszty" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Koszty</a>
+                <a href="#faq" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">FAQ</a>
+                <a href="/" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">O mnie</a>
+                <a href="#contact" class="block text-center w-full px-3 py-2 mt-4 rounded-md text-base font-medium text-white bg-brand-600 hover:bg-brand-500">Chcę taką stronę</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="relative py-24 sm:py-32 overflow-hidden">
+        <div class="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30"></div>
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-purple/10 rounded-full blur-3xl"></div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-xs text-brand-500 font-mono mb-6">
+                <i class="fa-solid fa-mobile-screen-button"></i> Płatności BLIK na telefon · bez operatora płatności
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6">
+                Sklep, rezerwacje albo wypożyczalnia
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-cyber-cyan to-cyber-blue mt-2">z płatnością BLIK — i bez umowy z operatorem</span>
+            </h1>
+            <p class="max-w-3xl mx-auto text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed">
+                Klient płaci <span class="text-brand-500 font-semibold">przelewem BLIK na Twój numer telefonu</span>, a system sam rozpoznaje płatność i potwierdza zamówienie.
+                Pieniądze od razu trafiają na Twoje konto — bez podpisywania umów z operatorami płatności, bez abonamentu, także przy działalności nierejestrowanej.
+                Płacisz tylko niewielką prowizję od tego, co faktycznie sprzedasz.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-900/30 transition-all flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-comments"></i> Porozmawiajmy o Twojej stronie
+                </a>
+                <a href="#realizacje" class="w-full sm:w-auto px-8 py-4 bg-slate-800/80 hover:bg-slate-700 text-slate-200 hover:text-white font-semibold rounded-xl border border-slate-700 transition-all">
+                    Zobacz realizacje
+                </a>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-16 pt-8 border-t border-slate-800/80">
+                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
+                    <div class="text-3xl font-extrabold text-white font-mono">0 zł</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">abonamentu</div>
+                </div>
+                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
+                    <div class="text-3xl font-extrabold text-white font-mono">2%</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">prowizji od sprzedaży</div>
+                </div>
+                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
+                    <div class="text-3xl font-extrabold text-white font-mono">~30 s</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">do potwierdzenia płatności</div>
+                </div>
+                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
+                    <div class="text-3xl font-extrabold text-white font-mono">0</div>
+                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">umów z operatorami</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28 pb-24">
+
+        <!-- HOW IT WORKS -->
+        <section id="jak-to-dziala" class="scroll-mt-20">
+            <span class="text-brand-500 font-mono text-xs uppercase tracking-wider"><i class="fa-solid fa-gears"></i> Jak to działa</span>
+            <h2 class="text-3xl font-extrabold text-white mt-2 mb-10">Płatność, którą klient zna, a Ty nie musisz obsługiwać ręcznie</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800">
+                    <div class="text-brand-500 font-mono text-sm mb-3">01</div>
+                    <h3 class="font-bold text-white mb-2">Klient składa zamówienie</h3>
+                    <p class="text-sm text-slate-400">Produkt lub termin jest od razu rezerwowany — nikt inny nie kupi tej samej sztuki ani nie zajmie tego samego miejsca.</p>
+                </div>
+                <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800">
+                    <div class="text-brand-500 font-mono text-sm mb-3">02</div>
+                    <h3 class="font-bold text-white mb-2">Płaci BLIK-iem na telefon</h3>
+                    <p class="text-sm text-slate-400">Dostaje Twój numer telefonu, kwotę i krótki kod do tytułu przelewu — płaci w aplikacji swojego banku w kilka sekund.</p>
+                </div>
+                <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800">
+                    <div class="text-brand-500 font-mono text-sm mb-3">03</div>
+                    <h3 class="font-bold text-white mb-2">System sam księguje wpłatę</h3>
+                    <p class="text-sm text-slate-400">Odczytuje powiadomienie z Twojego banku, dopasowuje kod i kwotę i potwierdza zamówienie — zwykle w ciągu pół minuty.</p>
+                </div>
+                <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800">
+                    <div class="text-brand-500 font-mono text-sm mb-3">04</div>
+                    <h3 class="font-bold text-white mb-2">Ty realizujesz zamówienie</h3>
+                    <p class="text-sm text-slate-400">Dostajesz powiadomienie, klient potwierdzenie z regulaminem. Wysyłka, rezerwacja czy odbiór — dalej wszystko dzieje się w panelu.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                <div class="flex gap-4 p-5 rounded-2xl border border-slate-800 bg-slate-950/40">
+                    <i class="fa-solid fa-file-signature text-brand-500 text-xl mt-1"></i>
+                    <div><h3 class="font-bold text-white">Bez umowy z operatorem płatności</h3>
+                    <p class="text-sm text-slate-400">Nie potrzebujesz Przelewy24, PayU ani Tpay — żadnej weryfikacji firmy, żadnych opłat od transakcji dla operatora.</p></div>
+                </div>
+                <div class="flex gap-4 p-5 rounded-2xl border border-slate-800 bg-slate-950/40">
+                    <i class="fa-solid fa-user-check text-brand-500 text-xl mt-1"></i>
+                    <div><h3 class="font-bold text-white">Także bez zakładania firmy</h3>
+                    <p class="text-sm text-slate-400">Działa przy działalności nierejestrowanej — możesz zacząć sprzedawać rękodzieło czy wynajmować sprzęt, zanim urośniesz do firmy.</p></div>
+                </div>
+                <div class="flex gap-4 p-5 rounded-2xl border border-slate-800 bg-slate-950/40">
+                    <i class="fa-solid fa-building-columns text-brand-500 text-xl mt-1"></i>
+                    <div><h3 class="font-bold text-white">Pieniądze od razu u Ciebie</h3>
+                    <p class="text-sm text-slate-400">Wpłaty trafiają prosto na Twoje konto, a nie na saldo pośrednika czekające na wypłatę.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CASE STUDIES -->
+        <section id="realizacje" class="scroll-mt-20">
+            <span class="text-brand-500 font-mono text-xs uppercase tracking-wider"><i class="fa-solid fa-briefcase"></i> Realizacje</span>
+            <h2 class="text-3xl font-extrabold text-white mt-2 mb-10">Trzy branże, jeden sprawdzony model płatności</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <article class="flex flex-col p-6 bg-slate-800/30 rounded-2xl border border-slate-800 hover:border-brand-500/60 transition-colors">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-11 h-11 rounded-xl bg-cyber-cyan/15 text-cyber-cyan grid place-items-center"><i class="fa-solid fa-bicycle text-lg"></i></span>
+                        <div><h3 class="font-bold text-white">Wypożyczalnia rowerów cargo</h3><a href="https://cargo.mleczki.pl" target="_blank" rel="noopener" class="text-xs font-mono text-brand-500 hover:underline">cargo.mleczki.pl</a></div>
+                    </div>
+                    <p class="text-sm text-slate-400 mb-4">Opłaty za wynajem pobierane z góry: klient wybiera sprzęt i dni w kalendarzu, płaci BLIK-iem, a rezerwacja potwierdza się sama.</p>
+                    <ul class="text-sm text-slate-300 space-y-2 mt-auto">
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i>kalendarz dostępności sprzętu i dodatków</li>
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i>płatność za wynajem BLIK-iem lub przy odbiorze</li>
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i>panel zamówień, klientów i blokad terminów</li>
+                    </ul>
+                </article>
+                <article class="flex flex-col p-6 bg-slate-800/30 rounded-2xl border border-slate-800 hover:border-brand-500/60 transition-colors">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-11 h-11 rounded-xl bg-cyber-purple/15 text-cyber-purple grid place-items-center"><i class="fa-solid fa-calendar-check text-lg"></i></span>
+                        <div><h3 class="font-bold text-white">Rezerwacje zajęć dla dzieci</h3><a href="https://warsztatowniasensoryczna.pl" target="_blank" rel="noopener" class="text-xs font-mono text-brand-500 hover:underline">warsztatowniasensoryczna.pl</a></div>
+                    </div>
+                    <p class="text-sm text-slate-400 mb-4">Zapisy na warsztaty i karnety z płatnością BLIK, przypomnienia i asystent AI, który zapisuje na zajęcia w rozmowie.</p>
+                    <ul class="text-sm text-slate-300 space-y-2 mt-auto">
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i>grafik, wolne miejsca, karnety i odrabianie</li>
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i>przypomnienia e-mail i kalendarz (.ics)</li>
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i>regulaminy i zgody RODO z wersjonowaniem</li>
+                    </ul>
+                </article>
+                <article class="flex flex-col p-6 bg-slate-800/30 rounded-2xl border border-slate-800 hover:border-brand-500/60 transition-colors">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-11 h-11 rounded-xl bg-orange-500/15 text-orange-400 grid place-items-center"><i class="fa-solid fa-store text-lg"></i></span>
+                        <div><h3 class="font-bold text-white">Sklep z rękodziełem</h3><a href="https://ceramiza.pl" target="_blank" rel="noopener" class="text-xs font-mono text-brand-500 hover:underline">ceramiza.pl</a></div>
+                    </div>
+                    <p class="text-sm text-slate-400 mb-4">Sklep z ceramicznymi lampkami, w którym każda sztuka jest jedyna — z pełną integracją z kurierami: paczkomaty, kurier i Poczta Polska.</p>
+                    <ul class="text-sm text-slate-300 space-y-2 mt-auto">
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i>realne ceny kurierów i darmowa wysyłka jednym kliknięciem</li>
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i>etykiety i śledzenie — status „wysłane” ustawia się sam</li>
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i>zdjęcia, filmy, Instagram i zamawianie przez czat AI</li>
+                    </ul>
+                </article>
+            </div>
+            <div class="mt-10 p-8 rounded-3xl border border-brand-500/40 bg-brand-500/5 text-center">
+                <h3 class="text-2xl font-extrabold text-white mb-3">Mogę zrobić taką stronę dla Ciebie</h3>
+                <p class="text-slate-300 max-w-3xl mx-auto mb-6">Sprzedajesz rękodzieło, wynajmujesz sprzęt albo prowadzisz zajęcia? Przygotuję stronę dopasowaną do Twojej działalności — z płatnościami BLIK, panelem do zarządzania, regulaminami i wszystkim, czego potrzebujesz, żeby zacząć sprzedawać.</p>
+                <a href="#contact" class="inline-flex items-center gap-3 px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl transition-all"><i class="fa-solid fa-paper-plane"></i> Opisz swój pomysł</a>
+            </div>
+        </section>
+
+        <!-- COSTS -->
+        <section id="koszty" class="scroll-mt-20">
+            <span class="text-brand-500 font-mono text-xs uppercase tracking-wider"><i class="fa-solid fa-coins"></i> Koszty</span>
+            <h2 class="text-3xl font-extrabold text-white mt-2 mb-10">Płacisz, kiedy sprzedajesz</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="p-8 rounded-2xl border border-brand-500/50 bg-slate-800/30">
+                    <h3 class="font-bold text-white text-xl mb-4">Strona z płatnością BLIK</h3>
+                    <ul class="space-y-3 text-slate-300 text-sm">
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i><strong>0 zł abonamentu</strong> — żadnej stałej opłaty miesięcznej</li>
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i><strong>2% prowizji</strong> od opłaconej sprzedaży, rozliczane raz w miesiącu</li>
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i>brak opłat operatora płatności — BLIK na telefon jest w Twoim banku</li>
+                        <li><i class="fa-solid fa-check text-brand-500 mr-2"></i>miesięczne podsumowanie sprzedaży do pobrania (CSV / PDF)</li>
+                    </ul>
+                </div>
+                <div class="p-8 rounded-2xl border border-slate-800 bg-slate-950/40">
+                    <h3 class="font-bold text-white text-xl mb-4">Przykład</h3>
+                    <p class="text-sm text-slate-400 mb-4">Sprzedajesz w miesiącu 10 lampek po 250 zł.</p>
+                    <div class="font-mono text-sm space-y-2">
+                        <div class="flex justify-between border-b border-slate-800 pb-2"><span class="text-slate-400">Sprzedaż</span><span class="text-white">2 500,00 zł</span></div>
+                        <div class="flex justify-between border-b border-slate-800 pb-2"><span class="text-slate-400">Prowizja (2%)</span><span class="text-white">50,00 zł</span></div>
+                        <div class="flex justify-between border-b border-slate-800 pb-2"><span class="text-slate-400">Abonament</span><span class="text-white">0,00 zł</span></div>
+                        <div class="flex justify-between border-b border-slate-800 pb-2"><span class="text-slate-400">Opłaty operatora płatności</span><span class="text-white">0,00 zł</span></div>
+                        <div class="flex justify-between pt-1"><span class="text-slate-300 font-bold">Zostaje u Ciebie</span><span class="text-brand-500 font-bold">2 450,00 zł</span></div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4">W miesiącu bez sprzedaży nie płacisz nic. Koszty wysyłki pokrywa klient według Twojego cennika.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="scroll-mt-20">
+            <span class="text-brand-500 font-mono text-xs uppercase tracking-wider"><i class="fa-solid fa-circle-question"></i> Pytania</span>
+            <h2 class="text-3xl font-extrabold text-white mt-2 mb-8">Najczęstsze pytania</h2>
+            <div class="space-y-3 max-w-4xl">
+                <details class="p-5 rounded-xl border border-slate-800 bg-slate-800/20"><summary class="font-semibold text-white cursor-pointer">Czy klient musi mieć konto albo instalować coś dodatkowego?</summary>
+                    <p class="text-sm text-slate-400 mt-3">Nie. Wystarczy aplikacja banku z BLIK-iem, a ma ją większość kupujących. Zamówienie składa się bez zakładania konta, a klient może też zapłacić zwykłym przelewem.</p></details>
+                <details class="p-5 rounded-xl border border-slate-800 bg-slate-800/20"><summary class="font-semibold text-white cursor-pointer">Skąd system wie, że klient zapłacił?</summary>
+                    <p class="text-sm text-slate-400 mt-3">Twój bank wysyła powiadomienie o wpływie na skrzynkę e-mail, którą system odczytuje. Kod z tytułu przelewu i kwota wskazują zamówienie. Wpłaty, których nie da się dopasować (np. literówka w kodzie), trafiają do panelu, gdzie przypiszesz je jednym kliknięciem.</p></details>
+                <details class="p-5 rounded-xl border border-slate-800 bg-slate-800/20"><summary class="font-semibold text-white cursor-pointer">Czy muszę mieć firmę?</summary>
+                    <p class="text-sm text-slate-400 mt-3">Nie musisz, jeśli mieścisz się w limicie przychodów działalności nierejestrowanej. Strona ma regulamin, politykę prywatności i pouczenie o odstąpieniu od umowy dopasowane do Twojej sytuacji. Obowiązki podatkowe dotyczące przychodów zostają oczywiście po Twojej stronie.</p></details>
+                <details class="p-5 rounded-xl border border-slate-800 bg-slate-800/20"><summary class="font-semibold text-white cursor-pointer">A co z wysyłką i kurierami?</summary>
+                    <p class="text-sm text-slate-400 mt-3">Sklep może być zintegrowany z kurierami przez Polkurier: klient wyszukuje paczkomat po mieście lub ulicy, Ty widzisz realny koszt wysyłki, drukujesz etykietę jednym kliknięciem, a status paczki aktualizuje się sam.</p></details>
+                <details class="p-5 rounded-xl border border-slate-800 bg-slate-800/20"><summary class="font-semibold text-white cursor-pointer">Ile trwa przygotowanie strony?</summary>
+                    <p class="text-sm text-slate-400 mt-3">Zwykle od tygodnia do kilku tygodni, zależnie od zakresu. Zaczynamy od krótkiej rozmowy o tym, co i jak sprzedajesz.</p></details>
+            </div>
+        </section>
+
+        <!-- CONTACT (same form as the home page) -->
+        <section id="contact" class="scroll-mt-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 bg-slate-800/20 p-8 sm:p-12 rounded-3xl border border-slate-800 items-start">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-brand-500 font-mono text-xs uppercase tracking-wider"><i class="fa-solid fa-paper-plane"></i> Kontakt</span>
+                    <h2 class="text-3xl font-extrabold text-white">Porozmawiajmy o Twojej stronie</h2>
+                    <p class="text-slate-400 text-sm">Napisz, co sprzedajesz albo wynajmujesz i jak dziś przyjmujesz płatności. Wybierz termin krótkiej rozmowy, a ja przygotuję propozycję.</p>
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-center gap-3 text-sm"><i class="fa-solid fa-envelope text-brand-500 w-5"></i><a href="mailto:do@mleczki.pl" class="text-slate-200 hover:text-brand-500 font-mono transition-colors">do@mleczki.pl</a></div>
+                        <div class="flex items-center gap-3 text-sm"><i class="fa-solid fa-phone text-brand-500 w-5"></i><a href="tel:+48732575375" class="text-slate-200 hover:text-brand-500 font-mono transition-colors">+48 732 575 375</a></div>
+                        <div class="flex items-center gap-3 text-sm"><i class="fa-solid fa-location-dot text-brand-500 w-5"></i><span class="text-slate-200 font-mono">Radzymin (Warszawa), Polska</span></div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 bg-slate-950 p-6 sm:p-8 rounded-2xl border border-slate-800">
+                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4" novalidate>
+                        <input type="hidden" name="_subject" value="Zapytanie: strona z płatnością BLIK">
+                        <input type="hidden" name="source" value="platnosci-blik">
+                        <div>
+                            <label for="form-name" class="block text-xs font-bold uppercase text-slate-400 mb-1">Imię i Nazwisko / Firma</label>
+                            <input type="text" id="form-name" name="name" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="Jan Kowalski">
+                        </div>
+                        <div>
+                            <label for="form-email" class="block text-xs font-bold uppercase text-slate-400 mb-1">Adres Email</label>
+                            <input type="email" id="form-email" name="email" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="jan@example.com">
+                        </div>
+                        <div>
+                            <label for="form-phone" class="block text-xs font-bold uppercase text-slate-400 mb-1">Telefon kontaktowy</label>
+                            <input type="tel" id="form-phone" name="phone" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="+48 123 456 789">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Preferowana data i godzina rozmowy</label>
+                            <div class="scheduler">
+                                <div class="scheduler-header">
+                                    <h4>Umów rozmowę</h4>
+                                    <div id="month-label" style="font-size: 12px; color: #94a3b8;"></div>
+                                </div>
+                                <div class="days-container" id="daysRow"></div>
+                                <div class="slots-container" id="slotsGrid"></div>
+                                <div class="selection-output" id="selectionOutput">Wybierz datę i godzinę</div>
+                                <input type="hidden" id="form-datetime" name="datetime" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="form-message" class="block text-xs font-bold uppercase text-slate-400 mb-1">Co chcesz sprzedawać lub rezerwować?</label>
+                            <textarea id="form-message" name="message" required rows="4" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="Np. sprzedaję ręcznie robioną biżuterię przez Instagram i chcę przyjmować płatności BLIK na stronie…"></textarea>
+                        </div>
+                        <div class="text-xs text-slate-400"><i class="fa-solid fa-info-circle mr-1"></i>Wysłanie wiadomości jest zgodą na kontakt zwrotny w celu umówienia rozmowy.</div>
+                        <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Umów bezpłatną rozmowę o Twoim projekcie
+                        </button>
+                    </form>
+                    <div id="form-feedback" class="hidden mt-4 p-4 rounded-lg text-sm text-center"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-950 border-t border-slate-900 py-12 text-slate-500 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <a href="/" class="flex items-center gap-2">
+                <span class="text-brand-500 font-mono font-bold text-lg">&lt;mleczakm/&gt;</span>
+                <span>© 2026 Michał Mleczko. Wszystkie prawa zastrzeżone.</span>
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="/" class="hover:text-brand-500 transition-colors">O mnie</a>
+                <a href="#realizacje" class="hover:text-brand-500 transition-colors">Realizacje</a>
+                <a href="#contact" class="hover:text-brand-500 transition-colors">Kontakt</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // CUSTOM DATE/TIME PICKER INITIALIZATION
+        function initCustomPicker() {
+            // CONFIGURATION
+            const WORK_START_HOUR = 7; // 7:00 AM
+            const WORK_END_HOUR = 20;  // 8:00 PM (20:00)
+            const DAYS_TO_CHECK = 7;   // Look forward 7 calendar days
+
+            // STATE
+            let selectedDateString = null;
+            let selectedTimeRange = null;
+
+            // DOM ELEMENTS
+            const daysRow = document.getElementById('daysRow');
+            const slotsGrid = document.getElementById('slotsGrid');
+            const monthLabel = document.getElementById('month-label');
+            const selectionOutput = document.getElementById('selectionOutput');
+            const datetimeInput = document.getElementById('form-datetime');
+
+            // HELPER: Generate working dates within the next 7 calendar days
+            function getWorkingDaysAhead() {
+                const workingDays = [];
+                const today = new Date();
+
+                for (let i = 0; i < DAYS_TO_CHECK; i++) {
+                    const checkDate = new Date();
+                    checkDate.setDate(today.getDate() + i);
+
+                    const dayOfWeek = checkDate.getDay();
+                    // 0 = Sunday, 6 = Saturday. Only push Monday-Friday (1-5)
+                    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+                        workingDays.push(checkDate);
+                    }
+                }
+                return workingDays;
+            }
+
+            // HELPER: Generate time ranges array (e.g. ["7-8", "8-9", ...])
+            function generateTimeRanges() {
+                const ranges = [];
+                for (let hour = WORK_START_HOUR; hour < WORK_END_HOUR; hour++) {
+                    ranges.push(`${hour}-${hour + 1}`);
+                }
+                return ranges;
+            }
+
+            // RENDER: Render the Day tabs
+            function renderDays() {
+                const availableDays = getWorkingDaysAhead();
+                daysRow.innerHTML = '';
+
+                // Update top right month tag dynamically based on first available date
+                if(availableDays.length > 0) {
+                    const options = { month: 'long', year: 'numeric' };
+                    monthLabel.innerText = availableDays[0].toLocaleDateString('pl-PL', options);
+                }
+
+                availableDays.forEach((date, index) => {
+                    const dateString = date.toISOString().split('T')[0];
+                    const dayName = date.toLocaleDateString('pl-PL', { weekday: 'short' });
+                    const dayNum = date.getDate();
+
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `day-btn ${index === 0 ? 'active' : ''}`;
+                    btn.dataset.date = dateString;
+                    btn.innerHTML = `
+                        <span class="day-name">${dayName}</span>
+                        <span class="day-date">${dayNum}</span>
+                    `;
+
+                    // Set initial active date string to today/first available day
+                    if (index === 0) selectedDateString = dateString;
+
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedDateString = dateString;
+                        selectedTimeRange = null; // Reset chosen time when changing day
+                        renderSlots();
+                        updateOutput();
+                    });
+
+                    daysRow.appendChild(btn);
+                });
+            }
+
+            // RENDER: Render the Slot blocks
+            function renderSlots() {
+                const ranges = generateTimeRanges();
+                slotsGrid.innerHTML = '';
+
+                ranges.forEach(range => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'slot-btn';
+                    // Formatting representation: "8-9" converted to text "08:00 - 09:00"
+                    const [start, end] = range.split('-');
+                    const formatTime = (h) => `${h.padStart(2, '0')}:00`;
+                    btn.innerText = `${formatTime(start)} - ${formatTime(end)}`;
+
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        selectedTimeRange = range;
+                        updateOutput();
+                    });
+
+                    slotsGrid.appendChild(btn);
+                });
+            }
+
+            // UPDATE: Output element behavior
+            function updateOutput() {
+                if (selectedDateString && selectedTimeRange) {
+                    const [start, end] = selectedTimeRange.split('-');
+                    selectionOutput.innerHTML = `Wybrany termin: <strong>${selectedDateString}</strong> pomiędzy <strong>${start}:00</strong> a <strong>${end}:00</strong>`;
+                    // Update hidden input for form submission
+                    datetimeInput.value = `${selectedDateString} ${start}:00`;
+                } else {
+                    selectionOutput.innerText = 'Wybierz datę i godzinę';
+                    datetimeInput.value = '';
+                }
+            }
+
+            // INITIALIZATION
+            renderDays();
+            renderSlots();
+        }
+        
+        // Initialize custom picker on page load
+        document.addEventListener('DOMContentLoaded', initCustomPicker);
+
+        // MOBILE MENU TOGGLE
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+            
+            if (isExpanded) {
+                mobileMenuIcon.className = "fa-solid fa-bars text-xl";
+            } else {
+                mobileMenuIcon.className = "fa-solid fa-xmark text-xl";
+            }
+        });
+
+        // Close mobile menu on click links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuIcon.className = "fa-solid fa-bars text-xl";
+            });
+        });
+
+
+        // THEME TOGGLE (LIGHT / DARK)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeIconMobile = document.getElementById('theme-icon-mobile');
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+                localStorage.setItem('color-theme', 'light');
+                themeIcon.className = "fa-solid fa-moon text-lg";
+                themeIconMobile.className = "fa-solid fa-moon text-lg";
+            } else {
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+                themeIcon.className = "fa-solid fa-sun text-lg";
+                themeIconMobile.className = "fa-solid fa-sun text-lg";
+            }
+        }
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        themeToggleMobileBtn.addEventListener('click', toggleTheme);
+
+
+
+        // FORMSPREE AJAX FORM SUBMISSION
+        async function handleContactSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            const feedback = document.getElementById('form-feedback');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            
+            // Custom validation
+            let isValid = true;
+            const requiredFields = form.querySelectorAll('[required]');
+            
+            // Clear previous validation styles
+            requiredFields.forEach(field => {
+                field.classList.remove('border-red-500');
+                field.classList.add('border-slate-800');
+            });
+            
+            // Validate each required field
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.classList.remove('border-slate-800');
+                    field.classList.add('border-red-500');
+                }
+            });
+
+            // Email validation
+            const emailField = form.querySelector('#form-email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailField.value.trim() && !emailRegex.test(emailField.value.trim())) {
+                isValid = false;
+                emailField.classList.remove('border-slate-800');
+                emailField.classList.add('border-red-500');
+            }
+
+            // Phone validation (accepts various formats: plain digits, with +, spaces, dashes, dots, parentheses)
+            const phoneField = form.querySelector('#form-phone');
+            const phoneRegex = /^[\+]?[0-9\s\-\.\(\)]{9,}$/;
+            if (phoneField.value.trim() && !phoneRegex.test(phoneField.value.trim())) {
+                isValid = false;
+                phoneField.classList.remove('border-slate-800');
+                phoneField.classList.add('border-red-500');
+            }
+
+            // If validation fails, show error and prevent submission
+            if (!isValid) {
+                feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-red-950/50 text-red-400 border border-red-800";
+                feedback.innerHTML = `
+                    <div class="font-bold mb-1"><i class="fa-solid fa-exclamation-circle mr-2"></i>Wypełnij wszystkie wymagane pola</div>
+                    Proszę uzupełnić wszystkie pola oznaczone jako wymagane w poprawnym formacie.
+                `;
+                feedback.classList.remove('hidden');
+                return;
+            }
+
+            // Show loading state
+            feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-slate-800 text-slate-300";
+            feedback.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Wysyłanie wiadomości...`;
+            feedback.classList.remove('hidden');
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Wysyłanie...`;
+
+            try {
+                const response = await fetch('https://formspree.io/f/xdavweok', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Success
+                    feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-brand-950/50 text-brand-400 border border-brand-800";
+                    feedback.innerHTML = `
+                        <div class="font-bold mb-1"><i class="fa-solid fa-check-circle mr-2"></i>Dziękuję za kontakt!</div>
+                        Twoja wiadomość została wysłana pomyślnie. Odpiszę najszybciej jak to możliwe.
+                    `;
+                    form.reset();
+                    // Reset validation styles
+                    requiredFields.forEach(field => {
+                        field.classList.remove('border-red-500');
+                        field.classList.add('border-slate-800');
+                    });
+                    // Reset custom picker
+                    if (typeof initCustomPicker === 'function') {
+                        initCustomPicker();
+                    }
+                } else {
+                    // Error from Formspree
+                    const data = await response.json();
+                    throw new Error(data.error || 'Wystąpił błąd podczas wysyłania wiadomości.');
+                }
+            } catch (error) {
+                // Network error or Formspree error
+                feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-red-950/50 text-red-400 border border-red-800";
+                feedback.innerHTML = `
+                    <div class="font-bold mb-1"><i class="fa-solid fa-exclamation-circle mr-2"></i>Błąd</div>
+                    ${error.message || 'Nie udało się wysłać wiadomości. Spróbuj ponownie później.'}
+                `;
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Umów bezpłatną rozmowę o Twoim projekcie`;
+            }
+        }
+    </script>
+</body>
+</html>

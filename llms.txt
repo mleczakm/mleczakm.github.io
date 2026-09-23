@@ -23,6 +23,8 @@ This is a personal portfolio website for Michał Mleczko, a Senior Developer & A
 ├── index.html          # Polish version (default)
 ├── en/
 │   └── index.html      # English version
+├── platnosci-blik/
+│   └── index.html      # PL landing page: shops, bookings and rentals with BLIK-to-phone payments (cargo.mleczki.pl, warsztatowniasensoryczna.pl, ceramiza.pl) + contact form
 ├── sitemap.xml        # SEO sitemap with hreflang
 ├── robots.txt         # SEO robots configuration
 ├── llms.txt          # This file - LLM documentation
