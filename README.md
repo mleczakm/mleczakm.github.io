@@ -16,10 +16,14 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 Visit `http://127.0.0.1:4173/`. No JavaScript framework, package install or build service is needed to serve the site. `scripts/build.py` (Python standard library) is the source for both language pages; edit copy and markup there, then regenerate. Generated HTML is committed so GitHub Pages serves complete content without client rendering. Styling and behavior are shared in `assets/site.css` and `assets/site.js`.
 
-The BLIK landing page is maintained directly in `platnosci-blik/index.html`. It uses the shared `assets/site.css` design system plus page-specific `assets/blik.css` and `assets/blik.js` (mobile menu, call scheduler, Formspree form with validation and timeout); no Tailwind or external CDN. Its pricing applies to the commerce offering; BezReszty's separate 0% application commission is explicitly distinguished.
+The BLIK landing page is maintained directly in `platnosci-blik/index.html`. It uses the shared `assets/site.css` design system plus page-specific `assets/blik.css` and `assets/blik.js` (mobile menu, 2% commission calculator, consultation scheduler, Formspree form with validation and timeout); no Tailwind or external CDN. Its pricing applies to the commerce offering; BezReszty's separate 0% application commission is explicitly distinguished.
 
 ## Interactions and verification
 
+- Consultation CTAs: `BOOKING_URL` in `scripts/build.py` (Cal.com / Calendly). While empty, the header and hero CTAs lead to the contact form, which asks for a preferred consultation time.
+- Testimonials: `TESTIMONIALS` in `scripts/build.py`. The section renders only when the list is not empty; add real quotes approved by the client, never placeholders.
+- Case studies follow Problem → Solution → Outcome. Each `kpi` states only a figure that is true for that project; replace it with a measured client result (hours saved, cost change) once confirmed.
+- The website cost calculator ends with a free cost-audit CTA that names the visitor's own annual difference and preselects the audit topic in the form.
 - AI workflow examples switch between sales, operations and engineering. They are clearly labeled illustrations and never call live business tools.
 - The cost calculator uses visitor-entered monthly costs, handles empty/invalid values and additional costs, and excludes one-time migration. Defaults are examples, not quotes or measured performance.
 - Contact: existing Formspree endpoint, native POST fallback, HTML validation, honeypot, 15-second request timeout, success/failure status and preserved input after errors. Preferred call time is optional and explicitly in Europe/Warsaw.

@@ -15,6 +15,26 @@
   });
   matchMedia('(min-width: 901px)').addEventListener('change', event => { if (event.matches) closeMenu(); });
 
+  // Cost calculator: 2% commission on paid sales, no subscription or payment-provider fees
+  const COMMISSION = 0.02;
+  const salesInput = document.querySelector('#monthly-sales');
+  const feeOutput = document.querySelector('#calc-fee');
+  const netOutput = document.querySelector('#calc-net');
+  const money = new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN' });
+  function calculate() {
+    if (!salesInput.validity.valid || salesInput.value === '') {
+      feeOutput.textContent = '—';
+      netOutput.textContent = '—';
+      return;
+    }
+    const sales = salesInput.valueAsNumber;
+    const fee = Math.round(sales * COMMISSION * 100) / 100;
+    feeOutput.textContent = money.format(fee);
+    netOutput.textContent = money.format(sales - fee);
+  }
+  salesInput.addEventListener('input', calculate);
+  calculate();
+
   // Call scheduler: next working days, one-hour slots 7:00-20:00
   const WORK_START_HOUR = 7;
   const WORK_END_HOUR = 20;
@@ -146,7 +166,7 @@
       if (!response.ok) throw new Error('Form submission failed');
       form.reset();
       renderDays();
-      setStatus('Dziękuję! Wiadomość została wysłana. Odpiszę najszybciej jak to możliwe.', 'success');
+      setStatus('Dziękuję! Prośba o konsultację została wysłana. Potwierdzę termin w odpowiedzi.', 'success');
     } catch {
       setStatus('Nie udało się potwierdzić wysłania. Dane pozostały w formularzu. Spróbuj ponownie lub napisz na do@mleczki.pl.', 'error');
     } finally {

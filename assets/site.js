@@ -117,20 +117,33 @@
   const wpCost = document.querySelector('#wp-cost');
   const staticCost = document.querySelector('#static-cost');
   const savings = document.querySelector('#savings-value');
+  const savingsCta = document.querySelector('#savings-cta');
   const money = new Intl.NumberFormat(en ? 'en-GB' : 'pl-PL', { style: 'currency', currency: 'PLN', maximumFractionDigits: 0 });
   function calculate() {
     if (!wpCost.validity.valid || !staticCost.validity.valid || wpCost.value === '' || staticCost.value === '') {
       savings.textContent = '—';
+      savingsCta.textContent = t('Zatrzymaj te pieniądze w firmie.', 'Keep that money in your business.');
       document.querySelector('#savings-label').textContent = t('Podaj dwa koszty od 0 do 100 000 zł', 'Enter both costs between PLN 0 and 100,000');
       return;
     }
     const annual = Math.round((wpCost.valueAsNumber - staticCost.valueAsNumber) * 12);
     document.querySelector('#savings-label').textContent = annual < 0 ? t('Dodatkowy koszt roczny', 'Additional annual cost') : t('Potencjalna oszczędność roczna', 'Potential annual savings');
     savings.textContent = money.format(Math.abs(annual));
+    savingsCta.textContent = annual > 0
+      ? t(`Zatrzymaj ${money.format(annual)} rocznie w firmie.`, `Keep ${money.format(annual)} a year in your business.`)
+      : t('Sprawdźmy, gdzie realnie da się obniżyć koszty.', 'Let’s find where costs can really come down.');
   }
   wpCost.addEventListener('input', calculate);
   staticCost.addEventListener('input', calculate);
   calculate();
+
+  // Calls to action that preselect the enquiry topic (e.g. the website cost audit).
+  const topic = document.querySelector('#topic');
+  const message = document.querySelector('#message');
+  document.querySelectorAll('[data-topic]').forEach(link => link.addEventListener('click', () => {
+    topic.value = link.dataset.topic;
+    if (!message.value && link.dataset.message) message.value = link.dataset.message;
+  }));
 
   const form = document.querySelector('#contact-form');
   const formStatus = document.querySelector('#form-status');
