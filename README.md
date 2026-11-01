@@ -4,7 +4,7 @@ Static Polish/English portfolio: business AI implementation, MCP integrations, c
 
 - `/` — Polish portfolio.
 - `/en/` — complete English portfolio; language switching preserves the section.
-- `/platnosci-blik/` — existing BLIK landing page, with its permanent URL preserved. Includes BezReszty and its phone + mObywatel organizer verification process.
+- `/platnosci-blik/` — BLIK landing page in the same design system, with its permanent URL preserved. Includes BezReszty and its phone + mObywatel organizer verification process.
 
 ## Develop
 
@@ -16,7 +16,7 @@ python3 -m http.server 4173 --bind 127.0.0.1
 
 Visit `http://127.0.0.1:4173/`. No JavaScript framework, package install or build service is needed to serve the site. `scripts/build.py` (Python standard library) is the source for both language pages; edit copy and markup there, then regenerate. Generated HTML is committed so GitHub Pages serves complete content without client rendering. Styling and behavior are shared in `assets/site.css` and `assets/site.js`.
 
-The BLIK landing page is maintained directly in `platnosci-blik/index.html` and retains its existing styling and form behavior. Its pricing applies to the commerce offering; BezReszty's separate 0% application commission is explicitly distinguished.
+The BLIK landing page is maintained directly in `platnosci-blik/index.html`. It uses the shared `assets/site.css` design system plus page-specific `assets/blik.css` and `assets/blik.js` (mobile menu, call scheduler, Formspree form with validation and timeout); no Tailwind or external CDN. Its pricing applies to the commerce offering; BezReszty's separate 0% application commission is explicitly distinguished.
 
 ## Interactions and verification
 
