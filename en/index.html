@@ -1,1434 +1,666 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michał Mleczko | Senior Developer & Architect</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Michał Mleczko - Senior Developer & Architect. Specializing in CI/CD automation, Kubernetes, PHP, and distributed architecture.">
-    <meta name="keywords" content="Senior Developer, Architect, PHP, Kubernetes, CI/CD, DevOps, Symfony, Docker">
-    <meta name="author" content="Michał Mleczko">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://mleczakm.github.io/en/">
-    
-    <!-- Hreflang for multilingual SEO -->
-    <link rel="alternate" hreflang="pl" href="https://mleczakm.github.io/">
-    <link rel="alternate" hreflang="en" href="https://mleczakm.github.io/en/">
-    <link rel="alternate" hreflang="x-default" href="https://mleczakm.github.io/">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mleczakm.github.io/en/">
-    <meta property="og:title" content="Michał Mleczko | Senior Developer & Architect">
-    <meta property="og:description" content="Senior Developer & Architect specializing in CI/CD automation, Kubernetes, and distributed architecture.">
-    <meta property="og:image" content="https://mleczakm.github.io/og-image.png">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://mleczakm.github.io/en/">
-    <meta property="twitter:title" content="Michał Mleczko | Senior Developer & Architect">
-    <meta property="twitter:description" content="Senior Developer & Architect specializing in CI/CD automation, Kubernetes, and distributed architecture.">
-    <meta property="twitter:image" content="https://mleczakm.github.io/og-image.png">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            900: '#14532d',
-                        },
-                        cyber: {
-                            cyan: '#06b6d4',
-                            blue: '#3b82f6',
-                            purple: '#8b5cf6',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Smooth transitions for theme switching */
-        * {
-            transition: background-color 0.3s ease, border-color 0.3s ease, text-decoration-color 0.3s ease;
-        }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #22c55e;
-        }
-        
-        /* Custom Date/Time Picker Styles */
-        .scheduler {
-            width: 100%;
-            background-color: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 16px;
-        }
-
-        .scheduler-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            border-bottom: 1px solid #334155;
-            padding-bottom: 8px;
-        }
-
-        .scheduler-header h4 {
-            margin: 0;
-            font-size: 14px;
-            font-weight: 600;
-            color: #e2e8f0;
-        }
-
-        .days-container {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .day-btn {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            color: #e2e8f0;
-            padding: 8px 4px;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        .day-btn:hover {
-            border-color: #94a3b8;
-        }
-
-        .day-btn.active {
-            background-color: #22c55e;
-            border-color: #22c55e;
-            color: #ffffff;
-        }
-
-        .day-btn span {
-            display: block;
-        }
-
-        .day-name {
-            font-size: 10px;
-            text-transform: uppercase;
-            color: #94a3b8;
-            margin-bottom: 4px;
-        }
-
-        .day-btn.active .day-name {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .day-date {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .slots-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-            gap: 8px;
-        }
-
-        .slot-btn {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            color: #e2e8f0;
-            padding: 10px 6px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 500;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .slot-btn:hover {
-            border-color: #22c55e;
-            background-color: rgba(34, 197, 94, 0.1);
-        }
-
-        .slot-btn.active {
-            background-color: #22c55e;
-            border-color: #22c55e;
-            color: #000000;
-            font-weight: 600;
-        }
-
-        .selection-output {
-            margin-top: 12px;
-            font-size: 12px;
-            color: #94a3b8;
-            text-align: center;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Michał Mleczko — Business AI, automation & fast websites</title>
+<meta name="description" content="I bring AI into business workflows. AI agents, MCP integrations, BLIK commerce and fast static websites with lower running costs than WordPress.">
+<meta name="author" content="Michał Mleczko">
+<meta name="theme-color" content="#f6f7f2">
+<link rel="canonical" href="https://mleczakm.github.io/en/">
+<link rel="alternate" hreflang="pl" href="https://mleczakm.github.io/">
+<link rel="alternate" hreflang="en" href="https://mleczakm.github.io/en/">
+<link rel="alternate" hreflang="x-default" href="https://mleczakm.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Michał Mleczko — Business AI, automation & fast websites">
+<meta property="og:description" content="I bring AI into business workflows. AI agents, MCP integrations, BLIK commerce and fast static websites with lower running costs than WordPress.">
+<meta property="og:url" content="https://mleczakm.github.io/en/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://mleczakm.github.io/assets/social-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Michał Mleczko — Business AI, automation & fast websites">
+<meta name="twitter:description" content="I bring AI into business workflows. AI agents, MCP integrations, BLIK commerce and fast static websites with lower running costs than WordPress.">
+<meta name="twitter:image" content="https://mleczakm.github.io/assets/social-en.png">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer>
+</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Michał Mleczko", "url": "https://mleczakm.github.io/", "jobTitle": "Software Architect & AI Engineer", "email": "do@mleczki.pl", "sameAs": ["https://github.com/mleczakm", "https://linkedin.com/in/michal-mleczko/"], "knowsAbout": ["AI integration", "MCP", "Software architecture", "E-commerce", "Static websites", "DevOps"]}</script>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white dark:bg-slate-950 dark:text-slate-100 light:bg-slate-50 light:text-slate-900">
-
-    <!-- TOP NAVIGATION BAR -->
-    <nav class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 dark:bg-slate-950/80 border-b border-slate-800 dark:border-slate-800 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo / Name -->
-                <div class="flex-shrink-0 flex items-center gap-2">
-                    <span class="text-brand-500 font-mono font-bold text-xl">&lt;mleczakm/&gt;</span>
-                    <span class="hidden md:block font-semibold text-sm tracking-wider uppercase text-slate-300">Michał Mleczko</span>
-                </div>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="#about" class="text-sm font-medium hover:text-brand-500 transition-colors">About</a>
-                    <a href="#experience" class="text-sm font-medium hover:text-brand-500 transition-colors">Experience</a>
-                    <a href="#pipeline" class="text-sm font-medium hover:text-brand-500 transition-colors">CI/CD Simulator</a>
-                    <a href="#skills" class="text-sm font-medium hover:text-brand-500 transition-colors">Tech Stack</a>
-                    <a href="#projects" class="text-sm font-medium hover:text-brand-500 transition-colors">Projects</a>
-                    <a href="#contact" class="px-4 py-2 text-xs font-semibold tracking-wider text-white bg-brand-600 rounded-lg hover:bg-brand-500 transition-all shadow-md shadow-brand-900/20 uppercase">Book Consultation</a>
-                    
-                    <!-- Language Switcher -->
-                    <a href="/" class="text-sm font-medium hover:text-brand-500 transition-colors flex items-center gap-1">
-                        <i class="fa-solid fa-globe"></i> PL
-                    </a>
-                    
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle" class="p-2 text-slate-400 hover:text-brand-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Toggle theme">
-                        <i id="theme-icon" class="fa-solid fa-sun text-lg"></i>
-                    </button>
-                </div>
-
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center gap-4">
-                    <button id="theme-toggle-mobile" class="p-2 text-slate-400 hover:text-brand-500 rounded-lg focus:outline-none" aria-label="Przełącz motyw">
-                        <i id="theme-icon-mobile" class="fa-solid fa-sun text-lg"></i>
-                    </button>
-                    <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-brand-500 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500" aria-expanded="false">
-                        <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu, show/hide based on menu state. -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 dark:bg-slate-950/95 border-b border-slate-800">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">About</a>
-                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Experience</a>
-                <a href="#pipeline" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">CI/CD Simulator</a>
-                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Tech Stack</a>
-                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Projects</a>
-                <a href="#contact" class="block text-center w-full px-3 py-2 mt-4 rounded-md text-base font-medium text-white bg-brand-600 hover:bg-brand-500">Book Consultation</a>
-                <a href="/" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500 flex items-center gap-2">
-                    <i class="fa-solid fa-globe"></i> Polski
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- HERO SECTION (Business-First focus) -->
-    <header class="relative min-h-[90vh] flex items-center justify-center py-16 overflow-hidden">
-        <!-- Abstract Tech Background Grid -->
-        <div class="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30"></div>
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-blue/10 rounded-full blur-3xl"></div>
-
-        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <!-- Terminal Badge -->
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-xs text-brand-500 font-mono mb-6 mx-auto">
-                <span class="flex h-2 w-2 relative">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
-                </span>
-Fast, scalable systems without technical debt
-            </div>
-
-            <!-- Title -->
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6">
-                Michał Mleczko
-                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-cyber-cyan to-cyber-blue mt-2">
-                    Senior Architect & Developer
-                </span>
-            </h1>
-
-            <!-- Business Promise Paragraph -->
-            <p class="max-w-3xl mx-auto text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed">
-I combine <span class="text-brand-500 font-semibold">business-first thinking</span> with uncompromising infrastructure automation. I take projects from raw idea and analysis, through DDD/Hexagonal architecture optimization, to stress-free production deployments on Kubernetes clusters.
-            </p>
-
-            <!-- CTA Actions -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#pipeline" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-900/30 transition-all flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-play"></i> Test My Pipeline
-                </a>
-                <a href="#experience" class="w-full sm:w-auto px-8 py-4 bg-slate-800/80 hover:bg-slate-700 text-slate-200 hover:text-white font-semibold rounded-xl border border-slate-700 transition-all flex items-center justify-center gap-2">
-                    Professional Experience
-                </a>
-            </div>
-
-            <!-- Quick Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-20 pt-8 border-t border-slate-800/80">
-                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
-                    <div class="text-3xl font-extrabold text-white font-mono">12+</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Years Experience</div>
-                </div>
-                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
-                    <div class="text-3xl font-extrabold text-white font-mono">100%</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Automated CI/CD</div>
-                </div>
-                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
-                    <div class="text-3xl font-extrabold text-white font-mono">3+</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Deployment Continents</div>
-                </div>
-                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
-                    <div class="text-3xl font-extrabold text-white font-mono">Friday</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Ready Deploys</div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- MAIN SECTIONS -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32 pb-24">
-
-        <!-- SECTION: ABOUT ME & DISC PROFILE -->
-        <section id="about" class="scroll-mt-20">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <!-- Left Column: Biography -->
-                <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 text-brand-500 font-mono text-xs uppercase tracking-wider">
-                        <i class="fa-solid fa-user"></i> Who am I?
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
-                        Architect who views code through the lens of business value.
-                    </h2>
-                    <p class="text-slate-300 leading-relaxed text-base">
-                        As a <strong class="text-white">DISC Dominant (D)</strong> profile, my natural drive is to remove obstacles and automate everything repeatable: from code quality checks (Rector, PHPStan), through automated tests, to dynamic test environments and deployments.
-                    </p>
-                    <p class="text-slate-300 leading-relaxed text-base">
-                        However, the true secret of stable business lies in <strong class="text-white">atmosphere and peace of mind</strong>. I deeply believe that a confident and cohesive development team can safely deploy code to production even on Friday afternoons without stress. This is guaranteed by hard quality rules and technical maturity.
-                    </p>
-                    
-                    <div class="p-4 bg-brand-950/25 border-l-4 border-brand-500 rounded-r-xl text-brand-300 text-sm italic font-mono">
-                        "A cohesive team that feels safe doesn't hesitate to deploy fixes on Friday afternoons because they trust automation procedures."
-                    </div>
-                </div>
-
-                <!-- Right Column: Interactive DISC Visualization -->
-                <div class="lg:col-span-5 bg-slate-800/40 p-6 rounded-2xl border border-slate-800/80">
-                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-chart-pie text-brand-500"></i> My DISC Profile in Action
-                    </h3>
-                    <p class="text-xs text-slate-400 mb-6">Click on profile letters to read how each aspect affects my work.</p>
-
-                    <!-- Bar Graph -->
-                    <div class="space-y-4">
-                        <!-- Dominance -->
-                        <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('D')">
-                            <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-brand-400">D — DOMINANCE (Dominant)</span>
-                                <span class="font-mono text-slate-300 font-bold">85%</span>
-                            </div>
-                            <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-brand-500 to-brand-400 h-full rounded-full" style="width: 85%"></div>
-                            </div>
-                        </div>
-
-                        <!-- Compliance -->
-                        <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('C')">
-                            <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-cyber-cyan">C — COMPLIANCE (Conscientious)</span>
-                                <span class="font-mono text-slate-300 font-bold">90%</span>
-                            </div>
-                            <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-cyber-cyan to-cyber-blue h-full rounded-full" style="width: 90%"></div>
-                            </div>
-                        </div>
-
-                        <!-- Influence -->
-                        <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('I')">
-                            <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-cyber-purple">I — INFLUENCE (Influential)</span>
-                                <span class="font-mono text-slate-300 font-bold">75%</span>
-                            </div>
-                            <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-cyber-purple to-pink-500 h-full rounded-full" style="width: 75%"></div>
-                            </div>
-                        </div>
-
-                        <!-- Steadiness -->
-                        <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('S')">
-                            <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-amber-500">S — STEADINESS (Steady)</span>
-                                <span class="font-mono text-slate-300 font-bold">70%</span>
-                            </div>
-                            <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-amber-500 to-amber-400 h-full rounded-full" style="width: 70%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- DISC Details Container -->
-                    <div class="mt-6 p-4 bg-slate-900/80 rounded-xl border border-slate-800 text-sm">
-                        <div id="disc-content-title" class="font-bold text-white mb-2 flex items-center gap-2">
-                            <span class="inline-block w-2.5 h-2.5 bg-brand-500 rounded-full"></span>
-                            D - Dominance (Results and Action)
-                        </div>
-                        <p id="disc-content-text" class="text-slate-300 text-xs leading-relaxed">
-                            Drives me toward continuous process improvement. I don't accept developers wasting time on manual repetitive operations. When performance issues arise, I seek solutions at the source by designing optimal tools.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- INTERACTIVE WIDGET: THE FRIDAY DEPLOY PIPELINE SIMULATOR -->
-        <section id="pipeline" class="scroll-mt-20">
-            <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800/80 p-6 sm:p-10 rounded-3xl border border-slate-800 shadow-xl relative overflow-hidden">
-                <!-- Glowing corner decorative light -->
-                <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-500/10 rounded-full blur-2xl"></div>
-
-                <div class="max-w-3xl mx-auto text-center mb-8">
-                    <span class="px-3 py-1 rounded-full bg-brand-950 text-brand-400 text-xs font-mono font-bold uppercase tracking-wider">
-                        Real-time Simulator
-                    </span>
-                    <h2 class="text-3xl font-extrabold text-white mt-4">Stress-Free Friday 4 PM Deployment</h2>
-                    <p class="text-slate-400 text-sm mt-2">
-                        See how the automation I've implemented allows developers and business to sleep peacefully. Click the button to run the full QA and CI/CD process.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                    <!-- Controls Column -->
-                    <div class="lg:col-span-4 flex flex-col justify-center space-y-4">
-                        <button id="run-pipeline-btn" onclick="startPipelineSimulation()" class="w-full py-4 px-6 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl shadow-lg shadow-brand-900/20 active:scale-95 transition-all flex items-center justify-center gap-3">
-                            <i class="fa-solid fa-play animate-pulse"></i> Run Pipeline
-                        </button>
-                        <button id="reset-pipeline-btn" onclick="resetPipeline()" class="w-full py-2 px-6 bg-slate-800 hover:bg-slate-700 text-slate-400 font-semibold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-rotate-right"></i> Reset Simulator
-                        </button>
-                        
-                        <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-800/80 space-y-2">
-                            <div class="text-xs font-bold uppercase text-slate-400 tracking-wider">SLA Metrics</div>
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Test Coverage:</span>
-                                <span class="font-mono text-brand-400 font-semibold">94.8%</span>
-                            </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Static Analysis (PHPStan):</span>
-                                <span class="font-mono text-brand-400 font-semibold">Max (Lvl 9)</span>
-                            </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Avg Deployment Time:</span>
-                                <span class="font-mono text-cyber-cyan font-semibold">3 min 45 sec</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pipeline Visual & Terminal Column -->
-                    <div class="lg:col-span-8 flex flex-col bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden min-h-[350px]">
-                        <!-- Terminal Title Bar -->
-                        <div class="bg-slate-900 px-4 py-2 flex items-center justify-between border-b border-slate-800 text-xs">
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-                                <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
-                                <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
-                                <span class="text-slate-400 font-mono ml-2">mleczakm-ci-cd-runner.sh</span>
-                            </div>
-                            <span class="text-slate-500 font-mono text-[10px]">v1.4.2</span>
-                        </div>
-
-                        <!-- Terminal Output Window -->
-                        <div id="terminal-logs" class="p-4 font-mono text-xs text-slate-300 flex-1 space-y-2 overflow-y-auto max-h-[300px]">
-                            <div class="text-slate-500">&gt; Waiting for deployment to start...</div>
-                            <div class="text-slate-500">&gt; Click "Run Pipeline" to test stress-free deployment.</div>
-                        </div>
-
-                        <!-- Progress indicator footer -->
-                        <div class="bg-slate-900/50 px-4 py-3 border-t border-slate-800 text-xs flex justify-between items-center">
-                            <div class="flex items-center gap-2">
-                                <span id="pipeline-status-badge" class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-semibold text-[10px]">IDLE</span>
-                            </div>
-                            <span id="pipeline-percentage" class="font-mono text-slate-400 font-bold">0%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- EXPERIENCE TIMELINE -->
-        <section id="experience" class="scroll-mt-20">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                    <i class="fa-solid fa-briefcase"></i> Career Path
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Delivered Projects & Roles</h2>
-                <p class="text-slate-400 mt-2 text-sm">
-                    From modernizing massive monoliths, through distributed architectures across continents, to full cloud orchestration.
-                </p>
-            </div>
-
-            <!-- Vertical Timeline Component -->
-            <div class="relative border-l border-slate-800 max-w-5xl mx-auto pl-6 sm:pl-10 space-y-12">
-                
-                <!-- eMag (Senior Engineer / Architect) -->
-                <div class="relative">
-                    <span class="absolute -left-[31px] sm:-left-[55px] top-1.5 bg-brand-500 text-slate-900 border-4 border-slate-900 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-[10px] sm:text-xs font-bold">
-                        e
-                    </span>
-                    <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800/80 hover:border-brand-500/50 transition-all">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                                    Senior Engineer, Architect
-                                    <span class="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">Contract</span>
-                                </h3>
-                                <p class="text-slate-400 text-sm font-mono mt-1">eMag (Warszawa, Polska)</p>
-                            </div>
-                            <span class="text-xs font-semibold px-3 py-1 bg-slate-800 text-brand-400 rounded-lg self-start sm:self-center font-mono border border-slate-700">
-                                03.2024 - 05.2025
-                            </span>
-                        </div>
-                        <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">PHP Monolith Refactoring:</strong> Implemented PHPStan (level 9), RectorPHP, and PHPUnit. Zero regressions on changes.</li>
-                            <li><strong class="text-white">Kubernetes & CI/CD:</strong> Optimized deployment pipelines for containerized applications.</li>
-                            <li><strong class="text-white">Mentoring:</strong> Implemented error logging and reporting standards in PHP teams.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- GFG Group (Senior Software Engineer) -->
-                <div class="relative">
-                    <span class="absolute -left-[31px] sm:-left-[55px] top-1.5 bg-cyber-blue text-white border-4 border-slate-900 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-[10px] sm:text-xs font-bold">
-                        G
-                    </span>
-                    <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800/80 hover:border-cyber-blue/50 transition-all">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Senior Software Engineer</h3>
-                                <p class="text-slate-400 text-sm font-mono mt-1">GFG Group (Niemcy / Globalnie)</p>
-                            </div>
-                            <span class="text-xs font-semibold px-3 py-1 bg-slate-800 text-cyber-blue rounded-lg self-start sm:self-center font-mono border border-slate-700">
-                                02.2023 - 02.2024
-                            </span>
-                        </div>
-                        <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">Backend e-commerce:</strong> Distributed across 3 continents, Kubernetes, PHP 8, MySQL.</li>
-                            <li><strong class="text-white">MySQL Migration:</strong> Safe transition from v5 to v8 in production.</li>
-                            <li>Implemented static code analysis for quality improvement.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Cobiro (Senior Software Engineer) -->
-                <div class="relative">
-                    <span class="absolute -left-[31px] sm:-left-[55px] top-1.5 bg-cyber-purple text-white border-4 border-slate-900 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-[10px] sm:text-xs font-bold">
-                        C
-                    </span>
-                    <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800/80 hover:border-cyber-purple/50 transition-all">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Senior Software Engineer</h3>
-                                <p class="text-slate-400 text-sm font-mono mt-1">Cobiro (Warszawa, Polska)</p>
-                            </div>
-                            <span class="text-xs font-semibold px-3 py-1 bg-slate-800 text-cyber-purple rounded-lg self-start sm:self-center font-mono border border-slate-700">
-                                03.2022 - 03.2023
-                            </span>
-                        </div>
-                        <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">Microservices:</strong> Development and maintenance of distributed cloud architecture.</li>
-                            <li><strong class="text-white">IaC & CI/CD:</strong> Terraform, Atlantis, CircleCI, GitHub Actions.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- IIIT (Senior PHP Developer / Tech Lead) -->
-                <div class="relative">
-                    <span class="absolute -left-[31px] sm:-left-[55px] top-1.5 bg-amber-500 text-slate-900 border-4 border-slate-900 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-[10px] sm:text-xs font-bold">
-                        I
-                    </span>
-                    <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800/80 hover:border-amber-500/50 transition-all">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Senior PHP Developer & Leader</h3>
-                                <p class="text-slate-400 text-sm font-mono mt-1">IIIT (Kraków, Polska)</p>
-                            </div>
-                            <span class="text-xs font-semibold px-3 py-1 bg-slate-800 text-amber-500 rounded-lg self-start sm:self-center font-mono border border-slate-700">
-                                07.2018 - 06.2021
-                            </span>
-                        </div>
-                        <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">Architecture:</strong> Implemented Hexagonal Architecture, CQRS, Event Sourcing.</li>
-                            <li><strong class="text-white">A/B Testing:</strong> Swoole, RoadRunner, Kafka - zero latency on redirects.</li>
-                            <li>Monitoring: Prometheus, Grafana, ELK stack.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Grupa 3S (Software Developer) -->
-                <div class="relative">
-                    <span class="absolute -left-[31px] sm:-left-[55px] top-1.5 bg-slate-600 text-white border-4 border-slate-900 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-[10px] sm:text-xs font-bold">
-                        3
-                    </span>
-                    <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800/80 hover:border-slate-600/50 transition-all">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Software Developer</h3>
-                                <p class="text-slate-400 text-sm font-mono mt-1">Grupa 3S (Katowice, Polska)</p>
-                            </div>
-                            <span class="text-xs font-semibold px-3 py-1 bg-slate-800 text-slate-400 rounded-lg self-start sm:self-center font-mono border border-slate-700">
-                                02.2015 - 09.2016
-                            </span>
-                        </div>
-                        <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">CRM rewrite:</strong> Symfony 2/3, 2700+ business clients.</li>
-                            <li>Design and implementation of internal modules.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- TECH STACK SECTION (FILTERABLE) -->
-        <section id="skills" class="scroll-mt-20">
-            <div class="max-w-3xl mx-auto text-center mb-12">
-                <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                    <i class="fa-solid fa-layer-group"></i> Tools & Technologies
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">My Tech Ecosystem</h2>
-                <p class="text-slate-400 mt-2 text-sm">
-                    Complete range of tools enabling rapid design, testing, and stable hosting of business systems.
-                </p>
-
-                <!-- Filter Buttons -->
-                <div class="flex flex-wrap items-center justify-center gap-2 mt-8">
-                    <button onclick="filterSkills('all')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-brand-600 text-white transition-all">
-                        All
-                    </button>
-                    <button onclick="filterSkills('backend')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-400 hover:text-white transition-all">
-                        PHP & Backend
-                    </button>
-                    <button onclick="filterSkills('devops')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-400 hover:text-white transition-all">
-                        DevOps, Cloud & CI/CD
-                    </button>
-                    <button onclick="filterSkills('architecture')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-400 hover:text-white transition-all">
-                        Methodology & Architecture
-                    </button>
-                </div>
-            </div>
-
-            <!-- Skills Grid -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4" id="skills-grid">
-                
-                <!-- Skill Card: PHP 8 -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-brands fa-php text-3xl text-cyber-blue mb-2"></i>
-                    <span class="text-sm font-semibold text-white">PHP 8.x</span>
-                </div>
-
-                <!-- Skill Card: Symfony -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-solid fa-cubes text-3xl text-brand-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Symfony Framework</span>
-                </div>
-
-                <!-- Skill Card: Laravel -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-brands fa-laravel text-3xl text-red-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Laravel</span>
-                </div>
-
-                <!-- Skill Card: Swoole & Roadrunner -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-solid fa-gauge-high text-3xl text-cyber-cyan mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Swoole / Roadrunner</span>
-                </div>
-
-                <!-- Skill Card: Docker -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="devops">
-                    <i class="fa-brands fa-docker text-3xl text-cyber-blue mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Docker / Containers</span>
-                </div>
-
-                <!-- Skill Card: Kubernetes -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="devops">
-                    <i class="fa-solid fa-circle-nodes text-3xl text-cyber-cyan mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Kubernetes / Helm</span>
-                </div>
-
-                <!-- Skill Card: Terraform -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="devops">
-                    <i class="fa-solid fa-cloud text-3xl text-brand-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Terraform & IaC</span>
-                </div>
-
-                <!-- Skill Card: CI/CD Pipelines -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="devops">
-                    <i class="fa-solid fa-code-merge text-3xl text-brand-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">GitHub Actions / CircleCI</span>
-                </div>
-
-                <!-- Skill Card: Hexagonal Architecture -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="architecture">
-                    <i class="fa-solid fa-diagram-project text-3xl text-cyber-purple mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Hexagonal Architecture</span>
-                </div>
-
-                <!-- Skill Card: DDD -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="architecture">
-                    <i class="fa-solid fa-brain text-3xl text-amber-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Domain-Driven Design</span>
-                </div>
-
-                <!-- Skill Card: Redis & Caching -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-solid fa-bolt text-3xl text-amber-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Redis / Memcached</span>
-                </div>
-
-                <!-- Skill Card: Kafka & Event Bus -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-solid fa-envelope-open-text text-3xl text-cyber-purple mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Kafka / CQRS</span>
-                </div>
-
-                <!-- Skill Card: Python -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-brands fa-python text-3xl text-cyber-cyan mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Python Scripts</span>
-                </div>
-
-                <!-- Skill Card: Prometheus -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="devops">
-                    <i class="fa-solid fa-chart-line text-3xl text-brand-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Prometheus & Grafana</span>
-                </div>
-
-                <!-- Skill Card: React -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="architecture">
-                    <i class="fa-brands fa-react text-3xl text-cyber-cyan mb-2"></i>
-                    <span class="text-sm font-semibold text-white">React SPA</span>
-                </div>
-
-                <!-- Skill Card: SLA & SQL -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-solid fa-database text-3xl text-cyber-blue mb-2"></i>
-                    <span class="text-sm font-semibold text-white">MySQL & Postgres</span>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- OUTSTANDING PROJECTS SECTION -->
-        <section id="projects" class="scroll-mt-20">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                    <i class="fa-solid fa-star"></i> What I'm Proud Of
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Breakthrough Achievements</h2>
-                <p class="text-slate-400 mt-2 text-sm">
-                    Specific deployments that brought measurable financial savings and simplified business processes.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Project 1: A/B Test SPA & PHP Worker -->
-                <div class="bg-slate-800/20 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all overflow-hidden flex flex-col">
-                    <div class="p-6 flex-1">
-                        <div class="flex items-center gap-3 text-brand-500 text-xs font-mono mb-3">
-                            <i class="fa-solid fa-split"></i> Performance & Architecture
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">High-Scale A/B Testing System</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            As Tech Lead, I led a team to create a modern A/B testing system for a high-traffic platform. Fast user redirects, precise activity tracking, and advanced reporting were built on <strong class="text-white">Kafka, RoadRunner, Swoole, React</strong> and containers in a Kubernetes cluster.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Swoole</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Kafka</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">React</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Docker</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2: On-Demand Dev Environments -->
-                <div class="bg-slate-800/20 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all overflow-hidden flex flex-col">
-                    <div class="p-6 flex-1">
-                        <div class="flex items-center gap-3 text-cyber-cyan text-xs font-mono mb-3">
-                            <i class="fa-solid fa-cloud"></i> DevOps & Automation
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">On-Demand Test Environments</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            I designed and deployed from scratch a complete, automated CI/CD pipeline enabling automatic creation of temporary, independent development environments for each development branch. I used <strong class="text-white">Docker, Traefik, Rancher</strong> and dynamic runners. This reduced QA time by over 40%.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Rancher</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Traefik</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">CI/CD</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3: Flow PHP Support -->
-                <div class="bg-slate-800/20 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all overflow-hidden flex flex-col">
-                    <div class="p-6 flex-1">
-                        <div class="flex items-center gap-3 text-cyber-blue text-xs font-mono mb-3">
-                            <i class="fa-solid fa-code"></i> Open Source
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Flow PHP (ETL) Support</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            I actively support and develop the open-source ecosystem, including the popular <strong class="text-white">Flow PHP</strong> framework — focused on high-throughput ETL processing in PHP. Maintaining excellent code quality standards, I implement static analysis tools and QA tests for smaller companion tools.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Flow PHP</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">ETL</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">QA Automation</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4: Volunteer Orphanage Care -->
-                <div class="bg-slate-800/20 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all overflow-hidden flex flex-col">
-                    <div class="p-6 flex-1">
-                        <div class="flex items-center gap-3 text-amber-500 text-xs font-mono mb-3">
-                            <i class="fa-solid fa-handshake-angle"></i> CSR & Social Engagement
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">3 Years of Volunteering at Orphanage</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            During high school, I weekly visited a local orphanage where I voluntarily managed the computer lab. My responsibilities included software selection, physical computer hardware repair, securing and cleaning systems from virus infections, and basic training for staff and residents.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Hardware</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">SysAdmin</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Social Work</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- INTERACTIVE CONTACT & QUICK CONVERSATION -->
-        <section id="contact" class="scroll-mt-20">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 bg-slate-800/20 p-8 sm:p-12 rounded-3xl border border-slate-800 items-start">
-                
-                <!-- Left: Contact info -->
-                <div class="lg:col-span-5 space-y-6">
-                    <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                        <i class="fa-solid fa-paper-plane"></i> Contact
-                    </span>
-                    <h2 class="text-3xl font-extrabold text-white">Let's Build Something Great Together</h2>
-                    <p class="text-slate-400 text-sm">
-                        Have a project to rescue? Need to organize infrastructure, implement static tests, or scale a cloud application? Let's discuss specific business needs.
-                    </p>
-
-                    <div class="space-y-4 pt-4">
-                        <div class="flex items-center gap-3 text-sm">
-                            <i class="fa-solid fa-envelope text-brand-500 w-5"></i>
-                            <a href="mailto:do@mleczki.pl" class="text-slate-200 hover:text-brand-500 font-mono transition-colors">do@mleczki.pl</a>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm">
-                            <i class="fa-solid fa-phone text-brand-500 w-5"></i>
-                            <a href="tel:+48732575375" class="text-slate-200 hover:text-brand-500 font-mono transition-colors">+48 732 575 375</a>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm">
-                            <i class="fa-solid fa-location-dot text-brand-500 w-5"></i>
-                            <span class="text-slate-200 font-mono">Radzymin (Warszawa), Polska</span>
-                        </div>
-                    </div>
-
-                    <!-- Social Icons -->
-                    <div class="flex items-center gap-4 pt-4">
-                        <a href="https://linkedin.com/in/michal-mleczko/" target="_blank" class="p-3 bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white rounded-xl transition-all" aria-label="LinkedIn profile">
-                            <i class="fa-brands fa-linkedin text-xl"></i>
-                        </a>
-                        <a href="https://github.com/mleczakm" target="_blank" class="p-3 bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white rounded-xl transition-all" aria-label="GitHub profile">
-                            <i class="fa-brands fa-github text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Right: Simulated message form with state feedback -->
-                <div class="lg:col-span-7 bg-slate-950 p-6 sm:p-8 rounded-2xl border border-slate-800">
-                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4" novalidate>
-                        <div>
-                            <label for="form-name" class="block text-xs font-bold uppercase text-slate-400 mb-1">Name / Company</label>
-                            <input type="text" id="form-name" name="name" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="John Doe">
-                        </div>
-                        <div>
-                            <label for="form-email" class="block text-xs font-bold uppercase text-slate-400 mb-1">Email Address</label>
-                            <input type="email" id="form-email" name="email" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="john@company.com">
-                        </div>
-                        <div>
-                            <label for="form-phone" class="block text-xs font-bold uppercase text-slate-400 mb-1">Phone Number</label>
-                            <input type="tel" id="form-phone" name="phone" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="+48 123 456 789">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Preferred Date and Time</label>
-                            <div class="scheduler">
-                                <div class="scheduler-header">
-                                    <h4>Book Consultation</h4>
-                                    <div id="month-label" style="font-size: 12px; color: #94a3b8;"></div>
-                                </div>
-                                <div class="days-container" id="daysRow"></div>
-                                <div class="slots-container" id="slotsGrid"></div>
-                                <div class="selection-output" id="selectionOutput">
-                                    Select date and time <small>(Warsaw, GMT+2)</small>
-                                </div>
-                                <input type="hidden" id="form-datetime" name="datetime" required>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="form-message" class="block text-xs font-bold uppercase text-slate-400 mb-1">How can I help?</label>
-                            <textarea id="form-message" name="message" required rows="4" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="Describe the technological or business challenge in your company..."></textarea>
-                        </div>
-                        <div class="text-xs text-slate-400">
-                            <i class="fa-solid fa-info-circle mr-1"></i>
-                            By sending this message, you agree to be contacted back for consultation purposes.
-                        </div>
-                        <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i> Book a 30-minute consultation
-                        </button>
-                    </form>
-
-                    <!-- Feedback message widget instead of alerts -->
-                    <div id="form-feedback" class="hidden mt-4 p-4 rounded-lg text-sm text-center"></div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 border-t border-slate-900 py-12 text-slate-500 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-2">
-                <span class="text-brand-500 font-mono font-bold text-lg">&lt;mleczakm/&gt;</span>
-                <span>© 2026 Michał Mleczko. All rights reserved.</span>
-            </div>
-            <div class="flex items-center gap-6">
-                <a href="#about" class="hover:text-brand-500 transition-colors">About</a>
-                <a href="#experience" class="hover:text-brand-500 transition-colors">Experience</a>
-                <a href="#skills" class="hover:text-brand-500 transition-colors">Stack</a>
-                <a href="#contact" class="hover:text-brand-500 transition-colors">Book Consultation</a>
-            </div>
-        </div>
-    </footer>
-
-
-    <!-- INTERACTIVE JAVASCRIPT CONTROLLERS -->
-    <script>
-        // CUSTOM DATE/TIME PICKER INITIALIZATION
-        function initCustomPicker() {
-            // CONFIGURATION
-            const WORK_START_HOUR = 7; // 7:00 AM
-            const WORK_END_HOUR = 20;  // 8:00 PM (20:00)
-            const DAYS_TO_CHECK = 7;   // Look forward 7 calendar days
-
-            // STATE
-            let selectedDateString = null;
-            let selectedTimeRange = null;
-
-            // DOM ELEMENTS
-            const daysRow = document.getElementById('daysRow');
-            const slotsGrid = document.getElementById('slotsGrid');
-            const monthLabel = document.getElementById('month-label');
-            const selectionOutput = document.getElementById('selectionOutput');
-            const datetimeInput = document.getElementById('form-datetime');
-
-            // HELPER: Generate working dates within the next 7 calendar days
-            function getWorkingDaysAhead() {
-                const workingDays = [];
-                const today = new Date();
-
-                for (let i = 0; i < DAYS_TO_CHECK; i++) {
-                    const checkDate = new Date();
-                    checkDate.setDate(today.getDate() + i);
-
-                    const dayOfWeek = checkDate.getDay();
-                    // 0 = Sunday, 6 = Saturday. Only push Monday-Friday (1-5)
-                    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-                        workingDays.push(checkDate);
-                    }
-                }
-                return workingDays;
-            }
-
-            // HELPER: Generate time ranges array (e.g. ["7-8", "8-9", ...])
-            function generateTimeRanges() {
-                const ranges = [];
-                for (let hour = WORK_START_HOUR; hour < WORK_END_HOUR; hour++) {
-                    ranges.push(`${hour}-${hour + 1}`);
-                }
-                return ranges;
-            }
-
-            // RENDER: Render the Day tabs
-            function renderDays() {
-                const availableDays = getWorkingDaysAhead();
-                daysRow.innerHTML = '';
-
-                // Update top right month tag dynamically based on first available date
-                if(availableDays.length > 0) {
-                    const options = { month: 'long', year: 'numeric' };
-                    monthLabel.innerText = availableDays[0].toLocaleDateString('en-US', options);
-                }
-
-                availableDays.forEach((date, index) => {
-                    const dateString = date.toISOString().split('T')[0];
-                    const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
-                    const dayNum = date.getDate();
-
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.className = `day-btn ${index === 0 ? 'active' : ''}`;
-                    btn.dataset.date = dateString;
-                    btn.innerHTML = `
-                        <span class="day-name">${dayName}</span>
-                        <span class="day-date">${dayNum}</span>
-                    `;
-
-                    // Set initial active date string to today/first available day
-                    if (index === 0) selectedDateString = dateString;
-
-                    btn.addEventListener('click', () => {
-                        document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        selectedDateString = dateString;
-                        selectedTimeRange = null; // Reset chosen time when changing day
-                        renderSlots();
-                        updateOutput();
-                    });
-
-                    daysRow.appendChild(btn);
-                });
-            }
-
-            // RENDER: Render the Slot blocks
-            function renderSlots() {
-                const ranges = generateTimeRanges();
-                slotsGrid.innerHTML = '';
-
-                ranges.forEach(range => {
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.className = 'slot-btn';
-                    // Formatting representation: "8-9" converted to text "08:00 - 09:00"
-                    const [start, end] = range.split('-');
-                    const formatTime = (h) => `${h.padStart(2, '0')}:00`;
-                    btn.innerText = `${formatTime(start)} - ${formatTime(end)}`;
-
-                    btn.addEventListener('click', () => {
-                        document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        selectedTimeRange = range;
-                        updateOutput();
-                    });
-
-                    slotsGrid.appendChild(btn);
-                });
-            }
-
-            // UPDATE: Output element behavior
-            function updateOutput() {
-                if (selectedDateString && selectedTimeRange) {
-                    const [start, end] = selectedTimeRange.split('-');
-                    selectionOutput.innerHTML = `Selected Date: <strong>${selectedDateString}</strong> between <strong>${start}:00</strong> and <strong>${end}:00</strong>`;
-                    // Update hidden input for form submission
-                    datetimeInput.value = `${selectedDateString} ${start}:00`;
-                } else {
-                    selectionOutput.innerText = 'Select date and time';
-                    datetimeInput.value = '';
-                }
-            }
-
-            // INITIALIZATION
-            renderDays();
-            renderSlots();
-        }
-        
-        // Initialize custom picker on page load
-        document.addEventListener('DOMContentLoaded', initCustomPicker);
-
-        // MOBILE MENU TOGGLE
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-            mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
-            mobileMenu.classList.toggle('hidden');
-            
-            if (isExpanded) {
-                mobileMenuIcon.className = "fa-solid fa-bars text-xl";
-            } else {
-                mobileMenuIcon.className = "fa-solid fa-xmark text-xl";
-            }
-        });
-
-        // Close mobile menu on click links
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                mobileMenuIcon.className = "fa-solid fa-bars text-xl";
-            });
-        });
-
-
-        // THEME TOGGLE (LIGHT / DARK)
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
-        const themeIcon = document.getElementById('theme-icon');
-        const themeIconMobile = document.getElementById('theme-icon-mobile');
-
-        function toggleTheme() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                document.documentElement.classList.add('light');
-                localStorage.setItem('color-theme', 'light');
-                themeIcon.className = "fa-solid fa-moon text-lg";
-                themeIconMobile.className = "fa-solid fa-moon text-lg";
-            } else {
-                document.documentElement.classList.remove('light');
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-                themeIcon.className = "fa-solid fa-sun text-lg";
-                themeIconMobile.className = "fa-solid fa-sun text-lg";
-            }
-        }
-
-        themeToggleBtn.addEventListener('click', toggleTheme);
-        themeToggleMobileBtn.addEventListener('click', toggleTheme);
-
-
-        // DYNAMIC TECH STACK FILTERING
-        function filterSkills(category) {
-            const cards = document.querySelectorAll('.skill-card');
-            const buttons = document.querySelectorAll('.skill-filter-btn');
-
-            // Toggle active classes on buttons
-            buttons.forEach(btn => {
-                if (btn.getAttribute('onclick').includes(`'${category}'`)) {
-                    btn.className = "skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-brand-600 text-white transition-all";
-                } else {
-                    btn.className = "skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-400 hover:text-white transition-all";
-                }
-            });
-
-            // Filter cards with scale animation
-            cards.forEach(card => {
-                const cardCat = card.getAttribute('data-category');
-                if (category === 'all' || cardCat === category) {
-                    card.classList.remove('hidden');
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 50);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        card.classList.add('hidden');
-                    }, 200);
-                }
-            });
-        }
-
-
-        // DISC PROFILE INTERACTIVE TEXT TOGGLE
-        const discData = {
-            'D': {
-                title: "D — DOMINANCE (Dominant)",
-                text: "Drives me toward continuous process improvement. I don't tolerate manual repetition of the same operations. When application performance issues or degraded SLA arise, I immediately diagnose the cause, make hard architectural decisions, and implement optimized rigorous control mechanisms."
-            },
-            'C': {
-                title: "C — COMPLIANCE (Conscientious)",
-                text: "This is my uncompromising drive for technical excellence and rigorous standard adherence. I implement the most difficult level of static analysis PHPStan (Level 9), automatic optimization rules in RectorPHP, and ensure high test coverage with PHPUnit. Code must be clean, secure, and readable."
-            },
-            'I': {
-                title: "I — INFLUENCE (Influential)",
-                text: "Shows in my approach to communication and working with people. I eagerly share developed knowledge with teams in workshops (Knowledge Sharing). I build trust-based relationships and strengthen recruitment and technical competencies in the organization, ensuring developers feel confident and safe."
-            },
-            'S': {
-                title: "S — STEADINESS (Steady)",
-                text: "Guarantees harmony and pursuit of absolute peace of mind. I create automated, stable Kubernetes and cloud infrastructures so the team knows the platform will withstand load spikes, and every deployment will run predictably without surprises."
-            }
-        };
-
-        function selectDisc(letter) {
-            const contentTitle = document.getElementById('disc-content-title');
-            const contentText = document.getElementById('disc-content-text');
-            
-            // Highlight color map
-            const colorMap = {
-                'D': 'bg-brand-500',
-                'C': 'bg-cyber-cyan',
-                'I': 'bg-cyber-purple',
-                'S': 'bg-amber-500'
-            };
-
-            contentTitle.innerHTML = `<span class="inline-block w-2.5 h-2.5 ${colorMap[letter]} rounded-full"></span> ${discData[letter].title}`;
-            contentText.innerText = discData[letter].text;
-        }
-
-
-        // CI/CD PIPELINE SIMULATOR ENGINE (Safe Friday Deploy)
-        let simulationInterval = null;
-        let isSimulating = false;
-
-        function appendTerminalLog(text, type = 'info') {
-            const terminal = document.getElementById('terminal-logs');
-            const logItem = document.createElement('div');
-            
-            let colorClass = 'text-slate-300';
-            let prefix = '[INFO]';
-            
-            if (type === 'success') {
-                colorClass = 'text-brand-400 font-bold';
-                prefix = '[SUCCESS]';
-            } else if (type === 'error') {
-                colorClass = 'text-red-400 font-bold';
-                prefix = '[ERROR]';
-            } else if (type === 'step') {
-                colorClass = 'text-cyber-cyan font-semibold';
-                prefix = '[STEP]';
-            } else if (type === 'warning') {
-                colorClass = 'text-amber-400';
-                prefix = '[WARNING]';
-            } else if (type === 'system') {
-                colorClass = 'text-slate-500';
-                prefix = '&gt;';
-            }
-            
-            logItem.className = `${colorClass} py-0.5 animate-fadeIn`;
-            logItem.innerHTML = `<span class="text-slate-500 font-mono select-none mr-2">${prefix}</span>${text}`;
-            terminal.appendChild(logItem);
-            terminal.scrollTop = terminal.scrollHeight;
-        }
-
-        const pipelineSteps = [
-            { pct: 5, type: 'step', text: 'Initializing safe deployment pipeline (v1.4.2)...' },
-            { pct: 10, type: 'info', text: 'Fetching latest environment dependencies...' },
-            { pct: 20, type: 'step', text: 'Running static code analysis (PHPStan, Level 9)...' },
-            { pct: 30, type: 'success', text: 'PHPStan: 0 errors! Static analysis completed successfully.' },
-            { pct: 40, type: 'step', text: 'RectorPHP: Validating refactoring rules and PHP 8.x compatibility...' },
-            { pct: 48, type: 'success', text: 'Rector: Code optimized and compliant with latest standards!' },
-            { pct: 55, type: 'step', text: 'PHPUnit: Running 1,240 integration and unit tests...' },
-            { pct: 68, type: 'success', text: 'PHPUnit: 100% of critical modules tested, code coverage: 94.8%.' },
-            { pct: 75, type: 'step', text: 'Building optimized Docker container (multi-stage build)...' },
-            { pct: 82, type: 'info', text: 'Generating dynamic routing configuration for cluster...' },
-            { pct: 90, type: 'step', text: 'Kubernetes Orchestration: Deploying new version using Helm to production cluster...' },
-            { pct: 95, type: 'warning', text: 'Checking application SLA status (Prometheus + Grafana)...' },
-            { pct: 100, type: 'success', text: 'Done! Code deployed safely on Friday afternoon. SLA stable (99.99%). Have a great weekend! 🍻' }
-        ];
-
-        function startPipelineSimulation() {
-            if (isSimulating) return;
-            isSimulating = true;
-            
-            const runBtn = document.getElementById('run-pipeline-btn');
-            const statusBadge = document.getElementById('pipeline-status-badge');
-            const pctLabel = document.getElementById('pipeline-percentage');
-            
-            runBtn.disabled = true;
-            runBtn.className = "w-full py-4 px-6 bg-slate-800 text-slate-500 font-bold rounded-xl cursor-not-allowed flex items-center justify-center gap-3";
-            
-            statusBadge.className = "px-2 py-0.5 rounded-full bg-brand-950 text-brand-400 font-semibold text-[10px] animate-pulse";
-            statusBadge.innerText = "PROCESSING";
-
-            // Clear terminal first
-            document.getElementById('terminal-logs').innerHTML = '';
-            appendTerminalLog('Starting deployment procedure...', 'system');
-
-            let stepIndex = 0;
-            
-            simulationInterval = setInterval(() => {
-                if (stepIndex < pipelineSteps.length) {
-                    const currentStep = pipelineSteps[stepIndex];
-                    appendTerminalLog(currentStep.text, currentStep.type);
-                    pctLabel.innerText = `${currentStep.pct}%`;
-                    stepIndex++;
-                } else {
-                    clearInterval(simulationInterval);
-                    isSimulating = false;
-                    statusBadge.className = "px-2 py-0.5 rounded-full bg-brand-600 text-white font-semibold text-[10px]";
-                    statusBadge.innerText = "SUCCESS";
-                }
-            }, 1000);
-        }
-
-        function resetPipeline() {
-            if (isSimulating) {
-                clearInterval(simulationInterval);
-                isSimulating = false;
-            }
-            
-            const runBtn = document.getElementById('run-pipeline-btn');
-            const statusBadge = document.getElementById('pipeline-status-badge');
-            const pctLabel = document.getElementById('pipeline-percentage');
-            
-            runBtn.disabled = false;
-            runBtn.className = "w-full py-4 px-6 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl shadow-lg shadow-brand-900/20 active:scale-95 transition-all flex items-center justify-center gap-3";
-            
-            statusBadge.className = "px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-semibold text-[10px]";
-            statusBadge.innerText = "IDLE";
-            
-            pctLabel.innerText = "0%";
-            
-            document.getElementById('terminal-logs').innerHTML = `
-                <div class="text-slate-500">&gt; Waiting for deployment to start...</div>
-                <div class="text-slate-500">&gt; Click "Run Pipeline" to test stress-free deployment.</div>
-            `;
-        }
-
-
-        // FORMSPREE AJAX FORM SUBMISSION
-        async function handleContactSubmit(event) {
-            event.preventDefault();
-            
-            const form = event.target;
-            const formData = new FormData(form);
-            const feedback = document.getElementById('form-feedback');
-            const submitBtn = form.querySelector('button[type="submit"]');
-            
-            // Custom validation
-            let isValid = true;
-            const requiredFields = form.querySelectorAll('[required]');
-            
-            // Clear previous validation styles
-            requiredFields.forEach(field => {
-                field.classList.remove('border-red-500');
-                field.classList.add('border-slate-800');
-            });
-            
-            // Validate each required field
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.classList.remove('border-slate-800');
-                    field.classList.add('border-red-500');
-                }
-            });
-
-            // Email validation
-            const emailField = form.querySelector('#form-email');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (emailField.value.trim() && !emailRegex.test(emailField.value.trim())) {
-                isValid = false;
-                emailField.classList.remove('border-slate-800');
-                emailField.classList.add('border-red-500');
-            }
-
-            // Phone validation (accepts various formats: plain digits, with +, spaces, dashes, dots, parentheses)
-            const phoneField = form.querySelector('#form-phone');
-            const phoneRegex = /^[\+]?[0-9\s\-\.\(\)]{9,}$/;
-            if (phoneField.value.trim() && !phoneRegex.test(phoneField.value.trim())) {
-                isValid = false;
-                phoneField.classList.remove('border-slate-800');
-                phoneField.classList.add('border-red-500');
-            }
-
-            // If validation fails, show error and prevent submission
-            if (!isValid) {
-                feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-red-950/50 text-red-400 border border-red-800";
-                feedback.innerHTML = `
-                    <div class="font-bold mb-1"><i class="fa-solid fa-exclamation-circle mr-2"></i>Please fill all required fields</div>
-                    Please complete all fields marked as required in the correct format.
-                `;
-                feedback.classList.remove('hidden');
-                return;
-            }
-
-            // Show loading state
-            feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-slate-800 text-slate-300";
-            feedback.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Sending message...`;
-            feedback.classList.remove('hidden');
-            
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Sending...`;
-
-            try {
-                const response = await fetch('https://formspree.io/f/xdavweok', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    // Success
-                    feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-brand-950/50 text-brand-400 border border-brand-800";
-                    feedback.innerHTML = `
-                        <div class="font-bold mb-1"><i class="fa-solid fa-check-circle mr-2"></i>Thank you for contact!</div>
-                        Your message was sent successfully. I'll reply as soon as possible.
-                    `;
-                    form.reset();
-                    // Reset validation styles
-                    requiredFields.forEach(field => {
-                        field.classList.remove('border-red-500');
-                        field.classList.add('border-slate-800');
-                    });
-                    // Reset custom picker
-                    if (typeof initCustomPicker === 'function') {
-                        initCustomPicker();
-                    }
-                } else {
-                    // Error from Formspree
-                    const data = await response.json();
-                    throw new Error(data.error || 'An error occurred while sending the message.');
-                }
-            } catch (error) {
-                // Network error or Formspree error
-                feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-red-950/50 text-red-400 border border-red-800";
-                feedback.innerHTML = `
-                    <div class="font-bold mb-1"><i class="fa-solid fa-exclamation-circle mr-2"></i>Error</div>
-                    ${error.message || 'Failed to send message. Please try again later.'}
-                `;
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Book a 30-minute consultation`;
-            }
-        }
-    </script>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container nav-wrap">
+<a class="wordmark" href="/en/" aria-label="Michał Mleczko — home">
+<span class="monogram" aria-hidden="true">m<span>.</span>
+</span>
+<span>Michał Mleczko<small>ENGINEER & BUILDER</small>
+</span>
+</a>
+<nav class="desktop-nav" aria-label="Main navigation">
+<a href="#ai">Business AI</a>
+<a href="#projects">Selected work</a>
+<a href="#wordpress">WordPress → Static</a>
+<a href="#about">About</a>
+</nav>
+<div class="nav-actions">
+<a class="language-link" href="/" lang="pl" hreflang="pl" aria-label="Przełącz na polski">PL</a>
+<a href="#contact" class="button button-small">Let’s talk <span aria-hidden="true">↗</span>
+</a>
+<button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+<span>
+</span>
+<span>
+</span>
+</button>
+</div>
+</div>
+<nav id="mobile-nav" class="mobile-nav container" aria-label="Mobile navigation" hidden>
+<a href="#ai">Business AI</a>
+<a href="#projects">Selected work</a>
+<a href="#wordpress">WordPress → Static</a>
+<a href="#about">About</a>
+<a href="/platnosci-blik/">BLIK commerce (PL)</a>
+</nav>
+</header>
+<main id="main">
+<section class="hero container">
+<div class="hero-copy">
+<p class="eyebrow">
+<span class="status-dot">
+</span> TECHNOLOGY THAT WORKS FOR YOUR BUSINESS</p>
+<h1>Less busywork.<br>More <span class="serif">possibility.</span>
+</h1>
+<p class="hero-lead">I implement AI that gets real work done.<br>I build products that make business simpler.</p>
+<p class="hero-detail">From AI agents and workflow automation to BLIK commerce and lightning-fast websites without WordPress. From an idea to a working solution.</p>
+<div class="hero-actions">
+<a class="button" href="#contact">Let’s talk about your project <span aria-hidden="true">↗</span>
+</a>
+<a class="text-link" href="#projects">Explore my work <span aria-hidden="true">↓</span>
+</a>
+</div>
+<div class="hero-signature">
+<span class="avatar" aria-hidden="true">MM</span>
+<p>
+<strong>Michał Mleczko</strong>
+<span>Software Architect · AI Engineer · Product builder</span>
+</p>
+</div>
+</div>
+<div class="system-visual">
+<div class="visual-top">
+<span>
+<span class="status-dot">
+</span> IDEA → WORKING SYSTEM</span>
+<span aria-hidden="true">↗</span>
+</div>
+<div class="orbit-scene" aria-hidden="true">
+<div class="orbit orbit-one">
+</div>
+<div class="orbit orbit-two">
+</div>
+<div class="orbit orbit-three">
+</div>
+<svg class="beams" viewBox="0 0 500 380" fill="none">
+<path d="M100 90C250 90 150 190 250 190S300 85 405 85M90 285C220 285 150 190 250 190S320 285 410 285"/>
+<path class="beam-active" d="M100 90C250 90 150 190 250 190S320 285 410 285"/>
+</svg>
+<div class="core">
+<span>m<span class="core-dot">.</span>
+</span>
+<small>AI × HUMAN</small>
+</div>
+<span class="orbit-node node-data">
+<b>≡</b>Your data</span>
+<span class="orbit-node node-ai">
+<b>✳</b>AI agent</span>
+<span class="orbit-node node-tools">
+<b>⌘</b>MCP / API</span>
+<span class="orbit-node node-result">
+<b>↗</b>Outcome</span>
+<span class="orbit-spark spark-one">
+</span>
+<span class="orbit-spark spark-two">
+</span>
+</div>
+<div class="visual-bottom">
+<span class="visual-caption">Good ideas. Thoughtful architecture.</span>
+<span class="visual-number">01 / 03</span>
+</div>
+<a class="floating-note" href="#ai">
+<span class="note-icon" aria-hidden="true">✳</span>
+<span>
+<strong>AI with tools to act</strong>
+<small>Explore a sample workflow</small>
+</span>
+<span aria-hidden="true">↗</span>
+</a>
+</div>
+</section>
+<div class="credibility container">
+<span>EXPERIENCE BUILT AT</span>
+<div>
+<strong>eMAG<span class="brand-dot">●</span>
+</strong>
+<strong class="gfg">GLOBAL FASHION GROUP</strong>
+<strong>Cobiro</strong>
+<strong class="iiit">IIIT<span>↗</span>
+</strong>
+</div>
+<p>12+ years connecting technology and business</p>
+</div>
+<section id="ai" class="section container">
+<div class="section-heading">
+<div>
+<p class="eyebrow">01 / AI IN EVERYDAY WORK</p>
+<h2>AI that goes<br>
+<span class="serif">beyond the chat box.</span>
+</h2>
+</div>
+<p>The real change comes when AI understands your business and has the right tools. I connect models to the workflows your team actually uses.</p>
+</div>
+<div class="ai-grid">
+<div class="demo-panel spotlight">
+<div class="demo-top">
+<span class="demo-brand">
+<span aria-hidden="true">✳</span> From conversation to action</span>
+<span class="demo-badge">DEMO</span>
+</div>
+<div class="demo-tabs" role="group" aria-label="AI use case">
+<button data-scenario="sales" aria-pressed="true">Sales</button>
+<button data-scenario="operations" aria-pressed="false">Operations</button>
+<button data-scenario="engineering" aria-pressed="false">Engineering</button>
+</div>
+<div class="demo-conversation">
+<p class="user-prompt" id="demo-prompt">Find a Saturday workshop for a 4-year-old.</p>
+<div class="assistant-reply">
+<span class="assistant-icon" aria-hidden="true">✳</span>
+<p id="demo-reply">I’ll check the catalog and availability, then ask you to confirm before booking.</p>
+</div>
+<ol class="workflow-steps" id="workflow-steps">
+<li>
+<span>01</span>
+<div>
+<strong>Check the catalog</strong>
+<small>MCP · search_workshops</small>
+</div>
+<span class="step-state" aria-hidden="true">○</span>
+</li>
+<li>
+<span>02</span>
+<div>
+<strong>Match availability</strong>
+<small>Age · date · available places</small>
+</div>
+<span class="step-state" aria-hidden="true">○</span>
+</li>
+<li>
+<span>03</span>
+<div>
+<strong>Human confirmation</strong>
+<small>You make the decision</small>
+</div>
+<span class="step-state" aria-hidden="true">○</span>
+</li>
+</ol>
+<button id="demo-run" class="button demo-run">
+<span aria-hidden="true">▶</span> <span>Run the example</span>
+</button>
+<p id="demo-status" class="demo-status" role="status">Interactive illustration. No actions are taken in a real system.</p>
+</div>
+</div>
+<div class="service-list">
+<article class="service-row">
+<span class="index">01</span>
+<div>
+<h3>From workflow to working AI</h3>
+<p>Together with your team, I find the tasks where AI makes sense. We define a baseline, cost and success criteria, then validate them in a pilot.</p>
+</div>
+</article>
+<article class="service-row">
+<span class="index">02</span>
+<div>
+<h3>Agents connected to your business</h3>
+<p>I connect assistants to your catalog, bookings, tasks and company knowledge through MCP and APIs. A conversation can lead to getting real work done.</p>
+</div>
+</article>
+<article class="service-row">
+<span class="index">03</span>
+<div>
+<h3>People stay in control</h3>
+<p>I design access scopes, confirmation for consequential actions and change history. Agents work within each user’s permissions.</p>
+</div>
+</article>
+<article class="service-row">
+<span class="index">04</span>
+<div>
+<h3>An implementation your team can own</h3>
+<p>Integrations, tests, monitoring and documentation. I help your team adopt the new workflow and improve it after launch.</p>
+</div>
+</article>
+</div>
+</div>
+<div class="stack-line" id="skills">
+<span>THE RIGHT TOOLS FOR THE PROBLEM</span>
+<div>
+<span>MCP</span>
+<span>ElevenLabs</span>
+<span>n8n</span>
+<span>Go</span>
+<span>PHP / Symfony</span>
+<span>Python</span>
+<span>Cloudflare</span>
+<span>Docker</span>
+</div>
+</div>
+</section>
+<section id="projects" class="section projects-section">
+<div class="container">
+<div class="section-heading">
+<div>
+<p class="eyebrow">02 / SELECTED WORK</p>
+<h2>Ideas turned into<br>
+<span class="serif">working products.</span>
+</h2>
+</div>
+<p>Products and implementations where I design the full journey: from the first click to integrations, payments and ongoing operation.</p>
+</div>
+<div class="project-grid">
+<article class="project-card">
+<a class="project-visual sprint" href="https://sprintspaces.github.io/" target="_blank" rel="noopener noreferrer" aria-label="Visit SprintSpaces (new tab)">
+<img src="/assets/sprintspaces.webp" width="1554" height="1023" loading="lazy" alt="SprintSpaces board with sample tasks; Polish interface">
+<span class="project-open" aria-hidden="true">↗</span>
+</a>
+<div class="project-info">
+<p class="eyebrow">BUSINESS WORKFLOWS · AI · MCP</p>
+<h3>
+<a href="https://sprintspaces.github.io/" target="_blank" rel="noopener noreferrer">SprintSpaces <span aria-hidden="true">↗</span>
+</a>
+</h3>
+<p>From spreadsheets to a shared workspace. Projects, tickets, time tracking and an AI assistant connected to tools through MCP.</p>
+<div class="tags">
+<span>Go</span>
+<span>Microsoft 365</span>
+<span>MCP</span>
+</div>
+</div>
+</article>
+<article class="project-card">
+<a class="project-visual ceramiza" href="https://ceramiza.pl" target="_blank" rel="noopener noreferrer" aria-label="Visit Ceramiza (new tab)">
+<div class="ceramiza-art">
+<img src="/assets/ceramiza.jpg" width="450" height="450" loading="lazy" alt="Ceramiza">
+<span class="art-caption">handmade · one of a kind</span>
+</div>
+<span class="project-open" aria-hidden="true">↗</span>
+</a>
+<div class="project-info">
+<p class="eyebrow">E-COMMERCE · BLIK · AI</p>
+<h3>
+<a href="https://ceramiza.pl" target="_blank" rel="noopener noreferrer">Ceramiza <span aria-hidden="true">↗</span>
+</a>
+</h3>
+<p>A shop for one-of-a-kind ceramics. Conversational AI ordering, automatic BLIK payment matching and Polkurier shipping integration.</p>
+<div class="tags">
+<span>Go</span>
+<span>SQLite</span>
+<span>ElevenLabs</span>
+</div>
+</div>
+</article>
+<article class="project-card">
+<a class="project-visual kiddo" href="https://warsztatowniasensoryczna.pl" target="_blank" rel="noopener noreferrer" aria-label="Visit Warsztatownia Sensoryczna (new tab)">
+<div class="workshop-art">
+<div class="workshop-flower" aria-hidden="true">✳</div>
+<strong>Little discoveries.<br>Big possibilities.</strong>
+<span>Workshops · passes · bookings</span>
+</div>
+<span class="project-open" aria-hidden="true">↗</span>
+</a>
+<div class="project-info">
+<p class="eyebrow">BOOKINGS · AI ASSISTANT</p>
+<h3>
+<a href="https://warsztatowniasensoryczna.pl" target="_blank" rel="noopener noreferrer">Warsztatownia Sensoryczna <span aria-hidden="true">↗</span>
+</a>
+</h3>
+<p>An assistant helps families discover workshops and manage bookings. Behind the scenes: passes, payments, reminders and an operations dashboard.</p>
+<div class="tags">
+<span>Symfony</span>
+<span>PostgreSQL</span>
+<span>MCP</span>
+</div>
+</div>
+</article>
+<article class="project-card">
+<a class="project-visual cargo" href="https://cargo.mleczki.pl" target="_blank" rel="noopener noreferrer" aria-label="Visit Cargo · mleczki.pl (new tab)">
+<img src="/assets/cargo.webp" width="800" height="600" loading="lazy" alt="Urban Arrow Family cargo bike">
+<span class="project-open" aria-hidden="true">↗</span>
+</a>
+<div class="project-info">
+<p class="eyebrow">RENTALS · AUTOMATION</p>
+<h3>
+<a href="https://cargo.mleczki.pl" target="_blank" rel="noopener noreferrer">Cargo · mleczki.pl <span aria-hidden="true">↗</span>
+</a>
+</h3>
+<p>Bike and equipment rental with an availability calendar. Booking, BLIK payment and confirmation in one connected workflow.</p>
+<div class="tags">
+<span>Go</span>
+<span>SQLite</span>
+<span>BLIK</span>
+</div>
+</div>
+</article>
+</div>
+<article class="bezreszty-feature" id="bezreszty">
+<a class="bezreszty-poster" href="https://bezreszty.org.pl" target="_blank" rel="noopener noreferrer" aria-label="Visit BezReszty (new tab)">
+<span class="eyebrow">OPEN SOURCE · BLIK</span>
+<strong>BezReszty<span aria-hidden="true">↗</span>
+</strong>
+<span class="zero-fee">0<span>%</span>
+</span>
+<span class="poster-foot">application commission.<br>The full donation goes to the organizer.</span>
+</a>
+<div class="bezreszty-copy">
+<p class="eyebrow">PAYMENTS THAT HELP</p>
+<h3>Fundraising without a platform cut.</h3>
+<p>BezReszty combines BLIK transfers directly to an organizer’s phone number with automatic matching of bank notifications. Donations reach the organizer’s bank account and the application updates the fundraiser.</p>
+<h4>Semi-automated verification: phone + mObywatel</h4>
+<p>The operator calls the submitted phone number. The organizer receives a temporary QR or entry code in their dashboard and shares identity data through mObywatel, Poland’s digital identity app. The operator checks it in the official verifier, records the outcome and makes the decision. The system enforces the steps and re-verification after a phone or bank account change.</p>
+<p class="small-note">Identity, account ownership and the BLIK phone-to-account association are checked separately. Approval is an operator decision, not automated KYC or a guarantee of a fundraiser’s outcome.</p>
+<div class="about-links">
+<a class="text-link" href="https://bezreszty.org.pl" target="_blank" rel="noopener noreferrer">Explore BezReszty <span aria-hidden="true">↗</span>
+</a>
+<a class="text-link" href="/platnosci-blik/#weryfikacja">Verification process (PL) <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+</article>
+<a href="/platnosci-blik/" class="blik-banner">
+<span class="blik-symbol">blik<span>●</span>
+</span>
+<span>
+<strong>Your shop, bookings or rentals. With BLIK.</strong>
+<small>Explore the payment model and how it can work for your business. Page in Polish.</small>
+</span>
+<span class="circle-arrow" aria-hidden="true">↗</span>
+</a>
+</div>
+</section>
+<section id="wordpress" class="migration-section">
+<div class="container">
+<div class="section-heading">
+<div>
+<p class="eyebrow">03 / WORDPRESS → STATIC</p>
+<h2>Your website.<br>
+<span class="serif">With less overhead.</span>
+</h2>
+</div>
+<p>Lightning-fast delivery. Significantly lower serving costs. I migrate WordPress sites to a static frontend, preserving content and planning the SEO transition.</p>
+</div>
+<div class="migration-grid">
+<div>
+<div class="architecture-compare">
+<div class="architecture-row">
+<span class="arch-label">WordPress</span>
+<div class="arch-parts">
+<span>PHP</span>
+<b>+</b>
+<span>MySQL</span>
+<b>+</b>
+<span>Plugins</span>
+</div>
+<p>Page generation on requests that are not served from cache.</p>
+</div>
+<div class="architecture-row static-row">
+<span class="arch-label">Static <span aria-hidden="true">↗</span>
+</span>
+<div class="arch-parts">
+<span>HTML / CSS</span>
+<b>→</b>
+<span>CDN</span>
+<b>→</b>
+<span>Delivered</span>
+</div>
+<p>Prebuilt files. Less server work. Fast responses.</p>
+</div>
+</div>
+<div class="migration-benefits">
+<article>
+<h3>Fast from the first click</h3>
+<p>Prebuilt HTML served from a CDN, lightweight assets and JavaScript only where it is needed.</p>
+</article>
+<article>
+<h3>Lower running costs</h3>
+<p>The public site needs no PHP or database. No plugin upkeep or large server just to display content.</p>
+</article>
+<article>
+<h3>A carefully planned migration</h3>
+<p>URL mapping, redirects, metadata, forms and convenient content editing. Performance measured before and after launch.</p>
+</article>
+</div>
+</div>
+<div class="savings-card">
+<p class="eyebrow">USE YOUR OWN NUMBERS</p>
+<h3>What could you save?</h3>
+<p>Compare monthly hosting and technical maintenance costs.</p>
+<label for="wp-cost">Current WordPress · PLN / month</label>
+<div class="input-unit">
+<input id="wp-cost" type="number" min="0" max="100000" step="1" value="200" inputmode="numeric">
+<span>PLN</span>
+</div>
+<label for="static-cost">Static site · PLN / month</label>
+<div class="input-unit">
+<input id="static-cost" type="number" min="0" max="100000" step="1" value="20" inputmode="numeric">
+<span>PLN</span>
+</div>
+<div class="savings-result">
+<span id="savings-label">Annual cost difference</span>
+<output id="savings-value" for="wp-cost static-cost" aria-live="polite">2 160 zł</output>
+</div>
+<p class="small-note">Illustrative inputs, not a quote. Calculation: monthly difference × 12. Excludes one-time migration and external services. Actual savings depend on the audit.</p>
+<a href="#contact" class="button">Let’s review your website <span aria-hidden="true">↗</span>
+</a>
+<noscript>
+<p>Enable JavaScript to recalculate the amounts.</p>
+</noscript>
+</div>
+</div>
+<p class="migration-note">Results depend on current caching, hosting and website features. For stores and applications, I select a hybrid solution or a dedicated backend.</p>
+</div>
+</section>
+<section class="section container process-section">
+<div class="section-heading">
+<div>
+<p class="eyebrow">04 / HOW I WORK</p>
+<h2>Ambitious direction.<br>
+<span class="serif">Practical steps.</span>
+</h2>
+</div>
+<p>A new approach matters when it solves a real problem. I start with the business, validate assumptions early and own the path to production.</p>
+</div>
+<div class="process-grid">
+<article>
+<span class="index">01</span>
+<h3>Discovery</h3>
+<p>Workflow, data, constraints and business goals.</p>
+</article>
+<article>
+<span class="index">02</span>
+<h3>A focused pilot</h3>
+<p>One use case. Clear acceptance criteria.</p>
+</article>
+<article>
+<span class="index">03</span>
+<h3>Integration & launch</h3>
+<p>Permissions, testing, monitoring and a rollback plan.</p>
+</article>
+<article>
+<span class="index">04</span>
+<h3>An empowered team</h3>
+<p>Documentation, onboarding and continuous improvement.</p>
+</article>
+</div>
+</section>
+<section id="about" class="section container about-section">
+<div class="about-intro">
+<div>
+<p class="eyebrow">05 / AN ENGINEER WHO UNDERSTANDS BUSINESS</p>
+<h2>I connect the dots.<br>
+<span class="serif">And make it work.</span>
+</h2>
+</div>
+<div>
+<p class="about-lead">I’m Michał. I combine a systems architect’s experience with a product builder’s mindset.</p>
+<p>I’ve worked on global e-commerce, application modernization and deployment automation. Today I use that foundation to bring AI into businesses and build solutions suited to their scale. Sometimes that means an agent connected to a workflow. Sometimes a fast website or a small Go application.</p>
+<div class="about-links">
+<a class="text-link" href="https://linkedin.com/in/michal-mleczko/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span>
+</a>
+<a class="text-link" href="https://github.com/mleczakm" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+</div>
+<div class="career" id="experience">
+<article class="career-row">
+<span class="index">2024 — 2025</span>
+<div>
+<h3>eMAG</h3>
+<span>Senior Engineer · Architect</span>
+</div>
+<p>PHP modernization, code quality and Kubernetes delivery.</p>
+</article>
+<article class="career-row">
+<span class="index">2023 — 2024</span>
+<div>
+<h3>Global Fashion Group</h3>
+<span>Senior Software Engineer</span>
+</div>
+<p>Distributed e-commerce across three continents.</p>
+</article>
+<article class="career-row">
+<span class="index">2022 — 2023</span>
+<div>
+<h3>Cobiro</h3>
+<span>Senior Software Engineer</span>
+</div>
+<p>Microservices, infrastructure as code and CI/CD.</p>
+</article>
+<article class="career-row">
+<span class="index">2018 — 2021</span>
+<div>
+<h3>IIIT</h3>
+<span>Senior PHP Developer · Leader</span>
+</div>
+<p>Hexagonal architecture, CQRS and high-performance systems.</p>
+</article>
+</div>
+<div class="principle">
+<span aria-hidden="true">↳</span>
+<p>Less manual work. Simpler systems.<br>
+<strong>More room for your business to grow.</strong>
+</p>
+</div>
+</section>
+<section class="section container faq-section">
+<div>
+<p class="eyebrow">GOOD TO KNOW</p>
+<h2>Before<br>
+<span class="serif">we begin.</span>
+</h2>
+</div>
+<div>
+<details>
+<summary>Where should we start with business AI?<span aria-hidden="true">+</span>
+</summary>
+<p>Start with a repetitive workflow and data your team can access. We choose one use case, define how to measure quality and costs, and build a pilot. Its results guide the wider rollout.</p>
+</details>
+<details>
+<summary>Can AI take action in our systems?<span aria-hidden="true">+</span>
+</summary>
+<p>Yes, through purpose-built API or MCP integrations. Depending on the system, this can range from finding information to creating tasks or bookings. We define permissions and which actions need user confirmation.</p>
+</details>
+<details>
+<summary>Can we still edit content after leaving WordPress?<span aria-hidden="true">+</span>
+</summary>
+<p>Yes. We choose an editing workflow that suits the team: a lightweight CMS, content files or WordPress retained only as an editorial backend. The public site can stay static, with forms and dynamic features handled by separate integrations.</p>
+</details>
+<details>
+<summary>Should every WordPress site become static?<span aria-hidden="true">+</span>
+</summary>
+<p>Not every site. Static delivery is a strong fit for business websites, landing pages and content sites. For a complex store or account area, I select a hybrid architecture or a dedicated application after reviewing features, traffic and running costs.</p>
+</details>
+</div>
+</section>
+<section id="contact" class="contact-section">
+<div class="container contact-grid">
+<div>
+<p class="eyebrow">LET’S TALK ABOUT YOUR IDEA</p>
+<h2>What could we<br>
+<span class="serif">make simpler?</span>
+</h2>
+<p>A process that takes too much time? A product idea? A WordPress site that costs more than it delivers? Tell me a little about it. We’ll start with the specifics.</p>
+<a class="contact-email" href="mailto:do@mleczki.pl">do@mleczki.pl <span aria-hidden="true">↗</span>
+</a>
+<a class="contact-phone" href="tel:+48732575375">+48 732 575 375</a>
+<p class="location">
+<span class="status-dot">
+</span> Radzymin / Warsaw · working remotely</p>
+</div>
+<form id="contact-form" action="https://formspree.io/f/xdavweok" method="POST">
+<input type="hidden" name="_subject" value="Portfolio — new enquiry">
+<input type="hidden" name="language" value="en">
+<div class="honeypot" aria-hidden="true">
+<label for="website">Website</label>
+<input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off">
+</div>
+<div class="form-row">
+<div>
+<label for="name">Name / company</label>
+<input id="name" name="name" required maxlength="150" autocomplete="name" placeholder="What should I call you?">
+</div>
+<div>
+<label for="email">E-mail</label>
+<input id="email" type="email" name="email" required maxlength="254" autocomplete="email" placeholder="you@company.com">
+</div>
+</div>
+<label for="topic">What would you like to improve?</label>
+<select id="topic" name="topic">
+<option value="AI">Business AI & automation</option>
+<option value="commerce">Commerce, bookings or BLIK</option>
+<option value="static">WordPress migration</option>
+<option value="product">Product / architecture / another idea</option>
+</select>
+<label for="message">A few words about your project</label>
+<textarea id="message" name="message" rows="4" required minlength="10" maxlength="5000" placeholder="How do things work today, and what would you like to change?">
+</textarea>
+<label for="preferred-date">Preferred call time (optional)</label>
+<input id="preferred-date" type="datetime-local" name="preferred_datetime">
+<p class="form-note">I’ll confirm the time in my reply. Time zone: Poland (Europe/Warsaw).</p>
+<button type="submit" class="button">Send message <span aria-hidden="true">↗</span>
+</button>
+<p class="form-note">I’ll use your details to reply to your enquiry. This form is handled by Formspree. You can also email me directly.</p>
+<p id="form-status" role="status" aria-live="polite">
+</p>
+</form>
+</div>
+</section>
+</main>
+<footer class="container site-footer">
+<a class="wordmark" href="/en/">
+<span class="monogram" aria-hidden="true">m<span>.</span>
+</span>
+<span>Michał Mleczko<small>GOOD IDEAS. WORKING SYSTEMS.</small>
+</span>
+</a>
+<div>
+<a href="/platnosci-blik/">BLIK commerce (PL)</a>
+<a href="https://github.com/mleczakm">GitHub <span aria-hidden="true">↗</span>
+</a>
+<a href="https://linkedin.com/in/michal-mleczko/">LinkedIn <span aria-hidden="true">↗</span>
+</a>
+<span>© 2026</span>
+</div>
+</footer>
 </body>
 </html>

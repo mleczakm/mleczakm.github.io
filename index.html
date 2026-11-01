@@ -1,1437 +1,665 @@
-<!DOCTYPE html>
-<html lang="pl" class="scroll-smooth dark">
+<!doctype html>
+<html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michał Mleczko | Senior Developer & Architect</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Michał Mleczko - Senior Developer & Architect. Specjalizuję się w automatyzacji CI/CD, Kubernetes, PHP i architekturze rozproszonej.">
-    <meta name="keywords" content="Senior Developer, Architect, PHP, Kubernetes, CI/CD, DevOps, Symfony, Docker">
-    <meta name="author" content="Michał Mleczko">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://mleczakm.github.io/">
-    
-    <!-- Hreflang for multilingual SEO -->
-    <link rel="alternate" hreflang="pl" href="https://mleczakm.github.io/">
-    <link rel="alternate" hreflang="en" href="https://mleczakm.github.io/en/">
-    <link rel="alternate" hreflang="x-default" href="https://mleczakm.github.io/">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mleczakm.github.io/">
-    <meta property="og:title" content="Michał Mleczko | Senior Developer & Architect">
-    <meta property="og:description" content="Senior Developer & Architect specjalizujący się w automatyzacji CI/CD, Kubernetes i architekturze rozproszonej.">
-    <meta property="og:image" content="https://mleczakm.github.io/og-image.png">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://mleczakm.github.io/">
-    <meta property="twitter:title" content="Michał Mleczko | Senior Developer & Architect">
-    <meta property="twitter:description" content="Senior Developer & Architect specjalizujący się w automatyzacji CI/CD, Kubernetes i architekturze rozproszonej.">
-    <meta property="twitter:image" content="https://mleczakm.github.io/og-image.png">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            900: '#14532d',
-                        },
-                        cyber: {
-                            cyan: '#06b6d4',
-                            blue: '#3b82f6',
-                            purple: '#8b5cf6',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Smooth transitions for theme switching */
-        * {
-            transition: background-color 0.3s ease, border-color 0.3s ease, text-decoration-color 0.3s ease;
-        }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #22c55e;
-        }
-        
-        /* Custom Date/Time Picker Styles */
-        .scheduler {
-            width: 100%;
-            background-color: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 16px;
-        }
-
-        .scheduler-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            border-bottom: 1px solid #334155;
-            padding-bottom: 8px;
-        }
-
-        .scheduler-header h4 {
-            margin: 0;
-            font-size: 14px;
-            font-weight: 600;
-            color: #e2e8f0;
-        }
-
-        .days-container {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .day-btn {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            color: #e2e8f0;
-            padding: 8px 4px;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        .day-btn:hover {
-            border-color: #94a3b8;
-        }
-
-        .day-btn.active {
-            background-color: #22c55e;
-            border-color: #22c55e;
-            color: #ffffff;
-        }
-
-        .day-btn span {
-            display: block;
-        }
-
-        .day-name {
-            font-size: 10px;
-            text-transform: uppercase;
-            color: #94a3b8;
-            margin-bottom: 4px;
-        }
-
-        .day-btn.active .day-name {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .day-date {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .slots-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-            gap: 8px;
-        }
-
-        .slot-btn {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            color: #e2e8f0;
-            padding: 10px 6px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 500;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .slot-btn:hover {
-            border-color: #22c55e;
-            background-color: rgba(34, 197, 94, 0.1);
-        }
-
-        .slot-btn.active {
-            background-color: #22c55e;
-            border-color: #22c55e;
-            color: #000000;
-            font-weight: 600;
-        }
-
-        .selection-output {
-            margin-top: 12px;
-            font-size: 12px;
-            color: #94a3b8;
-            text-align: center;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Michał Mleczko — AI w firmie, automatyzacja i szybkie strony</title>
+<meta name="description" content="Wdrażam AI w procesach firmowych. Buduję agentów i integracje MCP, sklepy z BLIK oraz szybkie, tanie w utrzymaniu strony statyczne zamiast WordPressa.">
+<meta name="author" content="Michał Mleczko">
+<meta name="theme-color" content="#f6f7f2">
+<link rel="canonical" href="https://mleczakm.github.io/">
+<link rel="alternate" hreflang="pl" href="https://mleczakm.github.io/">
+<link rel="alternate" hreflang="en" href="https://mleczakm.github.io/en/">
+<link rel="alternate" hreflang="x-default" href="https://mleczakm.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Michał Mleczko — AI w firmie, automatyzacja i szybkie strony">
+<meta property="og:description" content="Wdrażam AI w procesach firmowych. Buduję agentów i integracje MCP, sklepy z BLIK oraz szybkie, tanie w utrzymaniu strony statyczne zamiast WordPressa.">
+<meta property="og:url" content="https://mleczakm.github.io/">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:image" content="https://mleczakm.github.io/assets/social-pl.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Michał Mleczko — AI w firmie, automatyzacja i szybkie strony">
+<meta name="twitter:description" content="Wdrażam AI w procesach firmowych. Buduję agentów i integracje MCP, sklepy z BLIK oraz szybkie, tanie w utrzymaniu strony statyczne zamiast WordPressa.">
+<meta name="twitter:image" content="https://mleczakm.github.io/assets/social-pl.png">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer>
+</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Michał Mleczko", "url": "https://mleczakm.github.io/", "jobTitle": "Software Architect & AI Engineer", "email": "do@mleczki.pl", "sameAs": ["https://github.com/mleczakm", "https://linkedin.com/in/michal-mleczko/"], "knowsAbout": ["AI integration", "MCP", "Software architecture", "E-commerce", "Static websites", "DevOps"]}</script>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white dark:bg-slate-950 dark:text-slate-100 light:bg-slate-50 light:text-slate-900">
-
-    <!-- TOP NAVIGATION BAR -->
-    <nav class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 dark:bg-slate-950/80 border-b border-slate-800 dark:border-slate-800 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo / Name -->
-                <div class="flex-shrink-0 flex items-center gap-2">
-                    <span class="text-brand-500 font-mono font-bold text-xl">&lt;mleczakm/&gt;</span>
-                    <span class="hidden md:block font-semibold text-sm tracking-wider uppercase text-slate-300">Michał Mleczko</span>
-                </div>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="#about" class="text-sm font-medium hover:text-brand-500 transition-colors">O mnie</a>
-                    <a href="#experience" class="text-sm font-medium hover:text-brand-500 transition-colors">Doświadczenie</a>
-                    <a href="#pipeline" class="text-sm font-medium hover:text-brand-500 transition-colors">CI/CD Simulator</a>
-                    <a href="#skills" class="text-sm font-medium hover:text-brand-500 transition-colors">Stack Technologiczny</a>
-                    <a href="#projects" class="text-sm font-medium hover:text-brand-500 transition-colors">Projekty</a>
-                    <a href="/platnosci-blik/" class="text-sm font-medium hover:text-brand-500 transition-colors">Sklepy z BLIK</a>
-                    <a href="#contact" class="px-4 py-2 text-xs font-semibold tracking-wider text-white bg-brand-600 rounded-lg hover:bg-brand-500 transition-all shadow-md shadow-brand-900/20 uppercase">Umów Konsultację</a>
-                    
-                    <!-- Language Switcher -->
-                    <a href="/en/" class="text-sm font-medium hover:text-brand-500 transition-colors flex items-center gap-1">
-                        <i class="fa-solid fa-globe"></i> EN
-                    </a>
-                    
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle" class="p-2 text-slate-400 hover:text-brand-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Przełącz motyw">
-                        <i id="theme-icon" class="fa-solid fa-sun text-lg"></i>
-                    </button>
-                </div>
-
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center gap-4">
-                    <button id="theme-toggle-mobile" class="p-2 text-slate-400 hover:text-brand-500 rounded-lg focus:outline-none" aria-label="Przełącz motyw">
-                        <i id="theme-icon-mobile" class="fa-solid fa-sun text-lg"></i>
-                    </button>
-                    <button id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-brand-500 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500" aria-expanded="false">
-                        <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu, show/hide based on menu state. -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 dark:bg-slate-950/95 border-b border-slate-800">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">O mnie</a>
-                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Doświadczenie</a>
-                <a href="#pipeline" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">CI/CD Simulator</a>
-                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Stack Technologiczny</a>
-                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Projekty</a>
-                <a href="/platnosci-blik/" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Sklepy i rezerwacje z BLIK</a>
-                <a href="#contact" class="block text-center w-full px-3 py-2 mt-4 rounded-md text-base font-medium text-white bg-brand-600 hover:bg-brand-500">Umów Konsultację</a>
-                <a href="/en/" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500 flex items-center gap-2">
-                    <i class="fa-solid fa-globe"></i> English
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- HERO SECTION (Business-First focus) -->
-    <header class="relative min-h-[90vh] flex items-center justify-center py-16 overflow-hidden">
-        <!-- Abstract Tech Background Grid -->
-        <div class="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30"></div>
-        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-blue/10 rounded-full blur-3xl"></div>
-
-        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <!-- Terminal Badge -->
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-xs text-brand-500 font-mono mb-6 mx-auto">
-                <span class="flex h-2 w-2 relative">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
-                </span>
-                Szybkie, skalowalne systemy bez długu technicznego
-            </div>
-
-            <!-- Title -->
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6">
-                Pomagam firmom zautomatyzować wdrożenia,
-                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-cyber-cyan to-cyber-blue mt-2">
-                    żeby zespół mógł spokojnie deployować w piątek, bez stresu o awarie produkcji.
-                </span>
-            </h1>
-
-            <!-- Business Promise Paragraph -->
-            <p class="max-w-3xl mx-auto text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed">
-                Łączę <span class="text-brand-500 font-semibold">myślenie biznesowe (business-first)</span> z bezkompromisową automatyzacją infrastruktury. Przeprowadzam projekty od surowego pomysłu i analizy, przez optymalizację architektury DDD/Hexagonal, po bezstresowe wdrożenia produkcyjne na klastrach Kubernetes.
-            </p>
-
-            <!-- CTA Actions -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#pipeline" class="w-full sm:w-auto px-8 py-4 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl shadow-lg shadow-brand-900/30 transition-all flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-play"></i> Przetestuj mój Pipeline
-                </a>
-                <a href="#experience" class="w-full sm:w-auto px-8 py-4 bg-slate-800/80 hover:bg-slate-700 text-slate-200 hover:text-white font-semibold rounded-xl border border-slate-700 transition-all flex items-center justify-center gap-2">
-                    Doświadczenie zawodowe
-                </a>
-            </div>
-
-            <!-- Quick Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-20 pt-8 border-t border-slate-800/80">
-                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
-                    <div class="text-3xl font-extrabold text-white font-mono">12+</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Lat doświadczenia</div>
-                </div>
-                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
-                    <div class="text-3xl font-extrabold text-white font-mono">100%</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Zautomatyzowane CI/CD</div>
-                </div>
-                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
-                    <div class="text-3xl font-extrabold text-white font-mono">3+</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Kontynenty wdrożeń</div>
-                </div>
-                <div class="p-4 bg-slate-800/20 rounded-xl border border-slate-800/50">
-                    <div class="text-3xl font-extrabold text-white font-mono">Friday</div>
-                    <div class="text-xs text-slate-400 uppercase tracking-widest mt-1">Ready Deploys</div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- MAIN SECTIONS -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32 pb-24">
-
-        <!-- SECTION: ABOUT ME & DISC PROFILE -->
-        <section id="about" class="scroll-mt-20">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <!-- Left Column: Biography -->
-                <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 text-brand-500 font-mono text-xs uppercase tracking-wider">
-                        <i class="fa-solid fa-user"></i> Kim jestem?
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
-                        Architekt, który patrzy na kod przez pryzmat korzyści biznesowych.
-                    </h2>
-                    <p class="text-slate-300 leading-relaxed text-base">
-                        Jako osoba o profilu <strong class="text-white">DISC Dominującym (D)</strong>, moją naturalną siłą napędową jest dążenie do usuwania przeszkód oraz automatyzowania wszystkiego, co powtarzalne: od sprawdzania jakości kodu (Rector, PHPStan), przez automatyczne testy, po dynamiczne środowiska testowe i wdrożenia.
-                    </p>
-                    <p class="text-slate-300 leading-relaxed text-base">
-                        Jednak prawdziwy sekret stabilnego biznesu tkwi w <strong class="text-white">atmosferze i spokoju ducha</strong>. Głęboko wierzę, że pewny siebie i zgrany zespół deweloperski potrafi bezpiecznie wdrożyć kod na produkcję nawet w piątkowe popołudnie bez grama stresu. Gwarantują to twarde reguły jakości i dojrzałość techniczna.
-                    </p>
-                    
-                    <div class="p-4 bg-brand-950/25 border-l-4 border-brand-500 rounded-r-xl text-brand-300 text-sm italic font-mono">
-                        "Zgrany zespół, który czuje się bezpiecznie, nie waha się wdrażać poprawek w piątkowe popołudnie, bo ufa procedurom automatyzacji."
-                    </div>
-                </div>
-
-                <!-- Right Column: Interactive DISC Visualization -->
-                <div class="lg:col-span-5 bg-slate-800/40 p-6 rounded-2xl border border-slate-800/80">
-                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                        <i class="fa-solid fa-chart-pie text-brand-500"></i> Mój Profil DISC w działaniu
-                    </h3>
-                    <p class="text-xs text-slate-400 mb-6">Kliknij na poszczególne litery profilu, aby przeczytać jak dany aspekt wpływa na moją pracę.</p>
-
-                    <!-- Bar Graph -->
-                    <div class="space-y-4">
-                        <!-- Dominance -->
-                        <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('D')">
-                            <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-brand-400">D — DOMINANCE (Dominujący)</span>
-                                <span class="font-mono text-slate-300 font-bold">85%</span>
-                            </div>
-                            <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-brand-500 to-brand-400 h-full rounded-full" style="width: 85%"></div>
-                            </div>
-                        </div>
-
-                        <!-- Compliance -->
-                        <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('C')">
-                            <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-cyber-cyan">C — COMPLIANCE (Sumienny)</span>
-                                <span class="font-mono text-slate-300 font-bold">90%</span>
-                            </div>
-                            <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-cyber-cyan to-cyber-blue h-full rounded-full" style="width: 90%"></div>
-                            </div>
-                        </div>
-
-                        <!-- Influence -->
-                        <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('I')">
-                            <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-cyber-purple">I — INFLUENCE (Wpływowy)</span>
-                                <span class="font-mono text-slate-300 font-bold">75%</span>
-                            </div>
-                            <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-cyber-purple to-pink-500 h-full rounded-full" style="width: 75%"></div>
-                            </div>
-                        </div>
-
-                        <!-- Steadiness -->
-                        <div class="disc-item cursor-pointer p-2 rounded-lg hover:bg-slate-800/80 transition-all" onclick="selectDisc('S')">
-                            <div class="flex justify-between text-xs mb-1">
-                                <span class="font-bold text-amber-500">S — STEADINESS (Stały)</span>
-                                <span class="font-mono text-slate-300 font-bold">70%</span>
-                            </div>
-                            <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
-                                <div class="bg-gradient-to-r from-amber-500 to-amber-400 h-full rounded-full" style="width: 70%"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- DISC Details Container -->
-                    <div class="mt-6 p-4 bg-slate-900/80 rounded-xl border border-slate-800 text-sm">
-                        <div id="disc-content-title" class="font-bold text-white mb-2 flex items-center gap-2">
-                            <span class="inline-block w-2.5 h-2.5 bg-brand-500 rounded-full"></span>
-                            D - Dominacja (Rezultaty i Działanie)
-                        </div>
-                        <p id="disc-content-text" class="text-slate-300 text-xs leading-relaxed">
-                            Pcha mnie w kierunku ciągłego usprawniania procesów deweloperskich. Nie godzę się na marnowanie czasu przez deweloperów na manualne powtarzanie operacji. Gdy pojawia się problem z wydajnością, szukam rozwiązania u źródła, projektując optymalne narzędzia.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- INTERACTIVE WIDGET: THE FRIDAY DEPLOY PIPELINE SIMULATOR -->
-        <section id="pipeline" class="scroll-mt-20">
-            <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800/80 p-6 sm:p-10 rounded-3xl border border-slate-800 shadow-xl relative overflow-hidden">
-                <!-- Glowing corner decorative light -->
-                <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand-500/10 rounded-full blur-2xl"></div>
-
-                <div class="max-w-3xl mx-auto text-center mb-8">
-                    <span class="px-3 py-1 rounded-full bg-brand-950 text-brand-400 text-xs font-mono font-bold uppercase tracking-wider">
-                        Symulator w czasie rzeczywistym
-                    </span>
-                    <h2 class="text-3xl font-extrabold text-white mt-4">Wdrożenie Bez Stresu w Piątek o 16:00</h2>
-                    <p class="text-slate-400 text-sm mt-2">
-                        Przekonaj się, jak wdrożona przeze mnie automatyzacja pozwala spać spokojnie deweloperom i biznesowi. Kliknij przycisk, aby uruchomić pełen proces QA i CI/CD.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                    <!-- Controls Column -->
-                    <div class="lg:col-span-4 flex flex-col justify-center space-y-4">
-                        <button id="run-pipeline-btn" onclick="startPipelineSimulation()" class="w-full py-4 px-6 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl shadow-lg shadow-brand-900/20 active:scale-95 transition-all flex items-center justify-center gap-3">
-                            <i class="fa-solid fa-play animate-pulse"></i> Uruchom Pipeline
-                        </button>
-                        <button id="reset-pipeline-btn" onclick="resetPipeline()" class="w-full py-2 px-6 bg-slate-800 hover:bg-slate-700 text-slate-400 font-semibold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-rotate-right"></i> Resetuj Symulator
-                        </button>
-                        
-                        <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-800/80 space-y-2">
-                            <div class="text-xs font-bold uppercase text-slate-400 tracking-wider">Metryki SLA</div>
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Coverage testów:</span>
-                                <span class="font-mono text-brand-400 font-semibold">94.8%</span>
-                            </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Analiza statyczna (PHPStan):</span>
-                                <span class="font-mono text-brand-400 font-semibold">Max (Lvl 9)</span>
-                            </div>
-                            <div class="flex items-center justify-between text-xs">
-                                <span class="text-slate-400">Średni czas deploymentu:</span>
-                                <span class="font-mono text-cyber-cyan font-semibold">3 min 45 sek</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pipeline Visual & Terminal Column -->
-                    <div class="lg:col-span-8 flex flex-col bg-slate-950 rounded-2xl border border-slate-800 overflow-hidden min-h-[350px]">
-                        <!-- Terminal Title Bar -->
-                        <div class="bg-slate-900 px-4 py-2 flex items-center justify-between border-b border-slate-800 text-xs">
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-                                <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
-                                <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
-                                <span class="text-slate-400 font-mono ml-2">mleczakm-ci-cd-runner.sh</span>
-                            </div>
-                            <span class="text-slate-500 font-mono text-[10px]">v1.4.2</span>
-                        </div>
-
-                        <!-- Terminal Output Window -->
-                        <div id="terminal-logs" class="p-4 font-mono text-xs text-slate-300 flex-1 space-y-2 overflow-y-auto max-h-[300px]">
-                            <div class="text-slate-500">&gt; Oczekiwanie na uruchomienie wdrożenia...</div>
-                            <div class="text-slate-500">&gt; Kliknij "Uruchom Pipeline", aby przetestować bezstresowe wdrożenie.</div>
-                        </div>
-
-                        <!-- Progress indicator footer -->
-                        <div class="bg-slate-900/50 px-4 py-3 border-t border-slate-800 text-xs flex justify-between items-center">
-                            <div class="flex items-center gap-2">
-                                <span id="pipeline-status-badge" class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-semibold text-[10px]">IDLE</span>
-                            </div>
-                            <span id="pipeline-percentage" class="font-mono text-slate-400 font-bold">0%</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- EXPERIENCE TIMELINE -->
-        <section id="experience" class="scroll-mt-20">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                    <i class="fa-solid fa-briefcase"></i> Ścieżka Kariery
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Dostarczone Projekty & Role</h2>
-                <p class="text-slate-400 mt-2 text-sm">
-                    Od modernizacji potężnych monolitów, przez rozproszone architektury na wielu kontynentach, po pełną orkiestrację chmury.
-                </p>
-            </div>
-
-            <!-- Vertical Timeline Component -->
-            <div class="relative border-l border-slate-800 max-w-5xl mx-auto pl-6 sm:pl-10 space-y-12">
-                
-                <!-- eMag (Senior Engineer / Architect) -->
-                <div class="relative">
-                    <span class="absolute -left-[31px] sm:-left-[55px] top-1.5 bg-brand-500 text-slate-900 border-4 border-slate-900 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-[10px] sm:text-xs font-bold">
-                        e
-                    </span>
-                    <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800/80 hover:border-brand-500/50 transition-all">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                                    Senior Engineer, Architect
-                                    <span class="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">Contract</span>
-                                </h3>
-                                <p class="text-slate-400 text-sm font-mono mt-1">eMag (Warszawa, Polska)</p>
-                            </div>
-                            <span class="text-xs font-semibold px-3 py-1 bg-slate-800 text-brand-400 rounded-lg self-start sm:self-center font-mono border border-slate-700">
-                                03.2024 - 05.2025
-                            </span>
-                        </div>
-                        <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">Refaktoryzacja monolitu PHP:</strong> Wdrożyłem PHPStan (level 9), RectorPHP oraz PHPUnit. Zero regresji przy zmianach.</li>
-                            <li><strong class="text-white">Kubernetes & CI/CD:</strong> Zoptymalizowałem potoki wdrożeń kontenerowych aplikacji.</li>
-                            <li><strong class="text-white">Mentoring:</strong> Wdrożyłem standardy logowania błędów i raportowania w zespołach PHP.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- GFG Group (Senior Software Engineer) -->
-                <div class="relative">
-                    <span class="absolute -left-[31px] sm:-left-[55px] top-1.5 bg-cyber-blue text-white border-4 border-slate-900 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-[10px] sm:text-xs font-bold">
-                        G
-                    </span>
-                    <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800/80 hover:border-cyber-blue/50 transition-all">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Senior Software Engineer</h3>
-                                <p class="text-slate-400 text-sm font-mono mt-1">GFG Group (Niemcy / Globalnie)</p>
-                            </div>
-                            <span class="text-xs font-semibold px-3 py-1 bg-slate-800 text-cyber-blue rounded-lg self-start sm:self-center font-mono border border-slate-700">
-                                02.2023 - 02.2024
-                            </span>
-                        </div>
-                        <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">Backend e-commerce:</strong> Rozproszony na 3 kontynentach, Kubernetes, PHP 8, MySQL.</li>
-                            <li><strong class="text-white">Migracja MySQL:</strong> Bezpieczne przejście z v5 na v8 w produkcji.</li>
-                            <li>Wdrożyłem statyczną analizę kodu dla poprawy jakości.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Cobiro (Senior Software Engineer) -->
-                <div class="relative">
-                    <span class="absolute -left-[31px] sm:-left-[55px] top-1.5 bg-cyber-purple text-white border-4 border-slate-900 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-[10px] sm:text-xs font-bold">
-                        C
-                    </span>
-                    <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800/80 hover:border-cyber-purple/50 transition-all">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Senior Software Engineer</h3>
-                                <p class="text-slate-400 text-sm font-mono mt-1">Cobiro (Warszawa, Polska)</p>
-                            </div>
-                            <span class="text-xs font-semibold px-3 py-1 bg-slate-800 text-cyber-purple rounded-lg self-start sm:self-center font-mono border border-slate-700">
-                                03.2022 - 03.2023
-                            </span>
-                        </div>
-                        <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">Microservices:</strong> Rozwój i utrzymanie rozproszonej architektury w chmurze.</li>
-                            <li><strong class="text-white">IaC & CI/CD:</strong> Terraform, Atlantis, CircleCI, GitHub Actions.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- IIIT (Senior PHP Developer / Tech Lead) -->
-                <div class="relative">
-                    <span class="absolute -left-[31px] sm:-left-[55px] top-1.5 bg-amber-500 text-slate-900 border-4 border-slate-900 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-[10px] sm:text-xs font-bold">
-                        I
-                    </span>
-                    <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800/80 hover:border-amber-500/50 transition-all">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Senior PHP Developer & Leader</h3>
-                                <p class="text-slate-400 text-sm font-mono mt-1">IIIT (Kraków, Polska)</p>
-                            </div>
-                            <span class="text-xs font-semibold px-3 py-1 bg-slate-800 text-amber-500 rounded-lg self-start sm:self-center font-mono border border-slate-700">
-                                07.2018 - 06.2021
-                            </span>
-                        </div>
-                        <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">Architektura:</strong> Wdrożyłem Hexagonal Architecture, CQRS, Event Sourcing.</li>
-                            <li><strong class="text-white">A/B Testing:</strong> Swoole, RoadRunner, Kafka - zero latency przy przekierowaniach.</li>
-                            <li>Monitoring: Prometheus, Grafana, ELK stack.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Grupa 3S (Software Developer) -->
-                <div class="relative">
-                    <span class="absolute -left-[31px] sm:-left-[55px] top-1.5 bg-slate-600 text-white border-4 border-slate-900 rounded-full w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center font-mono text-[10px] sm:text-xs font-bold">
-                        3
-                    </span>
-                    <div class="p-6 bg-slate-800/30 rounded-2xl border border-slate-800/80 hover:border-slate-600/50 transition-all">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Software Developer</h3>
-                                <p class="text-slate-400 text-sm font-mono mt-1">Grupa 3S (Katowice, Polska)</p>
-                            </div>
-                            <span class="text-xs font-semibold px-3 py-1 bg-slate-800 text-slate-400 rounded-lg self-start sm:self-center font-mono border border-slate-700">
-                                02.2015 - 09.2016
-                            </span>
-                        </div>
-                        <ul class="space-y-2 text-slate-300 text-sm list-disc pl-5">
-                            <li><strong class="text-white">CRM rewrite:</strong> Symfony 2/3, 2700+ klientów biznesowych.</li>
-                            <li>Projektowanie i implementacja modułów wewnętrznych.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- TECH STACK SECTION (FILTERABLE) -->
-        <section id="skills" class="scroll-mt-20">
-            <div class="max-w-3xl mx-auto text-center mb-12">
-                <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                    <i class="fa-solid fa-layer-group"></i> Narzędzia i Technologie
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Mój Ekosystem Technologiczny</h2>
-                <p class="text-slate-400 mt-2 text-sm">
-                    Kompletna gama narzędzi pozwalających na szybkie projektowanie, testowanie i stabilne hostowanie systemów biznesowych.
-                </p>
-
-                <!-- Filter Buttons -->
-                <div class="flex flex-wrap items-center justify-center gap-2 mt-8">
-                    <button onclick="filterSkills('all')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-brand-600 text-white transition-all">
-                        Wszystko
-                    </button>
-                    <button onclick="filterSkills('backend')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-400 hover:text-white transition-all">
-                        PHP & Backend
-                    </button>
-                    <button onclick="filterSkills('devops')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-400 hover:text-white transition-all">
-                        DevOps, Chmura & CI/CD
-                    </button>
-                    <button onclick="filterSkills('architecture')" class="skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-400 hover:text-white transition-all">
-                        Metodologia & Architektura
-                    </button>
-                </div>
-            </div>
-
-            <!-- Skills Grid -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4" id="skills-grid">
-                
-                <!-- Skill Card: PHP 8 -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-brands fa-php text-3xl text-cyber-blue mb-2"></i>
-                    <span class="text-sm font-semibold text-white">PHP 8.x</span>
-                </div>
-
-                <!-- Skill Card: Symfony -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-solid fa-cubes text-3xl text-brand-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Symfony Framework</span>
-                </div>
-
-                <!-- Skill Card: Laravel -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-brands fa-laravel text-3xl text-red-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Laravel</span>
-                </div>
-
-                <!-- Skill Card: Swoole & Roadrunner -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-solid fa-gauge-high text-3xl text-cyber-cyan mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Swoole / Roadrunner</span>
-                </div>
-
-                <!-- Skill Card: Docker -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="devops">
-                    <i class="fa-brands fa-docker text-3xl text-cyber-blue mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Docker / Containers</span>
-                </div>
-
-                <!-- Skill Card: Kubernetes -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="devops">
-                    <i class="fa-solid fa-circle-nodes text-3xl text-cyber-cyan mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Kubernetes / Helm</span>
-                </div>
-
-                <!-- Skill Card: Terraform -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="devops">
-                    <i class="fa-solid fa-cloud text-3xl text-brand-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Terraform & IaC</span>
-                </div>
-
-                <!-- Skill Card: CI/CD Pipelines -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="devops">
-                    <i class="fa-solid fa-code-merge text-3xl text-brand-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">GitHub Actions / CircleCI</span>
-                </div>
-
-                <!-- Skill Card: Hexagonal Architecture -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="architecture">
-                    <i class="fa-solid fa-diagram-project text-3xl text-cyber-purple mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Hexagonal Architecture</span>
-                </div>
-
-                <!-- Skill Card: DDD -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="architecture">
-                    <i class="fa-solid fa-brain text-3xl text-amber-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Domain-Driven Design</span>
-                </div>
-
-                <!-- Skill Card: Redis & Caching -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-solid fa-bolt text-3xl text-amber-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Redis / Memcached</span>
-                </div>
-
-                <!-- Skill Card: Kafka & Event Bus -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-solid fa-envelope-open-text text-3xl text-cyber-purple mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Kafka / CQRS</span>
-                </div>
-
-                <!-- Skill Card: Python -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-brands fa-python text-3xl text-cyber-cyan mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Python Scripts</span>
-                </div>
-
-                <!-- Skill Card: Prometheus -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="devops">
-                    <i class="fa-solid fa-chart-line text-3xl text-brand-500 mb-2"></i>
-                    <span class="text-sm font-semibold text-white">Prometheus & Grafana</span>
-                </div>
-
-                <!-- Skill Card: React -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="architecture">
-                    <i class="fa-brands fa-react text-3xl text-cyber-cyan mb-2"></i>
-                    <span class="text-sm font-semibold text-white">React SPA</span>
-                </div>
-
-                <!-- Skill Card: SLA & SQL -->
-                <div class="skill-card bg-slate-800/40 p-4 rounded-xl border border-slate-800 flex flex-col items-center text-center hover:border-brand-500/50 hover:bg-slate-800/60 transition-all cursor-default" data-category="backend">
-                    <i class="fa-solid fa-database text-3xl text-cyber-blue mb-2"></i>
-                    <span class="text-sm font-semibold text-white">MySQL & Postgres</span>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- OUTSTANDING PROJECTS SECTION -->
-        <section id="projects" class="scroll-mt-20">
-            <div class="max-w-3xl mx-auto text-center mb-16">
-                <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                    <i class="fa-solid fa-star"></i> Z czego jestem dumny
-                </span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Przełomowe Osiągnięcia</h2>
-                <p class="text-slate-400 mt-2 text-sm">
-                    Konkretne wdrożenia, które przyniosły wymierne oszczędności finansowe i uprościły procesy biznesowe.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Project 1: A/B Test SPA & PHP Worker -->
-                <div class="bg-slate-800/20 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all overflow-hidden flex flex-col">
-                    <div class="p-6 flex-1">
-                        <div class="flex items-center gap-3 text-brand-500 text-xs font-mono mb-3">
-                            <i class="fa-solid fa-split"></i> Wydajność & Architektura
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">System Testów A/B Wysokiej Skali</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            Jako Tech Lead pokierowałem zespołem, z którym stworzyłem nowoczesny system A/B testing dla platformy o wysokim ruchu. Szybkie przekierowania użytkowników, precyzyjne śledzenie ich aktywności oraz zaawansowane raportowanie zostały oparte na technologii <strong class="text-white">Kafka, RoadRunner, Swoole, React</strong> oraz kontenerach w klastrze Kubernetes.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Swoole</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Kafka</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">React</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Docker</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2: On-Demand Dev Environments -->
-                <div class="bg-slate-800/20 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all overflow-hidden flex flex-col">
-                    <div class="p-6 flex-1">
-                        <div class="flex items-center gap-3 text-cyber-cyan text-xs font-mono mb-3">
-                            <i class="fa-solid fa-cloud"></i> DevOps & Automatyzacja
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Środowiska Testowe na Żądanie (On-Demand)</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            Zaprojektowałem i wdrożyłem od zera kompletny, automatyczny pipeline CI/CD pozwalający na automatyczne podnoszenie tymczasowych, niezależnych środowisk deweloperskich dla każdego brancha deweloperskiego. Wykorzystałem do tego <strong class="text-white">Docker, Traefik, Rancher</strong> oraz dynamiczne runner-y. Skróciło to czas QA o ponad 40%.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Rancher</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Traefik</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">CI/CD</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3: Flow PHP Support -->
-                <div class="bg-slate-800/20 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all overflow-hidden flex flex-col">
-                    <div class="p-6 flex-1">
-                        <div class="flex items-center gap-3 text-cyber-blue text-xs font-mono mb-3">
-                            <i class="fa-solid fa-code"></i> Open Source
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">Wsparcie dla Flow PHP (ETL)</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            Aktywnie wspieram i rozwijam ekosystem open-source, w tym popularny framework <strong class="text-white">Flow PHP</strong> — zorientowany na przetwarzanie ETL o dużej przepustowości w języku PHP. Dbając o doskonałe standardy jakości kodu, wdrażam narzędzia automatycznej analizy statycznej oraz testów QA dla mniejszych narzędzi towarzyszących.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Flow PHP</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">ETL</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">QA Automation</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4: Volunteer Orphanage Care -->
-                <div class="bg-slate-800/20 rounded-2xl border border-slate-800 hover:border-brand-500/50 transition-all overflow-hidden flex flex-col">
-                    <div class="p-6 flex-1">
-                        <div class="flex items-center gap-3 text-amber-500 text-xs font-mono mb-3">
-                            <i class="fa-solid fa-handshake-angle"></i> CSR & Zaangażowanie Społeczne
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-3">3 Lata Wolontariatu w Domu Dziecka</h3>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
-                            W trakcie trwania nauki w liceum co tydzień odwiedzałem zaprzyjaźniony dom dziecka, gdzie bezpłatnie opiekowałem się pracownią komputerową. Do moich obowiązków należał dobór oprogramowania, fizyczna naprawa sprzętu komputerowego, zabezpieczanie i czyszczenie systemów z infekcji wirusowych oraz podstawowe szkolenia dla personelu i podopiecznych.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Hardware</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">SysAdmin</span>
-                            <span class="px-2 py-1 bg-slate-900 text-slate-400 text-xs font-mono rounded">Social Work</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- INTERACTIVE CONTACT & QUICK CONVERSATION -->
-        <section id="contact" class="scroll-mt-20">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 bg-slate-800/20 p-8 sm:p-12 rounded-3xl border border-slate-800 items-start">
-                
-                <!-- Left: Contact info -->
-                <div class="lg:col-span-5 space-y-6">
-                    <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">
-                        <i class="fa-solid fa-paper-plane"></i> Kontakt
-                    </span>
-                    <h2 class="text-3xl font-extrabold text-white">Zbudujmy coś wielkiego razem</h2>
-                    <p class="text-slate-400 text-sm">
-                        Masz projekt do uratowania? Potrzebujesz uporządkować infrastrukturę, wdrożyć pewne testy statyczne, czy przeskalować aplikację chmurową? Porozmawiajmy o konkretnych potrzebach biznesowych.
-                    </p>
-
-                    <div class="space-y-4 pt-4">
-                        <div class="flex items-center gap-3 text-sm">
-                            <i class="fa-solid fa-envelope text-brand-500 w-5"></i>
-                            <a href="mailto:do@mleczki.pl" class="text-slate-200 hover:text-brand-500 font-mono transition-colors">do@mleczki.pl</a>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm">
-                            <i class="fa-solid fa-phone text-brand-500 w-5"></i>
-                            <a href="tel:+48732575375" class="text-slate-200 hover:text-brand-500 font-mono transition-colors">+48 732 575 375</a>
-                        </div>
-                        <div class="flex items-center gap-3 text-sm">
-                            <i class="fa-solid fa-location-dot text-brand-500 w-5"></i>
-                            <span class="text-slate-200 font-mono">Radzymin (Warszawa), Polska</span>
-                        </div>
-                    </div>
-
-                    <!-- Social Icons -->
-                    <div class="flex items-center gap-4 pt-4">
-                        <a href="https://linkedin.com/in/michal-mleczko/" target="_blank" class="p-3 bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white rounded-xl transition-all" aria-label="LinkedIn profile">
-                            <i class="fa-brands fa-linkedin text-xl"></i>
-                        </a>
-                        <a href="https://github.com/mleczakm" target="_blank" class="p-3 bg-slate-800 hover:bg-brand-600 text-slate-300 hover:text-white rounded-xl transition-all" aria-label="GitHub profile">
-                            <i class="fa-brands fa-github text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Right: Simulated message form with state feedback -->
-                <div class="lg:col-span-7 bg-slate-950 p-6 sm:p-8 rounded-2xl border border-slate-800">
-                    <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4" novalidate>
-                        <div>
-                            <label for="form-name" class="block text-xs font-bold uppercase text-slate-400 mb-1">Imię i Nazwisko / Firma</label>
-                            <input type="text" id="form-name" name="name" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="Jan Kowalski">
-                        </div>
-                        <div>
-                            <label for="form-email" class="block text-xs font-bold uppercase text-slate-400 mb-1">Adres Email</label>
-                            <input type="email" id="form-email" name="email" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="jan@company.com">
-                        </div>
-                        <div>
-                            <label for="form-phone" class="block text-xs font-bold uppercase text-slate-400 mb-1">Telefon kontaktowy</label>
-                            <input type="tel" id="form-phone" name="phone" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="+48 123 456 789">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-slate-400 mb-1">Preferowana data i godzina</label>
-                            <div class="scheduler">
-                                <div class="scheduler-header">
-                                    <h4>Umów konsultację</h4>
-                                    <div id="month-label" style="font-size: 12px; color: #94a3b8;"></div>
-                                </div>
-                                <div class="days-container" id="daysRow"></div>
-                                <div class="slots-container" id="slotsGrid"></div>
-                                <div class="selection-output" id="selectionOutput">
-                                    Wybierz datę i godzinę
-                                </div>
-                                <input type="hidden" id="form-datetime" name="datetime" required>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="form-message" class="block text-xs font-bold uppercase text-slate-400 mb-1">W czym mogę pomóc?</label>
-                            <textarea id="form-message" name="message" required rows="4" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-500 transition-colors" placeholder="Opisz wyzwanie technologiczne lub biznesowe w Twojej firmie..."></textarea>
-                        </div>
-                        <div class="text-xs text-slate-400">
-                            <i class="fa-solid fa-info-circle mr-1"></i>
-                            Wysłanie wiadomości jest zgodą na kontakt zwrotny w celu umówienia konsultacji.
-                        </div>
-                        <button type="submit" class="w-full py-3 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i> Umów 30-minutową konsultację
-                        </button>
-                    </form>
-
-                    <!-- Feedback message widget instead of alerts -->
-                    <div id="form-feedback" class="hidden mt-4 p-4 rounded-lg text-sm text-center"></div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 border-t border-slate-900 py-12 text-slate-500 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-2">
-                <span class="text-brand-500 font-mono font-bold text-lg">&lt;mleczakm/&gt;</span>
-                <span>© 2026 Michał Mleczko. Wszystkie prawa zastrzeżone.</span>
-            </div>
-            <div class="flex items-center gap-6">
-                <a href="#about" class="hover:text-brand-500 transition-colors">O mnie</a>
-                <a href="#experience" class="hover:text-brand-500 transition-colors">Doświadczenie</a>
-                <a href="#skills" class="hover:text-brand-500 transition-colors">Stack</a>
-                <a href="/platnosci-blik/" class="hover:text-brand-500 transition-colors">Sklepy z BLIK</a>
-                <a href="#contact" class="hover:text-brand-500 transition-colors">Umów Konsultację</a>
-            </div>
-        </div>
-    </footer>
-
-
-    <!-- INTERACTIVE JAVASCRIPT CONTROLLERS -->
-    <script>
-        // CUSTOM DATE/TIME PICKER INITIALIZATION
-        function initCustomPicker() {
-            // CONFIGURATION
-            const WORK_START_HOUR = 7; // 7:00 AM
-            const WORK_END_HOUR = 20;  // 8:00 PM (20:00)
-            const DAYS_TO_CHECK = 7;   // Look forward 7 calendar days
-
-            // STATE
-            let selectedDateString = null;
-            let selectedTimeRange = null;
-
-            // DOM ELEMENTS
-            const daysRow = document.getElementById('daysRow');
-            const slotsGrid = document.getElementById('slotsGrid');
-            const monthLabel = document.getElementById('month-label');
-            const selectionOutput = document.getElementById('selectionOutput');
-            const datetimeInput = document.getElementById('form-datetime');
-
-            // HELPER: Generate working dates within the next 7 calendar days
-            function getWorkingDaysAhead() {
-                const workingDays = [];
-                const today = new Date();
-
-                for (let i = 0; i < DAYS_TO_CHECK; i++) {
-                    const checkDate = new Date();
-                    checkDate.setDate(today.getDate() + i);
-
-                    const dayOfWeek = checkDate.getDay();
-                    // 0 = Sunday, 6 = Saturday. Only push Monday-Friday (1-5)
-                    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-                        workingDays.push(checkDate);
-                    }
-                }
-                return workingDays;
-            }
-
-            // HELPER: Generate time ranges array (e.g. ["7-8", "8-9", ...])
-            function generateTimeRanges() {
-                const ranges = [];
-                for (let hour = WORK_START_HOUR; hour < WORK_END_HOUR; hour++) {
-                    ranges.push(`${hour}-${hour + 1}`);
-                }
-                return ranges;
-            }
-
-            // RENDER: Render the Day tabs
-            function renderDays() {
-                const availableDays = getWorkingDaysAhead();
-                daysRow.innerHTML = '';
-
-                // Update top right month tag dynamically based on first available date
-                if(availableDays.length > 0) {
-                    const options = { month: 'long', year: 'numeric' };
-                    monthLabel.innerText = availableDays[0].toLocaleDateString('pl-PL', options);
-                }
-
-                availableDays.forEach((date, index) => {
-                    const dateString = date.toISOString().split('T')[0];
-                    const dayName = date.toLocaleDateString('pl-PL', { weekday: 'short' });
-                    const dayNum = date.getDate();
-
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.className = `day-btn ${index === 0 ? 'active' : ''}`;
-                    btn.dataset.date = dateString;
-                    btn.innerHTML = `
-                        <span class="day-name">${dayName}</span>
-                        <span class="day-date">${dayNum}</span>
-                    `;
-
-                    // Set initial active date string to today/first available day
-                    if (index === 0) selectedDateString = dateString;
-
-                    btn.addEventListener('click', () => {
-                        document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        selectedDateString = dateString;
-                        selectedTimeRange = null; // Reset chosen time when changing day
-                        renderSlots();
-                        updateOutput();
-                    });
-
-                    daysRow.appendChild(btn);
-                });
-            }
-
-            // RENDER: Render the Slot blocks
-            function renderSlots() {
-                const ranges = generateTimeRanges();
-                slotsGrid.innerHTML = '';
-
-                ranges.forEach(range => {
-                    const btn = document.createElement('button');
-                    btn.type = 'button';
-                    btn.className = 'slot-btn';
-                    // Formatting representation: "8-9" converted to text "08:00 - 09:00"
-                    const [start, end] = range.split('-');
-                    const formatTime = (h) => `${h.padStart(2, '0')}:00`;
-                    btn.innerText = `${formatTime(start)} - ${formatTime(end)}`;
-
-                    btn.addEventListener('click', () => {
-                        document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        selectedTimeRange = range;
-                        updateOutput();
-                    });
-
-                    slotsGrid.appendChild(btn);
-                });
-            }
-
-            // UPDATE: Output element behavior
-            function updateOutput() {
-                if (selectedDateString && selectedTimeRange) {
-                    const [start, end] = selectedTimeRange.split('-');
-                    selectionOutput.innerHTML = `Wybrany termin: <strong>${selectedDateString}</strong> pomiędzy <strong>${start}:00</strong> a <strong>${end}:00</strong>`;
-                    // Update hidden input for form submission
-                    datetimeInput.value = `${selectedDateString} ${start}:00`;
-                } else {
-                    selectionOutput.innerText = 'Wybierz datę i godzinę';
-                    datetimeInput.value = '';
-                }
-            }
-
-            // INITIALIZATION
-            renderDays();
-            renderSlots();
-        }
-        
-        // Initialize custom picker on page load
-        document.addEventListener('DOMContentLoaded', initCustomPicker);
-
-        // MOBILE MENU TOGGLE
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-            mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
-            mobileMenu.classList.toggle('hidden');
-            
-            if (isExpanded) {
-                mobileMenuIcon.className = "fa-solid fa-bars text-xl";
-            } else {
-                mobileMenuIcon.className = "fa-solid fa-xmark text-xl";
-            }
-        });
-
-        // Close mobile menu on click links
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                mobileMenuIcon.className = "fa-solid fa-bars text-xl";
-            });
-        });
-
-
-        // THEME TOGGLE (LIGHT / DARK)
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
-        const themeIcon = document.getElementById('theme-icon');
-        const themeIconMobile = document.getElementById('theme-icon-mobile');
-
-        function toggleTheme() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                document.documentElement.classList.add('light');
-                localStorage.setItem('color-theme', 'light');
-                themeIcon.className = "fa-solid fa-moon text-lg";
-                themeIconMobile.className = "fa-solid fa-moon text-lg";
-            } else {
-                document.documentElement.classList.remove('light');
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-                themeIcon.className = "fa-solid fa-sun text-lg";
-                themeIconMobile.className = "fa-solid fa-sun text-lg";
-            }
-        }
-
-        themeToggleBtn.addEventListener('click', toggleTheme);
-        themeToggleMobileBtn.addEventListener('click', toggleTheme);
-
-
-        // DYNAMIC TECH STACK FILTERING
-        function filterSkills(category) {
-            const cards = document.querySelectorAll('.skill-card');
-            const buttons = document.querySelectorAll('.skill-filter-btn');
-
-            // Toggle active classes on buttons
-            buttons.forEach(btn => {
-                if (btn.getAttribute('onclick').includes(`'${category}'`)) {
-                    btn.className = "skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-brand-600 text-white transition-all";
-                } else {
-                    btn.className = "skill-filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-slate-800 text-slate-400 hover:text-white transition-all";
-                }
-            });
-
-            // Filter cards with scale animation
-            cards.forEach(card => {
-                const cardCat = card.getAttribute('data-category');
-                if (category === 'all' || cardCat === category) {
-                    card.classList.remove('hidden');
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 50);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        card.classList.add('hidden');
-                    }, 200);
-                }
-            });
-        }
-
-
-        // DISC PROFILE INTERACTIVE TEXT TOGGLE
-        const discData = {
-            'D': {
-                title: "D — DOMINANCE (Dominujący)",
-                text: "Pcha mnie w kierunku ciągłego usprawniania procesów deweloperskich. Nie znoszę powtarzania ręcznego tych samych operacji. Gdy pojawia się problem z wydajnością aplikacji lub obniżonym SLA, natychmiast diagnozuję przyczynę, podejmuję twarde decyzje architektoniczne i wdrażam zoptymalizowane mechanizmy rygorystycznej kontroli."
-            },
-            'C': {
-                title: "C — COMPLIANCE (Sumienny)",
-                text: "To z kolei moje bezkompromisowe dążenie do doskonałości technicznej i rygorystycznego zachowania standardów. Wprowadzam do systemów najtrudniejszy poziom analizy statycznej PHPStan (Level 9), automatyczne reguły optymalizacyjne w RectorPHP oraz dbam o wysokie pokrycie testami PHPUnit. Kod musi być czysty, bezpieczny i czytelny."
-            },
-            'I': {
-                title: "I — INFLUENCE (Wpływowy)",
-                text: "Objawia się w moim podejściu do komunikacji i pracy z ludźmi. Chętnie dzielę się wypracowaną wiedzą z zespołami na warsztatach (Knowledge Sharing). Buduję relacje oparte na zaufaniu i wzmacniam kompetencje rekrutacyjne i techniczne w organizacji, dbając o to, by deweloperzy czuli się pewnie i bezpiecznie."
-            },
-            'S': {
-                title: "S — STEADINESS (Stały)",
-                text: "To gwarancja harmonii i dążenia do absolutnego spokoju ducha. Tworzę zautomatyzowane, stabilne infrastruktury Kubernetes i chmurowe w taki sposób, aby zespół wiedział, że platforma wytrzyma skoki obciążenia, a każdy deployment przebiegnie przewidywalnie i bez niespodzianek."
-            }
-        };
-
-        function selectDisc(letter) {
-            const contentTitle = document.getElementById('disc-content-title');
-            const contentText = document.getElementById('disc-content-text');
-            
-            // Highlight color map
-            const colorMap = {
-                'D': 'bg-brand-500',
-                'C': 'bg-cyber-cyan',
-                'I': 'bg-cyber-purple',
-                'S': 'bg-amber-500'
-            };
-
-            contentTitle.innerHTML = `<span class="inline-block w-2.5 h-2.5 ${colorMap[letter]} rounded-full"></span> ${discData[letter].title}`;
-            contentText.innerText = discData[letter].text;
-        }
-
-
-        // CI/CD PIPELINE SIMULATOR ENGINE (Safe Friday Deploy)
-        let simulationInterval = null;
-        let isSimulating = false;
-
-        function appendTerminalLog(text, type = 'info') {
-            const terminal = document.getElementById('terminal-logs');
-            const logItem = document.createElement('div');
-            
-            let colorClass = 'text-slate-300';
-            let prefix = '[INFO]';
-            
-            if (type === 'success') {
-                colorClass = 'text-brand-400 font-bold';
-                prefix = '[SUKCES]';
-            } else if (type === 'error') {
-                colorClass = 'text-red-400 font-bold';
-                prefix = '[BŁĄD]';
-            } else if (type === 'step') {
-                colorClass = 'text-cyber-cyan font-semibold';
-                prefix = '[KROK]';
-            } else if (type === 'warning') {
-                colorClass = 'text-amber-400';
-                prefix = '[OSTRZEŻENIE]';
-            } else if (type === 'system') {
-                colorClass = 'text-slate-500';
-                prefix = '&gt;';
-            }
-            
-            logItem.className = `${colorClass} py-0.5 animate-fadeIn`;
-            logItem.innerHTML = `<span class="text-slate-500 font-mono select-none mr-2">${prefix}</span>${text}`;
-            terminal.appendChild(logItem);
-            terminal.scrollTop = terminal.scrollHeight;
-        }
-
-        const pipelineSteps = [
-            { pct: 5, type: 'step', text: 'Inicjalizacja bezpiecznego potoku wdrożeniowego (v1.4.2)...' },
-            { pct: 10, type: 'info', text: 'Pobieranie najnowszych zależności środowiska...' },
-            { pct: 20, type: 'step', text: 'Uruchomienie statycznej analizy kodu (PHPStan, Level 9)...' },
-            { pct: 30, type: 'success', text: 'PHPStan: 0 błędów! Analiza statyczna zakończona sukcesem.' },
-            { pct: 40, type: 'step', text: 'RectorPHP: Walidacja reguł refaktoryzacyjnych i kompatybilności z PHP 8.x...' },
-            { pct: 48, type: 'success', text: 'Rector: Kod zoptymalizowany i zgodny z najnowszym standardem!' },
-            { pct: 55, type: 'step', text: 'PHPUnit: Uruchamianie 1,240 testów integracyjnych oraz jednostkowych...' },
-            { pct: 68, type: 'success', text: 'PHPUnit: Przetestowano 100% modułów krytycznych, pokrycie kodu: 94.8%.' },
-            { pct: 75, type: 'step', text: 'Budowanie zoptymalizowanego kontenera Docker (multi-stage build)...' },
-            { pct: 82, type: 'info', text: 'Generowanie konfiguracji dynamicznego routingu dla klastra...' },
-            { pct: 90, type: 'step', text: 'Orkiestracja Kubernetes: Wdrożenie nowej wersji za pomocą Helma na klaster produkcyjny...' },
-            { pct: 95, type: 'warning', text: 'Sprawdzanie stanu SLA aplikacji (Prometheus + Grafana)...' },
-            { pct: 100, type: 'success', text: 'Gotowe! Kod wdrożony bezpiecznie w piątek po południu. SLA stabilne (99.99%). Miłego weekendu! 🍻' }
-        ];
-
-        function startPipelineSimulation() {
-            if (isSimulating) return;
-            isSimulating = true;
-            
-            const runBtn = document.getElementById('run-pipeline-btn');
-            const statusBadge = document.getElementById('pipeline-status-badge');
-            const pctLabel = document.getElementById('pipeline-percentage');
-            
-            runBtn.disabled = true;
-            runBtn.className = "w-full py-4 px-6 bg-slate-800 text-slate-500 font-bold rounded-xl cursor-not-allowed flex items-center justify-center gap-3";
-            
-            statusBadge.className = "px-2 py-0.5 rounded-full bg-brand-950 text-brand-400 font-semibold text-[10px] animate-pulse";
-            statusBadge.innerText = "PRZETWARZANIE";
-
-            // Clear terminal first
-            document.getElementById('terminal-logs').innerHTML = '';
-            appendTerminalLog('Uruchomienie procedury deploymentu...', 'system');
-
-            let stepIndex = 0;
-            
-            simulationInterval = setInterval(() => {
-                if (stepIndex < pipelineSteps.length) {
-                    const currentStep = pipelineSteps[stepIndex];
-                    appendTerminalLog(currentStep.text, currentStep.type);
-                    pctLabel.innerText = `${currentStep.pct}%`;
-                    stepIndex++;
-                } else {
-                    clearInterval(simulationInterval);
-                    isSimulating = false;
-                    statusBadge.className = "px-2 py-0.5 rounded-full bg-brand-600 text-white font-semibold text-[10px]";
-                    statusBadge.innerText = "SUKCES";
-                }
-            }, 1000);
-        }
-
-        function resetPipeline() {
-            if (isSimulating) {
-                clearInterval(simulationInterval);
-                isSimulating = false;
-            }
-            
-            const runBtn = document.getElementById('run-pipeline-btn');
-            const statusBadge = document.getElementById('pipeline-status-badge');
-            const pctLabel = document.getElementById('pipeline-percentage');
-            
-            runBtn.disabled = false;
-            runBtn.className = "w-full py-4 px-6 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl shadow-lg shadow-brand-900/20 active:scale-95 transition-all flex items-center justify-center gap-3";
-            
-            statusBadge.className = "px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-semibold text-[10px]";
-            statusBadge.innerText = "IDLE";
-            
-            pctLabel.innerText = "0%";
-            
-            document.getElementById('terminal-logs').innerHTML = `
-                <div class="text-slate-500">&gt; Oczekiwanie na uruchomienie wdrożenia...</div>
-                <div class="text-slate-500">&gt; Kliknij "Uruchom Pipeline", aby przetestować bezstresowe wdrożenie.</div>
-            `;
-        }
-
-
-        // FORMSPREE AJAX FORM SUBMISSION
-        async function handleContactSubmit(event) {
-            event.preventDefault();
-            
-            const form = event.target;
-            const formData = new FormData(form);
-            const feedback = document.getElementById('form-feedback');
-            const submitBtn = form.querySelector('button[type="submit"]');
-            
-            // Custom validation
-            let isValid = true;
-            const requiredFields = form.querySelectorAll('[required]');
-            
-            // Clear previous validation styles
-            requiredFields.forEach(field => {
-                field.classList.remove('border-red-500');
-                field.classList.add('border-slate-800');
-            });
-            
-            // Validate each required field
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    isValid = false;
-                    field.classList.remove('border-slate-800');
-                    field.classList.add('border-red-500');
-                }
-            });
-
-            // Email validation
-            const emailField = form.querySelector('#form-email');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (emailField.value.trim() && !emailRegex.test(emailField.value.trim())) {
-                isValid = false;
-                emailField.classList.remove('border-slate-800');
-                emailField.classList.add('border-red-500');
-            }
-
-            // Phone validation (accepts various formats: plain digits, with +, spaces, dashes, dots, parentheses)
-            const phoneField = form.querySelector('#form-phone');
-            const phoneRegex = /^[\+]?[0-9\s\-\.\(\)]{9,}$/;
-            if (phoneField.value.trim() && !phoneRegex.test(phoneField.value.trim())) {
-                isValid = false;
-                phoneField.classList.remove('border-slate-800');
-                phoneField.classList.add('border-red-500');
-            }
-
-            // If validation fails, show error and prevent submission
-            if (!isValid) {
-                feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-red-950/50 text-red-400 border border-red-800";
-                feedback.innerHTML = `
-                    <div class="font-bold mb-1"><i class="fa-solid fa-exclamation-circle mr-2"></i>Wypełnij wszystkie wymagane pola</div>
-                    Proszę uzupełnić wszystkie pola oznaczone jako wymagane w poprawnym formacie.
-                `;
-                feedback.classList.remove('hidden');
-                return;
-            }
-
-            // Show loading state
-            feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-slate-800 text-slate-300";
-            feedback.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Wysyłanie wiadomości...`;
-            feedback.classList.remove('hidden');
-            
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Wysyłanie...`;
-
-            try {
-                const response = await fetch('https://formspree.io/f/xdavweok', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    // Success
-                    feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-brand-950/50 text-brand-400 border border-brand-800";
-                    feedback.innerHTML = `
-                        <div class="font-bold mb-1"><i class="fa-solid fa-check-circle mr-2"></i>Dziękuję za kontakt!</div>
-                        Twoja wiadomość została wysłana pomyślnie. Odpiszę najszybciej jak to możliwe.
-                    `;
-                    form.reset();
-                    // Reset validation styles
-                    requiredFields.forEach(field => {
-                        field.classList.remove('border-red-500');
-                        field.classList.add('border-slate-800');
-                    });
-                    // Reset custom picker
-                    if (typeof initCustomPicker === 'function') {
-                        initCustomPicker();
-                    }
-                } else {
-                    // Error from Formspree
-                    const data = await response.json();
-                    throw new Error(data.error || 'Wystąpił błąd podczas wysyłania wiadomości.');
-                }
-            } catch (error) {
-                // Network error or Formspree error
-                feedback.className = "mt-4 p-4 rounded-lg text-sm text-center bg-red-950/50 text-red-400 border border-red-800";
-                feedback.innerHTML = `
-                    <div class="font-bold mb-1"><i class="fa-solid fa-exclamation-circle mr-2"></i>Błąd</div>
-                    ${error.message || 'Nie udało się wysłać wiadomości. Spróbuj ponownie później.'}
-                `;
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Umów 30-minutową konsultację`;
-            }
-        }
-    </script>
+<body>
+<a class="skip-link" href="#main">Przejdź do treści</a>
+<header class="site-header">
+<div class="container nav-wrap">
+<a class="wordmark" href="/" aria-label="Michał Mleczko — strona główna">
+<span class="monogram" aria-hidden="true">m<span>.</span>
+</span>
+<span>Michał Mleczko<small>ENGINEER & BUILDER</small>
+</span>
+</a>
+<nav class="desktop-nav" aria-label="Nawigacja główna">
+<a href="#ai">AI w firmie</a>
+<a href="#projects">Realizacje</a>
+<a href="#wordpress">WordPress → Static</a>
+<a href="#about">O mnie</a>
+</nav>
+<div class="nav-actions">
+<a class="language-link" href="/en/" lang="en" hreflang="en" aria-label="Switch to English">EN</a>
+<a href="#contact" class="button button-small">Porozmawiajmy <span aria-hidden="true">↗</span>
+</a>
+<button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Otwórz menu">
+<span>
+</span>
+<span>
+</span>
+</button>
+</div>
+</div>
+<nav id="mobile-nav" class="mobile-nav container" aria-label="Nawigacja mobilna" hidden>
+<a href="#ai">AI w firmie</a>
+<a href="#projects">Realizacje</a>
+<a href="#wordpress">WordPress → Static</a>
+<a href="#about">O mnie</a>
+<a href="/platnosci-blik/">Sklepy z BLIK</a>
+</nav>
+</header>
+<main id="main">
+<section class="hero container">
+<div class="hero-copy">
+<p class="eyebrow">
+<span class="status-dot">
+</span> TECHNOLOGIA, KTÓRA PRACUJE DLA BIZNESU</p>
+<h1>Mniej rutyny.<br>Więcej <span class="serif">możliwości.</span>
+</h1>
+<p class="hero-lead">Wdrażam AI, które wykonuje realną pracę.<br>Buduję produkty, które upraszczają biznes.</p>
+<p class="hero-detail">Od agentów AI i automatyzacji procesów, przez sklepy z BLIK, po błyskawiczne strony bez WordPressa. Od pomysłu do działającego rozwiązania.</p>
+<div class="hero-actions">
+<a class="button" href="#contact">Porozmawiajmy o Twoim projekcie <span aria-hidden="true">↗</span>
+</a>
+<a class="text-link" href="#projects">Zobacz realizacje <span aria-hidden="true">↓</span>
+</a>
+</div>
+<div class="hero-signature">
+<span class="avatar" aria-hidden="true">MM</span>
+<p>
+<strong>Michał Mleczko</strong>
+<span>Software Architect · AI Engineer · Twórca produktów</span>
+</p>
+</div>
+</div>
+<div class="system-visual">
+<div class="visual-top">
+<span>
+<span class="status-dot">
+</span> POMYSŁ → DZIAŁAJĄCY SYSTEM</span>
+<span aria-hidden="true">↗</span>
+</div>
+<div class="orbit-scene" aria-hidden="true">
+<div class="orbit orbit-one">
+</div>
+<div class="orbit orbit-two">
+</div>
+<div class="orbit orbit-three">
+</div>
+<svg class="beams" viewBox="0 0 500 380" fill="none">
+<path d="M100 90C250 90 150 190 250 190S300 85 405 85M90 285C220 285 150 190 250 190S320 285 410 285"/>
+<path class="beam-active" d="M100 90C250 90 150 190 250 190S320 285 410 285"/>
+</svg>
+<div class="core">
+<span>m<span class="core-dot">.</span>
+</span>
+<small>AI × HUMAN</small>
+</div>
+<span class="orbit-node node-data">
+<b>≡</b>Twoje dane</span>
+<span class="orbit-node node-ai">
+<b>✳</b>Agent AI</span>
+<span class="orbit-node node-tools">
+<b>⌘</b>MCP / API</span>
+<span class="orbit-node node-result">
+<b>↗</b>Rezultat</span>
+<span class="orbit-spark spark-one">
+</span>
+<span class="orbit-spark spark-two">
+</span>
+</div>
+<div class="visual-bottom">
+<span class="visual-caption">Dobry pomysł. Przemyślana architektura.</span>
+<span class="visual-number">01 / 03</span>
+</div>
+<a class="floating-note" href="#ai">
+<span class="note-icon" aria-hidden="true">✳</span>
+<span>
+<strong>AI z dostępem do narzędzi</strong>
+<small>Zobacz przykładowy proces</small>
+</span>
+<span aria-hidden="true">↗</span>
+</a>
+</div>
+</section>
+<div class="credibility container">
+<span>DOŚWIADCZENIE ZDOBYTE W</span>
+<div>
+<strong>eMAG<span class="brand-dot">●</span>
+</strong>
+<strong class="gfg">GLOBAL FASHION GROUP</strong>
+<strong>Cobiro</strong>
+<strong class="iiit">IIIT<span>↗</span>
+</strong>
+</div>
+<p>12+ lat łączenia technologii z biznesem</p>
+</div>
+<section id="ai" class="section container">
+<div class="section-heading">
+<div>
+<p class="eyebrow">01 / AI W CODZIENNEJ PRACY</p>
+<h2>AI, które wychodzi<br>
+<span class="serif">poza okno czatu.</span>
+</h2>
+</div>
+<p>Najwięcej zmienia się wtedy, gdy AI rozumie kontekst firmy i ma dostęp do właściwych narzędzi. Łączę modele z procesami, które naprawdę wykonuje Twój zespół.</p>
+</div>
+<div class="ai-grid">
+<div class="demo-panel spotlight">
+<div class="demo-top">
+<span class="demo-brand">
+<span aria-hidden="true">✳</span> Od rozmowy do działania</span>
+<span class="demo-badge">DEMO</span>
+</div>
+<div class="demo-tabs" role="group" aria-label="Przykład zastosowania AI">
+<button data-scenario="sales" aria-pressed="true">Sprzedaż</button>
+<button data-scenario="operations" aria-pressed="false">Operacje</button>
+<button data-scenario="engineering" aria-pressed="false">Zespół IT</button>
+</div>
+<div class="demo-conversation">
+<p class="user-prompt" id="demo-prompt">Znajdź warsztaty dla 4-latka w sobotę.</p>
+<div class="assistant-reply">
+<span class="assistant-icon" aria-hidden="true">✳</span>
+<p id="demo-reply">Sprawdzę ofertę i wolne miejsca. Przed zapisaniem poproszę Cię o potwierdzenie.</p>
+</div>
+<ol class="workflow-steps" id="workflow-steps">
+<li>
+<span>01</span>
+<div>
+<strong>Sprawdzenie oferty</strong>
+<small>MCP · search_workshops</small>
+</div>
+<span class="step-state" aria-hidden="true">○</span>
+</li>
+<li>
+<span>02</span>
+<div>
+<strong>Dopasowanie terminu</strong>
+<small>Wiek · termin · wolne miejsca</small>
+</div>
+<span class="step-state" aria-hidden="true">○</span>
+</li>
+<li>
+<span>03</span>
+<div>
+<strong>Potwierdzenie przez człowieka</strong>
+<small>Ty podejmujesz decyzję</small>
+</div>
+<span class="step-state" aria-hidden="true">○</span>
+</li>
+</ol>
+<button id="demo-run" class="button demo-run">
+<span aria-hidden="true">▶</span> <span>Uruchom przykład</span>
+</button>
+<p id="demo-status" class="demo-status" role="status">Interaktywna ilustracja. Nie wykonuje operacji w prawdziwym systemie.</p>
+</div>
+</div>
+<div class="service-list">
+<article class="service-row">
+<span class="index">01</span>
+<div>
+<h3>Od procesu do działającego AI</h3>
+<p>Wybieram z zespołem zadania, w których AI ma sens. Ustalamy punkt wyjścia, koszt i kryteria sukcesu, a potem sprawdzamy je w pilotażu.</p>
+</div>
+</article>
+<article class="service-row">
+<span class="index">02</span>
+<div>
+<h3>Agenci połączeni z Twoją firmą</h3>
+<p>Łączę asystentów z ofertą, rezerwacjami, zadaniami i firmową wiedzą przez MCP oraz API. Rozmowa może prowadzić do wykonania konkretnej pracy.</p>
+</div>
+</article>
+<article class="service-row">
+<span class="index">03</span>
+<div>
+<h3>Kontrola po stronie człowieka</h3>
+<p>Projektuję zakresy dostępu, potwierdzanie istotnych operacji i historię zmian. Agent działa w granicach uprawnień użytkownika.</p>
+</div>
+</article>
+<article class="service-row">
+<span class="index">04</span>
+<div>
+<h3>Wdrożenie, które zostaje z zespołem</h3>
+<p>Integracje, testy, monitoring i dokumentacja. Wprowadzam zespół w nowy sposób pracy i pomagam rozwijać rozwiązanie po uruchomieniu.</p>
+</div>
+</article>
+</div>
+</div>
+<div class="stack-line" id="skills">
+<span>DOBIERAM NARZĘDZIA DO PROBLEMU</span>
+<div>
+<span>MCP</span>
+<span>ElevenLabs</span>
+<span>n8n</span>
+<span>Go</span>
+<span>PHP / Symfony</span>
+<span>Python</span>
+<span>Cloudflare</span>
+<span>Docker</span>
+</div>
+</div>
+</section>
+<section id="projects" class="section projects-section">
+<div class="container">
+<div class="section-heading">
+<div>
+<p class="eyebrow">02 / WYBRANE REALIZACJE</p>
+<h2>Pomysły zamienione<br>w <span class="serif">działające produkty.</span>
+</h2>
+</div>
+<p>Własne produkty i wdrożenia, w których projektuję cały proces: od pierwszego kliknięcia po integracje, płatności i utrzymanie.</p>
+</div>
+<div class="project-grid">
+<article class="project-card">
+<a class="project-visual sprint" href="https://sprintspaces.github.io/" target="_blank" rel="noopener noreferrer" aria-label="Otwórz SprintSpaces (nowa karta)">
+<img src="/assets/sprintspaces.webp" width="1554" height="1023" loading="lazy" alt="Tablica SprintSpaces z przykładowymi zadaniami">
+<span class="project-open" aria-hidden="true">↗</span>
+</a>
+<div class="project-info">
+<p class="eyebrow">PROCESY FIRMOWE · AI · MCP</p>
+<h3>
+<a href="https://sprintspaces.github.io/" target="_blank" rel="noopener noreferrer">SprintSpaces <span aria-hidden="true">↗</span>
+</a>
+</h3>
+<p>Od arkuszy do wspólnej przestrzeni pracy. Projekty, zgłoszenia, czas pracy i asystent AI z dostępem do narzędzi przez MCP.</p>
+<div class="tags">
+<span>Go</span>
+<span>Microsoft 365</span>
+<span>MCP</span>
+</div>
+</div>
+</article>
+<article class="project-card">
+<a class="project-visual ceramiza" href="https://ceramiza.pl" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Ceramiza (nowa karta)">
+<div class="ceramiza-art">
+<img src="/assets/ceramiza.jpg" width="450" height="450" loading="lazy" alt="Ceramiza">
+<span class="art-caption">handmade · one of a kind</span>
+</div>
+<span class="project-open" aria-hidden="true">↗</span>
+</a>
+<div class="project-info">
+<p class="eyebrow">E-COMMERCE · BLIK · AI</p>
+<h3>
+<a href="https://ceramiza.pl" target="_blank" rel="noopener noreferrer">Ceramiza <span aria-hidden="true">↗</span>
+</a>
+</h3>
+<p>Sklep z unikatową ceramiką. Zamówienia w rozmowie z AI, automatyczne dopasowanie wpłat BLIK i integracja wysyłek z Polkurier.</p>
+<div class="tags">
+<span>Go</span>
+<span>SQLite</span>
+<span>ElevenLabs</span>
+</div>
+</div>
+</article>
+<article class="project-card">
+<a class="project-visual kiddo" href="https://warsztatowniasensoryczna.pl" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Warsztatownia Sensoryczna (nowa karta)">
+<div class="workshop-art">
+<div class="workshop-flower" aria-hidden="true">✳</div>
+<strong>Małe odkrycia.<br>Wielkie możliwości.</strong>
+<span>Zajęcia · karnety · rezerwacje</span>
+</div>
+<span class="project-open" aria-hidden="true">↗</span>
+</a>
+<div class="project-info">
+<p class="eyebrow">REZERWACJE · ASYSTENT AI</p>
+<h3>
+<a href="https://warsztatowniasensoryczna.pl" target="_blank" rel="noopener noreferrer">Warsztatownia Sensoryczna <span aria-hidden="true">↗</span>
+</a>
+</h3>
+<p>Asystent pomaga znaleźć zajęcia i zarządzać zapisami. W tle: karnety, płatności, przypomnienia i panel obsługi warsztatów.</p>
+<div class="tags">
+<span>Symfony</span>
+<span>PostgreSQL</span>
+<span>MCP</span>
+</div>
+</div>
+</article>
+<article class="project-card">
+<a class="project-visual cargo" href="https://cargo.mleczki.pl" target="_blank" rel="noopener noreferrer" aria-label="Otwórz Cargo · mleczki.pl (nowa karta)">
+<img src="/assets/cargo.webp" width="800" height="600" loading="lazy" alt="Rower cargo Urban Arrow Family">
+<span class="project-open" aria-hidden="true">↗</span>
+</a>
+<div class="project-info">
+<p class="eyebrow">WYPOŻYCZALNIA · AUTOMATYZACJA</p>
+<h3>
+<a href="https://cargo.mleczki.pl" target="_blank" rel="noopener noreferrer">Cargo · mleczki.pl <span aria-hidden="true">↗</span>
+</a>
+</h3>
+<p>Wynajem rowerów i sprzętu z kalendarzem dostępności. Rezerwacja, płatność BLIK i potwierdzenie w jednym procesie.</p>
+<div class="tags">
+<span>Go</span>
+<span>SQLite</span>
+<span>BLIK</span>
+</div>
+</div>
+</article>
+</div>
+<article class="bezreszty-feature" id="bezreszty">
+<a class="bezreszty-poster" href="https://bezreszty.org.pl" target="_blank" rel="noopener noreferrer" aria-label="Otwórz BezReszty (nowa karta)">
+<span class="eyebrow">OPEN SOURCE · BLIK</span>
+<strong>BezReszty<span aria-hidden="true">↗</span>
+</strong>
+<span class="zero-fee">0<span>%</span>
+</span>
+<span class="poster-foot">prowizji aplikacji.<br>Cała wpłata u organizatora.</span>
+</a>
+<div class="bezreszty-copy">
+<p class="eyebrow">PŁATNOŚCI, KTÓRE POMAGAJĄ</p>
+<h3>Zbiórki bez potrącania prowizji.</h3>
+<p>BezReszty łączy przelewy BLIK na telefon bezpośrednio do organizatora z automatycznym rozpoznawaniem bankowych powiadomień. Wpłaty trafiają na rachunek organizatora, a aplikacja aktualizuje zbiórkę.</p>
+<h4>Półautomatyczna weryfikacja: telefon + mObywatel</h4>
+<p>Operator dzwoni na zgłoszony numer. Organizator otrzymuje w panelu czasowy kod QR lub kod do wpisania w mObywatelu i udostępnia dane do sprawdzenia. Operator porównuje je w oficjalnym weryfikatorze, zapisuje wynik i podejmuje decyzję. System pilnuje etapów i ponownej weryfikacji po zmianie telefonu lub rachunku.</p>
+<p class="small-note">Tożsamość, własność rachunku i przypisanie telefonu BLIK sprawdzane są osobno. Decyzję podejmuje operator — nie jest to automatyczne KYC ani gwarancja realizacji celu zbiórki.</p>
+<div class="about-links">
+<a class="text-link" href="https://bezreszty.org.pl" target="_blank" rel="noopener noreferrer">Zobacz BezReszty <span aria-hidden="true">↗</span>
+</a>
+<a class="text-link" href="/platnosci-blik/#weryfikacja">Jak działa weryfikacja <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+</article>
+<a href="/platnosci-blik/" class="blik-banner">
+<span class="blik-symbol">blik<span>●</span>
+</span>
+<span>
+<strong>Twój sklep, rezerwacje lub wypożyczalnia. Z BLIK.</strong>
+<small>Poznaj model płatności i zobacz, jak może działać Twój biznes.</small>
+</span>
+<span class="circle-arrow" aria-hidden="true">↗</span>
+</a>
+</div>
+</section>
+<section id="wordpress" class="migration-section">
+<div class="container">
+<div class="section-heading">
+<div>
+<p class="eyebrow">03 / WORDPRESS → STATIC</p>
+<h2>Twoja strona.<br>
+<span class="serif">Na lżejszych zasadach.</span>
+</h2>
+</div>
+<p>Błyskawiczne ładowanie. Znacznie niższy koszt serwowania. Przenoszę strony z WordPressa na statyczny frontend, zachowując treści i planując migrację SEO.</p>
+</div>
+<div class="migration-grid">
+<div>
+<div class="architecture-compare">
+<div class="architecture-row">
+<span class="arch-label">WordPress</span>
+<div class="arch-parts">
+<span>PHP</span>
+<b>+</b>
+<span>MySQL</span>
+<b>+</b>
+<span>Wtyczki</span>
+</div>
+<p>Generowanie strony przy żądaniu, jeśli nie korzysta z cache.</p>
+</div>
+<div class="architecture-row static-row">
+<span class="arch-label">Static <span aria-hidden="true">↗</span>
+</span>
+<div class="arch-parts">
+<span>HTML / CSS</span>
+<b>→</b>
+<span>CDN</span>
+<b>→</b>
+<span>Gotowe</span>
+</div>
+<p>Gotowe pliki. Mniej pracy serwera. Szybka odpowiedź.</p>
+</div>
+</div>
+<div class="migration-benefits">
+<article>
+<h3>Szybkość od pierwszego kliknięcia</h3>
+<p>Gotowy HTML serwowany z CDN, lekkie zasoby i JavaScript tylko tam, gdzie jest potrzebny.</p>
+</article>
+<article>
+<h3>Niższy koszt utrzymania</h3>
+<p>Publiczna strona nie wymaga PHP i bazy danych. Odpada utrzymywanie wtyczek i dużego serwera tylko do wyświetlania treści.</p>
+</article>
+<article>
+<h3>Przemyślana migracja</h3>
+<p>Mapa adresów, przekierowania, metadane, formularze i wygodna edycja treści. Porównanie wydajności przed i po wdrożeniu.</p>
+</article>
+</div>
+</div>
+<div class="savings-card">
+<p class="eyebrow">POLICZ NA SWOICH LICZBACH</p>
+<h3>Ile możesz zaoszczędzić?</h3>
+<p>Porównaj miesięczne koszty hostingu i obsługi technicznej.</p>
+<label for="wp-cost">Obecny WordPress · zł / miesiąc</label>
+<div class="input-unit">
+<input id="wp-cost" type="number" min="0" max="100000" step="1" value="200" inputmode="numeric">
+<span>PLN</span>
+</div>
+<label for="static-cost">Strona statyczna · zł / miesiąc</label>
+<div class="input-unit">
+<input id="static-cost" type="number" min="0" max="100000" step="1" value="20" inputmode="numeric">
+<span>PLN</span>
+</div>
+<div class="savings-result">
+<span id="savings-label">Różnica w skali roku</span>
+<output id="savings-value" for="wp-cost static-cost" aria-live="polite">2 160 zł</output>
+</div>
+<p class="small-note">Przykładowe wartości, nie oferta. Kalkulacja: różnica kosztów × 12. Nie uwzględnia jednorazowej migracji ani usług zewnętrznych. Realną oszczędność ustalimy po audycie.</p>
+<a href="#contact" class="button">Sprawdźmy potencjał Twojej strony <span aria-hidden="true">↗</span>
+</a>
+<noscript>
+<p>Aby przeliczyć kwoty, włącz JavaScript.</p>
+</noscript>
+</div>
+</div>
+<p class="migration-note">Wynik zależy od obecnego cache, hostingu i funkcji strony. Dla sklepów i aplikacji dobieram rozwiązanie hybrydowe lub dedykowany backend.</p>
+</div>
+</section>
+<section class="section container process-section">
+<div class="section-heading">
+<div>
+<p class="eyebrow">04 / JAK PRACUJĘ</p>
+<h2>Ambitny kierunek.<br>
+<span class="serif">Konkretne kroki.</span>
+</h2>
+</div>
+<p>Nowatorskie podejście ma sens, gdy rozwiązuje prawdziwy problem. Zaczynam od biznesu, szybko weryfikuję założenia i biorę odpowiedzialność za drogę do produkcji.</p>
+</div>
+<div class="process-grid">
+<article>
+<span class="index">01</span>
+<h3>Rozpoznanie</h3>
+<p>Proces, dane, ograniczenia i cel biznesowy.</p>
+</article>
+<article>
+<span class="index">02</span>
+<h3>Mały, konkretny pilotaż</h3>
+<p>Jedno zastosowanie. Jasne kryteria odbioru.</p>
+</article>
+<article>
+<span class="index">03</span>
+<h3>Integracja i wdrożenie</h3>
+<p>Uprawnienia, testy, monitoring i plan wycofania.</p>
+</article>
+<article>
+<span class="index">04</span>
+<h3>Samodzielny zespół</h3>
+<p>Dokumentacja, wprowadzenie i dalszy rozwój.</p>
+</article>
+</div>
+</section>
+<section id="about" class="section container about-section">
+<div class="about-intro">
+<div>
+<p class="eyebrow">05 / INŻYNIER, KTÓRY ROZUMIE BIZNES</p>
+<h2>Łączę kropki.<br>
+<span class="serif">I dowożę całość.</span>
+</h2>
+</div>
+<div>
+<p class="about-lead">Jestem Michał. Łączę doświadczenie architekta systemów z podejściem twórcy produktów.</p>
+<p>Pracowałem przy globalnym e-commerce, modernizacji aplikacji i automatyzacji wdrożeń. Dziś wykorzystuję te fundamenty, aby wdrażać AI w firmach i budować rozwiązania dopasowane do ich skali. Czasem to agent połączony z procesem. Czasem szybka strona albo prosta aplikacja w Go.</p>
+<div class="about-links">
+<a class="text-link" href="https://linkedin.com/in/michal-mleczko/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span>
+</a>
+<a class="text-link" href="https://github.com/mleczakm" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span>
+</a>
+</div>
+</div>
+</div>
+<div class="career" id="experience">
+<article class="career-row">
+<span class="index">2024 — 2025</span>
+<div>
+<h3>eMAG</h3>
+<span>Senior Engineer · Architect</span>
+</div>
+<p>Modernizacja PHP, jakość kodu i wdrożenia Kubernetes.</p>
+</article>
+<article class="career-row">
+<span class="index">2023 — 2024</span>
+<div>
+<h3>Global Fashion Group</h3>
+<span>Senior Software Engineer</span>
+</div>
+<p>Rozproszony e-commerce na trzech kontynentach.</p>
+</article>
+<article class="career-row">
+<span class="index">2022 — 2023</span>
+<div>
+<h3>Cobiro</h3>
+<span>Senior Software Engineer</span>
+</div>
+<p>Mikroserwisy, infrastruktura jako kod i CI/CD.</p>
+</article>
+<article class="career-row">
+<span class="index">2018 — 2021</span>
+<div>
+<h3>IIIT</h3>
+<span>Senior PHP Developer · Leader</span>
+</div>
+<p>Architektura heksagonalna, CQRS i systemy wysokiej wydajności.</p>
+</article>
+</div>
+<div class="principle">
+<span aria-hidden="true">↳</span>
+<p>Mniej ręcznej pracy. Prostsze systemy.<br>
+<strong>Więcej przestrzeni na rozwój firmy.</strong>
+</p>
+</div>
+</section>
+<section class="section container faq-section">
+<div>
+<p class="eyebrow">DOBRZE WIEDZIEĆ</p>
+<h2>Zanim<br>
+<span class="serif">zaczniemy.</span>
+</h2>
+</div>
+<div>
+<details>
+<summary>Od czego zacząć wdrażanie AI w firmie?<span aria-hidden="true">+</span>
+</summary>
+<p>Od powtarzalnego procesu i danych, do których zespół ma dostęp. Wybieramy jedno zastosowanie, ustalamy sposób pomiaru jakości i kosztów, a następnie budujemy pilotaż. Dopiero jego wyniki są podstawą do szerszego wdrożenia.</p>
+</details>
+<details>
+<summary>Czy AI może wykonywać operacje w naszych systemach?<span aria-hidden="true">+</span>
+</summary>
+<p>Tak, przez odpowiednio przygotowane API lub MCP. Zakres zależy od integracji: od wyszukiwania danych po tworzenie zadań czy rezerwacji. Ustalamy uprawnienia i operacje, które wymagają potwierdzenia użytkownika.</p>
+</details>
+<details>
+<summary>Czy po odejściu od WordPressa można nadal edytować treści?<span aria-hidden="true">+</span>
+</summary>
+<p>Tak. Dobieramy edycję do zespołu: prosty CMS, pliki treści albo WordPress pozostawiony wyłącznie jako panel redakcyjny. Publiczna strona może być statyczna, a formularze i inne funkcje dynamiczne działać jako osobne integracje.</p>
+</details>
+<details>
+<summary>Czy każdą stronę WordPress warto przenieść na statyczną?<span aria-hidden="true">+</span>
+</summary>
+<p>Nie każdą. To bardzo dobre rozwiązanie dla stron firmowych, landing pages i serwisów treściowych. Przy rozbudowanym sklepie lub panelu użytkownika dobieram architekturę hybrydową albo dedykowaną aplikację. Najpierw sprawdzam funkcje, ruch i koszt utrzymania.</p>
+</details>
+</div>
+</section>
+<section id="contact" class="contact-section">
+<div class="container contact-grid">
+<div>
+<p class="eyebrow">POROZMAWIAJMY O TWOIM POMYŚLE</p>
+<h2>Co możemy<br>
+<span class="serif">uprościć u Ciebie?</span>
+</h2>
+<p>Proces, który zajmuje za dużo czasu? Pomysł na produkt? WordPress, który więcej kosztuje, niż daje? Napisz kilka zdań. Zaczniemy od konkretów.</p>
+<a class="contact-email" href="mailto:do@mleczki.pl">do@mleczki.pl <span aria-hidden="true">↗</span>
+</a>
+<a class="contact-phone" href="tel:+48732575375">+48 732 575 375</a>
+<p class="location">
+<span class="status-dot">
+</span> Radzymin / Warszawa · współpraca zdalna</p>
+</div>
+<form id="contact-form" action="https://formspree.io/f/xdavweok" method="POST">
+<input type="hidden" name="_subject" value="Portfolio — nowe zapytanie">
+<input type="hidden" name="language" value="pl">
+<div class="honeypot" aria-hidden="true">
+<label for="website">Website</label>
+<input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off">
+</div>
+<div class="form-row">
+<div>
+<label for="name">Imię / firma</label>
+<input id="name" name="name" required maxlength="150" autocomplete="name" placeholder="Jak się do Ciebie zwracać?">
+</div>
+<div>
+<label for="email">E-mail</label>
+<input id="email" type="email" name="email" required maxlength="254" autocomplete="email" placeholder="ty@firma.pl">
+</div>
+</div>
+<label for="topic">Co chcesz usprawnić?</label>
+<select id="topic" name="topic">
+<option value="AI">AI i automatyzacja w firmie</option>
+<option value="commerce">Sklep, rezerwacje lub BLIK</option>
+<option value="static">Migracja z WordPressa</option>
+<option value="product">Produkt / architektura / inny pomysł</option>
+</select>
+<label for="message">Kilka słów o Twoim projekcie</label>
+<textarea id="message" name="message" rows="4" required minlength="10" maxlength="5000" placeholder="Jak działacie dziś i co chcecie zmienić?">
+</textarea>
+<label for="preferred-date">Preferowany termin rozmowy (opcjonalnie)</label>
+<input id="preferred-date" type="datetime-local" name="preferred_datetime">
+<p class="form-note">Termin potwierdzę w odpowiedzi. Strefa: Polska (Europe/Warsaw).</p>
+<button type="submit" class="button">Wyślij wiadomość <span aria-hidden="true">↗</span>
+</button>
+<p class="form-note">Dane wykorzystam do odpowiedzi na zapytanie. Formularz obsługuje Formspree. Możesz też napisać bezpośrednio na mój e-mail.</p>
+<p id="form-status" role="status" aria-live="polite">
+</p>
+</form>
+</div>
+</section>
+</main>
+<footer class="container site-footer">
+<a class="wordmark" href="/">
+<span class="monogram" aria-hidden="true">m<span>.</span>
+</span>
+<span>Michał Mleczko<small>DOBRE POMYSŁY. DZIAŁAJĄCE SYSTEMY.</small>
+</span>
+</a>
+<div>
+<a href="/platnosci-blik/">Sklepy z BLIK</a>
+<a href="https://github.com/mleczakm">GitHub <span aria-hidden="true">↗</span>
+</a>
+<a href="https://linkedin.com/in/michal-mleczko/">LinkedIn <span aria-hidden="true">↗</span>
+</a>
+<span>© 2026</span>
+</div>
+</footer>
 </body>
 </html>

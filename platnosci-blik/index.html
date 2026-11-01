@@ -204,7 +204,7 @@
                     <span class="text-brand-500 font-mono font-bold text-xl">&lt;mleczakm/&gt;</span>
                     <span class="hidden md:block font-semibold text-sm tracking-wider uppercase text-slate-300">Michał Mleczko</span>
                 </a>
-                <div class="hidden md:flex items-center space-x-6">
+                <div class="hidden xl:flex items-center space-x-6">
                     <a href="#jak-to-dziala" class="text-sm font-medium hover:text-brand-500 transition-colors">Jak to działa</a>
                     <a href="#realizacje" class="text-sm font-medium hover:text-brand-500 transition-colors">Realizacje</a>
                     <a href="#koszty" class="text-sm font-medium hover:text-brand-500 transition-colors">Koszty</a>
@@ -215,7 +215,7 @@
                         <i id="theme-icon" class="fa-solid fa-sun text-lg"></i>
                     </button>
                 </div>
-                <div class="md:hidden flex items-center gap-4">
+                <div class="xl:hidden flex items-center gap-4">
                     <button id="theme-toggle-mobile" class="p-2 text-slate-400 hover:text-brand-500 rounded-lg focus:outline-none" aria-label="Przełącz motyw">
                         <i id="theme-icon-mobile" class="fa-solid fa-sun text-lg"></i>
                     </button>
@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 dark:bg-slate-950/95 border-b border-slate-800">
+        <div id="mobile-menu" class="hidden xl:hidden bg-slate-900/95 dark:bg-slate-950/95 border-b border-slate-800">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#jak-to-dziala" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Jak to działa</a>
                 <a href="#realizacje" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-800 hover:text-brand-500">Realizacje</a>
@@ -334,7 +334,7 @@
         <!-- CASE STUDIES -->
         <section id="realizacje" class="scroll-mt-20">
             <span class="text-brand-500 font-mono text-xs uppercase tracking-wider"><i class="fa-solid fa-briefcase"></i> Realizacje</span>
-            <h2 class="text-3xl font-extrabold text-white mt-2 mb-10">Trzy branże, jeden sprawdzony model płatności</h2>
+            <h2 class="text-3xl font-extrabold text-white mt-2 mb-10">Sklepy, rezerwacje, wypożyczalnia i zbiórki z BLIK</h2>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <article class="flex flex-col p-6 bg-slate-800/30 rounded-2xl border border-slate-800 hover:border-brand-500/60 transition-colors">
                     <div class="flex items-center gap-3 mb-4">
@@ -373,6 +373,13 @@
                     </ul>
                 </article>
             </div>
+            <article class="p-6 mt-6 bg-slate-800/30 rounded-2xl border border-slate-800">
+                <h3 class="text-xl font-bold text-white mb-2">BezReszty — zbiórki bez prowizji aplikacji</h3>
+                <a href="https://bezreszty.org.pl" target="_blank" rel="noopener noreferrer" class="text-sm font-mono text-brand-500 hover:underline">bezreszty.org.pl ↗</a>
+                <p class="text-sm text-slate-400 mt-4">Przelewy BLIK na telefon trafiają bezpośrednio do organizatora. Aplikacja rozpoznaje bankowe powiadomienia, dopasowuje wpłaty i aktualizuje zbiórkę. BezReszty ma własny model: 0% prowizji aplikacji, niezależnie od oferty sklepów poniżej.</p>
+                <ul class="text-sm text-slate-300 space-y-2 mt-4"><li>automatyczne dopasowanie tytułu i kwoty wpłaty</li><li>weryfikacja podpisu bankowego powiadomienia i ochrona przed duplikatami</li><li>półautomatyczna weryfikacja telefoniczna organizatora z mObywatelem</li></ul>
+                <a href="#weryfikacja" class="inline-block text-brand-500 text-sm mt-4 hover:underline">Poznaj proces weryfikacji →</a>
+            </article>
             <div class="mt-10 p-8 rounded-3xl border border-brand-500/40 bg-brand-500/5 text-center">
                 <h3 class="text-2xl font-extrabold text-white mb-3">Mogę zrobić taką stronę dla Ciebie</h3>
                 <p class="text-slate-300 max-w-3xl mx-auto mb-6">Sprzedajesz rękodzieło, wynajmujesz sprzęt albo prowadzisz zajęcia? Przygotuję stronę dopasowaną do Twojej działalności — z płatnościami BLIK, panelem do zarządzania, regulaminami i wszystkim, czego potrzebujesz, żeby zacząć sprzedawać.</p>
@@ -381,6 +388,20 @@
         </section>
 
         <!-- COSTS -->
+        <section id="weryfikacja" class="scroll-mt-20">
+            <span class="text-brand-500 font-mono text-xs uppercase tracking-wider">BezReszty · zaufanie do organizatora</span>
+            <h2 class="text-3xl font-extrabold text-white mt-2 mb-5">Telefon, mObywatel i decyzja człowieka</h2>
+            <p class="text-slate-300 max-w-4xl mb-8">Półautomatyczna weryfikacja łączy rozmowę telefoniczną z udostępnieniem danych w mObywatelu. Aplikacja prowadzi organizatora i operatora przez kolejne etapy; porównanie danych i ostateczna decyzja należą do operatora.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <article class="p-6 rounded-2xl border border-slate-800 bg-slate-800/30"><span class="text-brand-500 font-mono text-sm">01 / PRZYGOTOWANIE</span><h3 class="font-bold text-white mt-3 mb-2">Konto, rachunek i przelew testowy</h3><p class="text-sm text-slate-400">Organizator potwierdza e-mail, podaje dane rachunku i telefonu BLIK oraz konfiguruje bankowe powiadomienia. System sprawdza format danych i odbiór powiadomienia o przelewie testowym. Sam test nie potwierdza tożsamości ani własności rachunku.</p></article>
+                <article class="p-6 rounded-2xl border border-slate-800 bg-slate-800/30"><span class="text-brand-500 font-mono text-sm">02 / KONTAKT TELEFONICZNY</span><h3 class="font-bold text-white mt-3 mb-2">Rozmowa na zgłoszony numer</h3><p class="text-sm text-slate-400">Operator dzwoni do organizatora i otwiera <a href="https://weryfikator.mobywatel.gov.pl/" target="_blank" rel="noopener noreferrer" class="text-brand-500 underline">oficjalny weryfikator mObywatel</a>. Generuje kod QR lub kod do wpisania w aplikacji i udostępnia go w panelu BezReszty.</p></article>
+                <article class="p-6 rounded-2xl border border-slate-800 bg-slate-800/30"><span class="text-brand-500 font-mono text-sm">03 / UDOSTĘPNIENIE DANYCH</span><h3 class="font-bold text-white mt-3 mb-2">Potwierdzenie w mObywatelu</h3><p class="text-sm text-slate-400">Organizator korzysta z otrzymanego kodu w mObywatelu i udostępnia dane. Kod jest widoczny w panelu do 3 minut; może wcześniej stracić ważność w weryfikatorze. Operator porównuje dane w weryfikatorze ze zgłoszeniem. Nie potrzebuje hasła do banku ani kodów autoryzacji płatności.</p></article>
+                <article class="p-6 rounded-2xl border border-slate-800 bg-slate-800/30"><span class="text-brand-500 font-mono text-sm">04 / DECYZJA OPERATORA</span><h3 class="font-bold text-white mt-3 mb-2">Wynik i ponowna kontrola zmian</h3><p class="text-sm text-slate-400">Operator zapisuje wynik i krótką notatkę bez numerów dokumentów oraz podejmuje decyzję. System blokuje akceptację bez wymaganych potwierdzeń. Zmiana numeru telefonu lub rachunku wymaga ponownej weryfikacji. Zatwierdzenie konta nie publikuje automatycznie zbiórki — jej treść podlega osobnej moderacji.</p></article>
+            </div>
+            <p class="text-sm text-slate-400 mt-6 max-w-4xl">Tożsamość, własność rachunku i przypisanie telefonu BLIK do rachunku są sprawdzane osobno. To proces wspierany przez aplikację i prowadzony przez człowieka, nie automatyczna integracja KYC ani certyfikat banku lub mObywatela. Weryfikacja nie gwarantuje realizacji celu zbiórki.</p>
+            <a href="https://bezreszty.org.pl" target="_blank" rel="noopener noreferrer" class="inline-flex mt-6 text-brand-500 font-semibold hover:underline">Zobacz BezReszty ↗</a>
+        </section>
+
         <section id="koszty" class="scroll-mt-20">
             <span class="text-brand-500 font-mono text-xs uppercase tracking-wider"><i class="fa-solid fa-coins"></i> Koszty</span>
             <h2 class="text-3xl font-extrabold text-white mt-2 mb-10">Płacisz, kiedy sprzedajesz</h2>

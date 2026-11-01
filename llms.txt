@@ -1,90 +1,32 @@
-# Project: Michał Mleczko - Personal Portfolio Website
+# Michał Mleczko — Software Architect & AI Engineer
 
-## Purpose
-This is a personal portfolio website for Michał Mleczko, a Senior Developer & Architect specializing in PHP, Kubernetes, CI/CD automation, and distributed architecture. The website showcases professional experience, technical skills, projects, and provides contact information.
+> Personal portfolio covering business AI implementation, automation, software architecture, BLIK commerce and fast static websites.
 
-## Tech Stack
-- **Frontend**: HTML5, Tailwind CSS (CDN), Vanilla JavaScript
-- **Backend**: Formspree (form handling)
-- **Deployment**: GitHub Pages (static hosting)
-- **Icons**: FontAwesome 6.4.0
-- **Fonts**: Inter (sans-serif), JetBrains Mono (monospace)
-- **Features**: 
-  - Multilingual support (Polish/English)
-  - Dark/Light theme toggle
-  - CI/CD Pipeline Simulator (interactive demo)
-  - DISC Profile visualization
-  - Tech Stack filtering
-  - Contact form with AJAX submission
+## Pages
+- [Polish portfolio](https://mleczakm.github.io/)
+- [English portfolio](https://mleczakm.github.io/en/)
+- [BLIK shops, bookings, rentals and fundraising](https://mleczakm.github.io/platnosci-blik/)
+- [BezReszty organizer verification](https://mleczakm.github.io/platnosci-blik/#weryfikacja)
 
-## Project Structure
-```
-/
-├── index.html          # Polish version (default)
-├── en/
-│   └── index.html      # English version
-├── platnosci-blik/
-│   └── index.html      # PL landing page: shops, bookings and rentals with BLIK-to-phone payments (cargo.mleczki.pl, warsztatowniasensoryczna.pl, ceramiza.pl) + contact form
-├── sitemap.xml        # SEO sitemap with hreflang
-├── robots.txt         # SEO robots configuration
-├── llms.txt          # This file - LLM documentation
-└── README.md         # Project documentation
-```
+## Focus
+- Business AI: process discovery, focused pilots, MCP/API integrations, access controls, human confirmation, team onboarding and ongoing operation.
+- Products: conversational commerce and booking, business workflow automation.
+- WordPress migration: static public frontend, content and SEO preservation, CDN delivery and lower serving overhead. Performance and actual savings depend on the site and are measured per project.
+- Architecture, Go, PHP/Symfony, Python, Docker, CI/CD and cloud infrastructure.
 
-## Key Files
-- `index.html` - Main Polish version with all sections (Hero, About, Experience, Skills, Projects, Contact)
-- `en/index.html` - English version with identical structure but translated content
-- Both HTML files contain embedded JavaScript for interactivity
+## Selected work
+- [SprintSpaces](https://sprintspaces.github.io/): projects, tickets, time tracking, Microsoft 365 integration and optional AI/MCP tools.
+- [Ceramiza](https://ceramiza.pl): handmade ceramics, conversational ordering, BLIK payment matching and shipping integration.
+- [Warsztatownia Sensoryczna](https://warsztatowniasensoryczna.pl): workshop discovery, bookings, passes, payments and conversational assistant.
+- [Cargo rental](https://cargo.mleczki.pl): equipment availability, rental bookings and BLIK payments.
+- [BezReszty](https://bezreszty.org.pl): direct-to-organizer BLIK fundraising, automatic bank notification matching, 0% application commission. Semi-automated telephone and mObywatel verification is operator-controlled. Identity, account ownership and BLIK phone association are checked separately. Not automated KYC or a guarantee of fundraiser outcomes.
 
-## Important Notes for LLM
-- The website is fully static (no server-side rendering)
-- All interactivity is handled via vanilla JavaScript
-- Contact form uses Formspree endpoint: `https://formspree.io/f/xdavweok`
-- The CI/CD Pipeline Simulator is a visual demo, not actual deployment
-- DISC Profile data is stored in JavaScript object `discData`
-- Tech Stack filtering is handled by `filterSkills()` function
-- Theme toggle uses localStorage to persist user preference
-- Language switching is done via separate HTML files (not JavaScript routing)
-
-## SEO Configuration
-- Canonical URLs configured for both language versions
-- Hreflang tags for multilingual SEO
-- Open Graph and Twitter meta tags
-- Sitemap.xml with proper hreflang annotations
-- Robots.txt allowing all crawlers
-
-## Color Scheme
-- Primary brand color: Green (#22c55e)
-- Secondary colors: Cyan (#06b6d4), Blue (#3b82f6), Purple (#8b5cf6)
-- Background: Slate (#0f172a, #020617)
-- Text: Slate (#e2e8f0, #f8fafc)
-
-## Sections Overview
-1. **Hero**: Professional introduction with key stats
-2. **About**: Biography with interactive DISC profile visualization
-3. **Pipeline Simulator**: Interactive CI/CD deployment demo
-4. **Experience**: Timeline of professional roles
-5. **Tech Stack**: Filterable grid of technologies
-6. **Projects**: Showcase of key achievements
-7. **Contact**: Form with AJAX submission via Formspree
-
-## Contact Information
+## Contact
 - Email: do@mleczki.pl
 - Phone: +48 732 575 375
-- Location: Radzymin (Warsaw), Poland
-- LinkedIn: https://linkedin.com/in/michal-mleczko/
-- GitHub: https://github.com/mleczakm
+- Location: Radzymin / Warsaw, Poland; remote collaboration.
+- [LinkedIn](https://linkedin.com/in/michal-mleczko/)
+- [GitHub](https://github.com/mleczakm)
 
-## Development Notes
-- Uses Tailwind CSS CDN for styling
-- No build process required
-- Direct deployment to GitHub Pages
-- Responsive design (mobile-first)
-- Accessibility considerations (ARIA labels, semantic HTML)
-
-## Maintenance
-- Update experience section when changing roles
-- Update projects section with new achievements
-- Keep translations in sync between PL and EN versions
-- Update sitemap.xml lastmod date when content changes
-- Test Formspree integration periodically
+## Website behavior
+The AI workflow is an illustrative demo and does not execute real business operations. The cost calculator uses illustrative, editable monthly costs. Contact enquiries use Formspree. Both language pages contain full static HTML. The original /platnosci-blik/ URL remains unchanged.
